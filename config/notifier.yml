@@ -1,0 +1,17 @@
+development:
+  notifier:
+    host: localhost:3000
+    name: User Notifier
+    email: noreply@example.com
+
+test:
+  notifier:
+    host: www.example.com
+    name: User Notifier
+    email: noreply@example.com
+
+production:
+  notifier:
+    host: www.example.com
+    name: User Notifier
+    email: noreply@example.com

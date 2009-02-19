@@ -1,0 +1,31 @@
+  <p>
+    <%= form.label :login %><br />
+    <%= form.text_field :login %>
+  </p>
+  <p>
+    <%= form.label :email %><br />
+    <%= form.text_field :email %>
+  </p>
+<%- unless form.object.new_record? -%>
+<fieldset>
+  <legend>Authenticated by <%= link_to_function "Password / OpenID", "$('password_box').toggle(); $('openid_box').toggle();" %></legend>
+  
+  <div id="password_box"<% unless @user.openid_identifier.blank? %> style="display: none;"<% end %>
+    <p>
+      <%= form.label :password, "Change password" %><br />
+      <%= form.password_field :password %>
+    </p>
+    <p>
+      <%= form.label :password_confirmation %><br />
+      <%= form.password_field :password_confirmation %>
+    </p>
+  </div>
+  
+  <div id="openid_box"<% if @user.openid_identifier.blank? %> style="display: none;"<% end %>>
+    <p>
+      <%= form.label :openid_identifier, link_to("Open ID", "http://openid.net/") %><br />
+      <%= form.text_field :openid_identifier %>
+    </p>
+  </div>
+</fieldset>
+<%- end -%>

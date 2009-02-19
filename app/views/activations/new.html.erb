@@ -1,0 +1,21 @@
+<h1>Activate your account</h1>
+
+<% form_for @user, :url => activate_path(@user), :html => { :method => :post } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :password, "Set your password" %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <hr />
+  <p>
+    <%= f.label :openid_identifier, link_to("Or use OpenID instead of your email / password", "http://openid.net/") %><br />
+    <%= f.text_field :openid_identifier %><br />
+  </p>
+  <p>
+    <%= f.submit "Activate" %>
+  </p>
+<% end %>

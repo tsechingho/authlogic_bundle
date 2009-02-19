@@ -1,0 +1,27 @@
+class ActivationsController < ApplicationController
+  before_filter :require_no_user, :only => [:new, :create]
+  
+  # GET /register/:activation_code
+  def new
+    @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
+    raise Exception if @user.active?
+  rescue Exception => e
+    redirect_to root_url
+  end
+
+  # POST /activate/:id
+  def create
+    @user = User.find_by_login(params[:id])
+    raise Exception if @user.active?
+
+    if @user.activate!(params[:user])
+      @user.deliver_activation_confirmation!
+      flash[:notice] = "Your account has been activated."
+      redirect_to account_url
+    else
+      render :action => :new
+    end
+  rescue Exception => e
+    redirect_to root_url
+  end
+end
