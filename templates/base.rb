@@ -1,26 +1,5 @@
 SOURCE = "vendor/plugins/authlogic_bundle"
-
-def file_append(file, data)
-  File.open(file, 'a') { |f| f.write(data) }
-end
-
-def file_inject(file_name, sentinel, string, before_after=:after)
-  gsub_file file_name, /(#{Regexp.escape(sentinel)})/mi do |match|
-    if :after == before_after
-      "#{match}\n#{string}"
-    else
-      "#{string}\n#{match}"
-    end
-  end
-end
-
-#########################
-#  SCM
-#########################
-
-#scm = yes?('Use git as scm? (y/n)') ? 'git' : nil
-scm = ENV['SCM'] ? 'git' : nil
-submodule_token = (scm == 'git') ? true : false
+load_template("#{SOURCE}/templates/helper.rb")
 
 #########################
 #  Gems & Plugins
@@ -32,14 +11,14 @@ ActionController::Base.session_store = :active_record_store
 CODE
 
 gem 'authlogic', :version => '>=1.4.1'
-# plugin 'authlogic', :submodule => submodule_token, 
+# plugin 'authlogic', :submodule => git?, 
 #   :git => 'git://github.com/binarylogic/authlogic.git'
 generate :migration, 'create_users'
 file Dir.glob('db/migrate/*_create_users.rb').first,
   open("#{SOURCE}/db/migrate/create_users.rb").read
 
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.4'
-plugin 'open_id_authentication', :submodule => submodule_token, 
+plugin 'open_id_authentication', :submodule => git?, 
   :git => 'git://github.com/rails/open_id_authentication.git'
 generate :migration, 'add_open_id_to_users'
 file Dir.glob('db/migrate/*_add_open_id_to_users.rb').first,
@@ -49,7 +28,7 @@ rake 'open_id_authentication:db:create'
 rake 'gems:install', :sudo => true
 rake 'db:migrate'
 
-if scm == 'git'
+if git?
   git :rm => "public/index.html"
 else
   run 'rm public/index.html'
@@ -86,7 +65,7 @@ config = File.read(Rails.root.join('config', 'notifier.yml'))
 NOTIFIER = YAML.load(config)[RAILS_ENV]['notifier'].symbolize_keys
 CODE
 
-# initializer 'rails_patch.rb.rb'
+# initializer 'rails_patch.rb'
 file_append 'config/initializers/rails_patch.rb', <<-CODE
 # This file is a hack for rails 2.3.0, and may be fixed in rails edge
 
@@ -113,3 +92,8 @@ file_inject 'app/controllers/application_controller.rb',
 
 # Views
 run "cp -R #{SOURCE}/app/views/user_mailer app/views"
+
+if git?
+  git :add => "app config db"
+  git :commit => "-m 'install authlogic bundle'"
+end
