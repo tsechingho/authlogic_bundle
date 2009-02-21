@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /account
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    @user = @current_user
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to account_url
