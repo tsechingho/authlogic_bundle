@@ -93,7 +93,11 @@ file_inject 'app/controllers/application_controller.rb',
 # Views
 run "cp -R #{SOURCE}/app/views/user_mailer app/views"
 
+route "map.root :controller => 'users', :action => 'show'"
+
 if git?
+  git :submodule => "init"
+  git :submodule => "update"
   git :add => "app config db"
   git :commit => "-m 'install authlogic bundle'"
 end

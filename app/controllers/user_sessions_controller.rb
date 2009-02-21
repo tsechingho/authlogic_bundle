@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new
   end
 
-  # POST /login
+  # POST /user_session
   def create
     @user_session = UserSession.new(params[:user_session])
     @user_session.save do |result|
