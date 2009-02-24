@@ -1,3 +1,5 @@
+<fieldset>
+  <legend>Basic Information</legend>
   <p>
     <%= form.label :login %><br />
     <%= form.text_field :login %>
@@ -6,6 +8,8 @@
     <%= form.label :email %><br />
     <%= form.text_field :email %>
   </p>
+</fieldset>
+
 <%- unless form.object.new_record? -%>
 <fieldset>
   <legend>Authenticated by <%= link_to_function "Password / OpenID", "$('password_box').toggle(); $('openid_box').toggle();" %></legend>

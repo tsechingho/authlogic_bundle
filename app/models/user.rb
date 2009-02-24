@@ -4,10 +4,23 @@ class User < ActiveRecord::Base
     :password_field_validation_options => { :if => :openid_identifier_blank? },
     :password_field_validates_length_of_options => { :on => :update, :if => :has_no_credentials? }
 
+  using_access_control
+
+  has_many :roles
+
   validate :normalize_openid_identifier
   validates_uniqueness_of :openid_identifier, :allow_blank => true
 
   attr_accessible :login, :email, :password, :password_confirmation, :openid_identifier
+
+  # Since UserSession.find and UserSession.save will trigger 
+  # record.save_without_session_maintenance(false) and the 'updated_at', 'last_request_at' 
+  # fields of user model will be updated every time by authlogic if record (user) found.
+  # We need to reset Authorization.current_user instead of giving the update privilege 
+  # of user model to guest role, and use before_save filter in user model instead of 
+  # after_find and before_save filters in UserSession model in case of other methods like 
+  # reset_perishable_token! will call save_without_session_maintenance too.
+  before_save :set_current_user_for_model_security
 
   def openid_identifier_blank?
     openid_identifier.blank?
@@ -34,15 +47,13 @@ class User < ActiveRecord::Base
     self.password = user[:password]
     self.password_confirmation = user[:password_confirmation]
     self.openid_identifier = user[:openid_identifier]
+    self.roles.build(:name => 'customer')
     save
   end
 
-  def to_param
-    login.parameterize
-  end
-
   def deliver_activation_instructions!
-    reset_perishable_token!
+    # skip reset perishable token since we don't set roles in signup!
+    reset_perishable_token! unless roles.blank?
     UserMailer.deliver_activation_instructions(self)
   end
 
@@ -54,6 +65,20 @@ class User < ActiveRecord::Base
   def deliver_password_reset_instructions!
     reset_perishable_token!
     UserMailer.deliver_password_reset_instructions(self)
+  end
+
+  def role_symbols
+    (roles || []).map { |r| r.name.to_sym }
+  end
+
+  def to_param
+    login.parameterize
+  end
+
+  protected
+
+  def set_current_user_for_model_security
+    Authorization.current_user = self
   end
 
   private

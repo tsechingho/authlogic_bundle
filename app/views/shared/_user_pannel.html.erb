@@ -4,7 +4,7 @@
   <%= link_to "Log In", login_path %>
 <%- else -%>
   <%= link_to "My Account", account_path %> |
-  <%= link_to "Logout", logout_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+  <%= link_to "Logout", logout_path, :method => :delete %>
 <%- end -%>
 <!-- This based on last_request_at, if they were active < 10 minutes they are logged in -->
  | <%= pluralize User.logged_in.count, "user" %> currently logged in

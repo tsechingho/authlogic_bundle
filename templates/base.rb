@@ -10,6 +10,7 @@ file_append 'config/initializers/session_store.rb', <<-CODE
 ActionController::Base.session_store = :active_record_store
 CODE
 
+gem 'bcrypt-ruby', :version => '>=2.0.3'
 gem 'authlogic', :version => '>=1.4.1'
 # plugin 'authlogic', :submodule => git?, 
 #   :git => 'git://github.com/binarylogic/authlogic.git'
@@ -25,20 +26,23 @@ file Dir.glob('db/migrate/*_add_open_id_to_users.rb').first,
   open("#{SOURCE}/db/migrate/add_open_id_to_users.rb").read
 rake 'open_id_authentication:db:create'
 
+plugin 'declarative_authorization', :submodule => git?, 
+  :git => 'git://github.com/stffn/declarative_authorization.git'
+generate :migration, 'create_roles'
+file Dir.glob('db/migrate/*_create_roles.rb').first,
+  open("#{SOURCE}/db/migrate/create_roles.rb").read
+
 rake 'gems:install', :sudo => true
 rake 'db:migrate'
-
-if git?
-  git :rm => "public/index.html"
-else
-  run 'rm public/index.html'
-end
 
 #########################
 #  Configuration
 #########################
-route "map.root :controller => 'users', :action => 'show'"
+route "map.root :controller => 'home', :action => 'index'"
 route "map.resources :users"
+route "map.resources :roles"
+
+run "cp #{SOURCE}/config/authorization_rules.rb config"
 
 file 'config/notifier.yml', <<-CODE
 development:
@@ -67,10 +71,10 @@ config = File.read(Rails.root.join('config', 'notifier.yml'))
 NOTIFIER = YAML.load(config)[RAILS_ENV]['notifier'].symbolize_keys
 CODE
 
+# fixed in rails edge
 # initializer 'rails_patch.rb'
 file_append 'config/initializers/rails_patch.rb', <<-CODE
-# This file is a hack for rails 2.3.0, and may be fixed in rails edge
-
+# This is a hack for rails 2.3.0, and fixed in rails edge
 # http://rails.lighthouseapp.com:80/projects/8994/tickets/1970-app-routesrb-not-loaded-when-both-engine-and-inflections-present
 class Rails::Initializer
   def initialize_routing
@@ -89,15 +93,21 @@ CODE
 
 # Controllers
 file_inject 'app/controllers/application_controller.rb',
-  'class ApplicationController < ActionController::Base',
-  "  include AuthenticatedSystem\n"
+  'class ApplicationController < ActionController::Base', <<-CODE
+  include AuthenticatedSystem
+  include AuthorizedSystem
+CODE
 
 # Views
+# fixed in rails edge
 run "cp -R #{SOURCE}/app/views/user_mailer app/views"
 
 if git?
+  git :rm => "public/index.html"
   git :submodule => "init"
   git :submodule => "update"
   git :add => "app config db"
   git :commit => "-m 'install authlogic bundle'"
+else
+  run 'rm public/index.html'
 end

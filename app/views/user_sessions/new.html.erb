@@ -2,10 +2,10 @@
 
 <fieldset>
   <legend>Login using <%= link_to_function "Password / OpenID", "$('password_box').toggle(); $('openid_box').toggle();" %></legend>
-  <%= error_messages_for :user_session %>
 
 <% form_for @user_session, :url => user_session_path do |f| %>
 <div id="password_box"<% unless @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
+  <%= f.error_messages %>
   <p>
     <%= f.label :login %><br />
     <%= f.text_field :login %>
@@ -27,6 +27,7 @@
 
 <% form_for @user_session, :url => user_session_path do |f| %>
 <div id="openid_box"<% if @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
+  <%= f.error_messages %>
   <p>
     <%= f.label :openid_identifier, link_to("Open ID", "http://openid.net/") %><br />
     <%= f.text_field :openid_identifier %>

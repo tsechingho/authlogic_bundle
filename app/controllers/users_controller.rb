@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
+  filter_access_to :show, :edit, :update, :attribute_check => true, :load_method => :current_user
 
   # GET /users/1
   # GET /account
