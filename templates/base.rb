@@ -10,7 +10,7 @@ file_append 'config/initializers/session_store.rb', <<-CODE
 ActionController::Base.session_store = :active_record_store
 CODE
 
-gem 'bcrypt-ruby', :version => '>=2.0.3'
+gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.3'
 gem 'authlogic', :version => '>=1.4.1'
 # plugin 'authlogic', :submodule => git?, 
 #   :git => 'git://github.com/binarylogic/authlogic.git'

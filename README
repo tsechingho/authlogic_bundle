@@ -25,6 +25,7 @@ The user using password authentication can also reset his/her password.
 2. authlogic gem/plugin
 3. ruby-openid gem
 4. open_id_authentication plugin
+5. declarative_authorization plugin
 
 == Installation
 
