@@ -1,11 +1,40 @@
-<h1>Editing user</h1>
+<% title t('users.titles.edit') %>
 
 <% form_for @user, :url => account_path do |f| %>
   <%= f.error_messages %>
-<%= render :partial => 'form', :object => f %>
+  <fieldset>
+    <legend><%= t('users.basic_infomation') %></legend>
+    <p>
+      <%= f.label :login, t('activerecord.attributes.user.login') %><br />
+      <%= f.text_field :login %>
+    </p>
+    <p>
+      <%= f.label :email, t('activerecord.attributes.user.email') %><br />
+      <%= f.text_field :email %>
+    </p>
+  </fieldset>
+  <fieldset>
+    <legend><%= t('users.authentication_toggle', :token => authentication_toggle) %></legend>
+    <div id="password_box"<% unless @user.openid_identifier.blank? %> style="display: none;"<% end %>
+      <p>
+        <%= f.label :password, t('users.password') %><br />
+        <%= f.password_field :password %>
+      </p>
+      <p>
+        <%= f.label :password_confirmation, t('activerecord.attributes.user.password_confirmation') %><br />
+        <%= f.password_field :password_confirmation %>
+      </p>
+    </div>
+    <div id="openid_box"<% if @user.openid_identifier.blank? %> style="display: none;"<% end %>>
+      <p>
+        <%= f.label :openid_identifier, openid_link %><br />
+        <%= f.text_field :openid_identifier %>
+      </p>
+    </div>
+  </fieldset>
   <p>
-    <%= f.submit "Update" %>
+    <%= f.submit t('common.actions.update') %>
   </p>
 <% end %>
 
-<%= link_to "My Profile", account_path %>
+<%= link_to t('users.account'), account_path %>

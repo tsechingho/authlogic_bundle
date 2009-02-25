@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   default_url_options[:host] = NOTIFIER[:host]
 
   def activation_instructions(user)
-    subject       "Activation Instructions"
+    subject       I18n.t('user_mailer.titles.activation_instructions')
     from          "#{NOTIFIER[:name]} <#{NOTIFIER[:email]}>"
     recipients    user.email
     sent_on       Time.now
@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def activation_confirmation(user)
-    subject       "Activation Complete"
+    subject       I18n.t('user_mailer.titles.activation_confirmation')
     from          "#{NOTIFIER[:name]} <#{NOTIFIER[:email]}>"
     recipients    user.email
     sent_on       Time.now
@@ -18,7 +18,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def password_reset_instructions(user)
-    subject       "Password Reset Instructions"
+    subject       I18n.t('user_mailer.titles.password_reset_instructions')
     from          "#{NOTIFIER[:name]} <#{NOTIFIER[:email]}>"
     recipients    user.email
     sent_on       Time.now

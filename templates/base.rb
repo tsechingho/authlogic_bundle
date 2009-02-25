@@ -33,7 +33,7 @@ file Dir.glob('db/migrate/*_create_roles.rb').first,
   open("#{SOURCE}/db/migrate/create_roles.rb").read
 
 rake 'gems:install', :sudo => true
-rake 'db:migrate'
+rake 'db:migrate'#, :env => 'development'
 
 #########################
 #  Configuration
@@ -43,6 +43,7 @@ route "map.resources :users"
 route "map.resources :roles"
 
 run "cp #{SOURCE}/config/authorization_rules.rb config"
+run "cp #{SOURCE}/config/locales/* config/locales"
 
 file 'config/notifier.yml', <<-CODE
 development:
@@ -96,11 +97,12 @@ file_inject 'app/controllers/application_controller.rb',
   'class ApplicationController < ActionController::Base', <<-CODE
   include AuthenticatedSystem
   include AuthorizedSystem
+  include LocalizedSystem
 CODE
 
-# Views
 # fixed in rails edge
 run "cp -R #{SOURCE}/app/views/user_mailer app/views"
+run "cp #{SOURCE}/app/helpers/*_helper.rb app/helpers"
 
 if git?
   git :rm => "public/index.html"

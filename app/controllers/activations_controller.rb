@@ -16,7 +16,7 @@ class ActivationsController < ApplicationController
 
     if @user.activate!(params[:user])
       @user.deliver_activation_confirmation!
-      flash[:notice] = "Your account has been activated."
+      flash[:success] = t('activations.flashs.success.create')
       redirect_to account_url
     else
       render :action => :new

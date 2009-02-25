@@ -17,7 +17,7 @@ module AuthenticatedSystem
     def require_user
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
+        flash[:notice] = t('users.flashs.notices.login_required')
         redirect_to login_url
         return false
       end
@@ -26,7 +26,7 @@ module AuthenticatedSystem
     def require_no_user
       if current_user
         store_location
-        flash[:notice] = "You must be logged out to access this page"
+        flash[:notice] = t('users.flashs.notices.logout_required')
         redirect_to account_url
         return false
       end
@@ -44,8 +44,10 @@ module AuthenticatedSystem
 
   def self.included(receiver)
     receiver.extend ClassMethods
-    receiver.send :include, InstanceMethods
-    receiver.send :helper_method, :current_user_session, :current_user if receiver.respond_to? :helper_method
-    receiver.send :filter_parameter_logging, :password, :password_confirmation if receiver.respond_to? :filter_parameter_logging
+    receiver.class_eval do
+      include InstanceMethods
+      helper_method :current_user_session, :current_user
+      filter_parameter_logging :password, :password_confirmation
+    end
   end
 end

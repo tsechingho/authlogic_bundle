@@ -1,9 +1,16 @@
-<h1>Register Account</h1>
+<% title t('users.titles.new') %>
 
 <% form_for @user, :url => account_path do |f| %>
   <%= f.error_messages %>
-<%= render :partial => 'form', :object => f %>
   <p>
-    <%= f.submit "Register" %>
+    <%= f.label :login, t('activerecord.attributes.user.login') %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :email, t('activerecord.attributes.user.email') %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.submit t('users.actions.signup') %>
   </p>
 <% end %>

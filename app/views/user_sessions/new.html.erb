@@ -1,43 +1,43 @@
-<h1>Login</h1>
+<% title t('user_sessions.titles.new') %>
 
 <fieldset>
-  <legend>Login using <%= link_to_function "Password / OpenID", "$('password_box').toggle(); $('openid_box').toggle();" %></legend>
+  <legend><%= t('user_sessions.login_toggle', :token => login_toggle) %></legend>
+
+<%= error_messages_for :user_session %>
 
 <% form_for @user_session, :url => user_session_path do |f| %>
 <div id="password_box"<% unless @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
-  <%= f.error_messages %>
   <p>
-    <%= f.label :login %><br />
+    <%= f.label :login, t('activerecord.attributes.user.login') %><br />
     <%= f.text_field :login %>
   </p>
   <p>
-    <%= f.label :password %><br />
+    <%= f.label :password, t('activerecord.attributes.user.password') %><br />
     <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.label :remember_me %>
+    <%= f.label :remember_me, t('user_sessions.remember_me') %>
     <%= f.check_box :remember_me %>
   </p>
   <p>
-    <%= f.submit "Login" %> | 
-    <%= link_to "Forgot password", new_password_reset_path %>
+    <%= f.submit t('user_sessions.actions.login') %> | 
+    <%= link_to t('user_sessions.forget_password'), new_password_reset_path %>
   </p>
 </div>
 <% end %>
 
 <% form_for @user_session, :url => user_session_path do |f| %>
 <div id="openid_box"<% if @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
-  <%= f.error_messages %>
   <p>
-    <%= f.label :openid_identifier, link_to("Open ID", "http://openid.net/") %><br />
+    <%= f.label :openid_identifier, openid_link %><br />
     <%= f.text_field :openid_identifier %>
   </p>
   <p>
-    <%= f.label :remember_me %>
+    <%= f.label :remember_me, t('user_sessions.remember_me') %>
     <%= f.check_box :remember_me %>
   </p>
   <p>
-    <%= f.submit "Login" %>
+    <%= f.submit t('user_sessions.actions.login') %>
   </p>
 </div>
 <% end %>

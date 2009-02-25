@@ -1,5 +1,6 @@
 authorization do
   role :guest do
+    # Don't remove this or you can't signup
     has_permission_on :users, :to => :create
   end
   

@@ -11,3 +11,5 @@ else
     end
   end
 end
+
+require "authlogic_bundle"

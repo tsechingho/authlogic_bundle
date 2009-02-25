@@ -1,0 +1,18 @@
+<div id="user_pannel">
+<%- if !current_user -%>
+  <%= link_to t('users.actions.signup'), signup_path %> |
+  <%= link_to t('users.actions.login'), login_path %>
+<%- else -%>
+  <%= link_to t('users.account'), account_path %> |
+  <%= link_to t('users.actions.logout'), logout_path, :method => :delete %>
+<%- end -%>
+<%- permitted_to? :manage, :users do -%>
+<!-- This based on last_request_at, if they were active < 10 minutes they are logged in -->
+ | <%= t('users.online', :count => User.logged_in.count) %>
+<%- end -%>
+</div>
+<div id="locale_pannel">
+  <% form_tag request.path, :method => :get do %>
+    <%= select_tag :locale, options_for_select(@locales_available, I18n.locale), { :index => nil, :onchange => 'this.form.submit()' } %>
+  <% end %>
+</div>

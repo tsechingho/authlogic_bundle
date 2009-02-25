@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource :user_session, :only => [:create]
   map.login '/login', :controller => 'user_sessions', :action => 'new', :conditions => { :method => :get }
-  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => :delete }
+  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy', :conditions => { :method => [:get, :delete] }
   
   map.signup '/signup', :controller => 'users', :action => 'new', :conditions => { :method => :get }
   map.resource :account, :controller => "users", :only => [:show, :create, :edit, :update]
