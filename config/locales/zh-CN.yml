@@ -155,8 +155,8 @@
         name: "名称"
       
       user:
-        login: "登入帐号"
-        email: "电子邮件"
+        login: "用户名"
+        email: "电邮"
         state: "状态"
         password: "密码"
         password_confirmation: "确认密码"
@@ -184,7 +184,6 @@
       not_confirmed: "你的帐号尚未得到确认"
       not_approved: "你的帐号并未得到核准"
       blank_record: "你没用使用任何帐号进行登入"
-      new_record: "你不能使用尚未建立的帐号登入"
   
   common:
     flashs:
@@ -216,6 +215,8 @@
       next: "向后"
       up: "往上"
       down: "往下"
+    confirms:
+      delete: "你确定吗？"
     created_at: "建立时间"
     updated_at: "更新时间"
     previous_page: "&laquo; 前一页"
@@ -244,7 +245,7 @@
         create: "重设密码的指引已经电邮给你，请检查你的电子邮件。"
         update: "密码更改成功"
       errors:
-        create: "没有使用这个电子邮件的使用者"
+        create: "没有使用这个电子邮件的用户"
         update: "很抱歉，我们无法找到你的帐号。如果你仍有问题，请试著从电子邮件将密码重设连结拷贝及贴上你的浏览器，或重跑一次密码重设流程。"
     titles:
       edit: "更改我的密码"

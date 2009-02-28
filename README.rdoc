@@ -1,6 +1,6 @@
 = AuthlogicBundle
 
-This plugin will help you build up authentication/authorization system easily. You can also customize it by rails builtin engines' way.
+This plugin will help you build up an authentication/authorization system easily. You can also customize it by rails built-in engines' way.
 
 This plugin uses work flow of registration as:
 
@@ -19,7 +19,7 @@ The user using password authentication can also reset his/her password.
 4. The user chooses new password
 5. The user can log in with new password
 
-The Role-Based Access Control (RBAC) is introdued, and you can design the authorization rules in first place. Here gives sample rules.
+The Role-Based Access Control (RBAC) is introdued, and you can design the authorization rules (DSL) in first place. Here gives sample rules.
 
 1. The anonymous (guest role) can create a new user (customer role).
 2. The logged-in user (customer role) can show and update his/her account.

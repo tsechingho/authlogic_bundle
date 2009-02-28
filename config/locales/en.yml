@@ -44,7 +44,6 @@ en:
       not_confirmed: "Your account is not confirmed"
       not_approved: "Your account is not approved"
       blank_record: "You can not login with a blank record"
-      new_record: "You can not login with a new record"
   
   common:
     flashs:
@@ -76,6 +75,8 @@ en:
       next: "Next"
       up: "Up"
       down: "Down"
+    confirms:
+      delete: "Are you sure?"
     created_at: "Created at"
     updated_at: "Updated at"
     previous_page: "&laquo; Previous page"

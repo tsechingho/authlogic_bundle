@@ -184,7 +184,6 @@
       not_confirmed: "你的帳號尚未得到確認"
       not_approved: "你的帳號並未得到核准"
       blank_record: "你沒有使用任何帳號進行登入"
-      new_record: "你不能使用尚未建立的帳號登入"
   
   common:
     flashs:
@@ -216,6 +215,8 @@
       next: "向後"
       up: "往上"
       down: "往下"
+    confirms:
+      delete: "你確定嗎？"
     created_at: "建立時間"
     updated_at: "更新時間"
     previous_page: "&laquo; 前一頁"
