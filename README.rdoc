@@ -29,7 +29,7 @@ The internationalization of interface and messages are built-in with english and
 
 == Requirements
 
-1. rails gem (2.3.0+)
+1. rails gem (2.3.2+)
 2. bcrypt-ruby gem
 3. authlogic gem/plugin
 4. ruby-openid gem

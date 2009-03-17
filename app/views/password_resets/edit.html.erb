@@ -3,7 +3,7 @@
 <% form_for @user, :url => password_reset_path, :method => :put do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :password, t('activerecord.attributes.user.email') %><br />
+    <%= f.label :password, t('activerecord.attributes.user.password') %><br />
     <%= f.password_field :password %>
   </p>
   <p>

@@ -10,7 +10,7 @@ file_append 'config/initializers/session_store.rb', <<-CODE
 ActionController::Base.session_store = :active_record_store
 CODE
 
-gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.3'
+gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.5'
 gem 'authlogic', :version => '>=1.4.3'
 # plugin 'authlogic', :submodule => git?, 
 #   :git => 'git://github.com/binarylogic/authlogic.git'
@@ -42,10 +42,13 @@ route "map.root :controller => 'home', :action => 'index'"
 route "map.resources :users"
 route "map.resources :roles"
 
-run "cp #{SOURCE}/config/authorization_rules.rb config"
-run "cp #{SOURCE}/config/locales/* config/locales"
+file_append 'config/locales/en.yml', open("#{SOURCE}/config/locales/en.yml").read
+file_append 'config/locales/zh-CN.yml', open("#{SOURCE}/config/locales/zh-CN.yml").read
+file_append 'config/locales/zh-TW.yml', open("#{SOURCE}/config/locales/zh-TW.yml").read
 
-file 'config/notifier.yml', <<-CODE
+file_append 'config/authorization_rules.rb', open("#{SOURCE}/config/authorization_rules.rb").read
+
+file_append 'config/notifier.yml', <<-CODE
 development:
   notifier:
     host: localhost:3000
@@ -72,22 +75,6 @@ config = File.read(Rails.root.join('config', 'notifier.yml'))
 NOTIFIER = YAML.load(config)[RAILS_ENV]['notifier'].symbolize_keys
 CODE
 
-# fixed in rails edge
-# initializer 'rails_patch.rb'
-file_append 'config/initializers/rails_patch.rb', <<-CODE
-# This is a hack for rails 2.3.0, and fixed in rails edge
-# http://rails.lighthouseapp.com:80/projects/8994/tickets/1970-app-routesrb-not-loaded-when-both-engine-and-inflections-present
-class Rails::Initializer
-  def initialize_routing
-    return unless configuration.frameworks.include?(:action_controller)
-
-    ActionController::Routing.controller_paths += configuration.controller_paths
-    ActionController::Routing::Routes.add_configuration_file(configuration.routes_configuration_file)
-    ActionController::Routing::Routes.reload!
-  end
-end
-CODE
-
 #########################
 #  MVC
 #########################
@@ -100,9 +87,16 @@ file_inject 'app/controllers/application_controller.rb',
   include LocalizedSystem
 CODE
 
-# fixed in rails edge
-run "cp -R #{SOURCE}/app/views/user_mailer app/views"
-run "cp #{SOURCE}/app/helpers/*_helper.rb app/helpers"
+# Helpers
+# NOTE: Only controller's helper in engines will be loaded.
+file_inject 'app/helpers/application_helper.rb', 'module ApplicationHelper', <<-CODE
+  def secure_mail_to(email)
+    mail_to email, nil, :encode => 'javascript'
+  end
+CODE
+
+file_append 'app/helpers/layout_helper.rb', open("#{SOURCE}/app/helpers/layout_helper.rb").read
+file_append 'app/helpers/users_helper.rb', open("#{SOURCE}/app/helpers/users_helper.rb").read
 
 if git?
   git :rm => "public/index.html"
