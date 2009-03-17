@@ -77,6 +77,7 @@ en:
       down: "Down"
     confirms:
       delete: "Are you sure?"
+    please_wait: "Please wait..."
     created_at: "Created at"
     updated_at: "Updated at"
     previous_page: "&laquo; Previous page"
@@ -120,9 +121,6 @@ en:
       activation_instructions: "Activation Instructions"
       activation_confirmation: "Activation Complete"
       password_reset_instructions: "Password Reset Instructions"
-    activation_instructions: "Thank you for creating an account! Click the url below to activate your account!\n\n{{url}}\n\nIf the above URL does not work, try copying and pasting it into your browser.\nIf you continue to have problem, please feel free to contact us."
-    activation_confirmation: "Your account has been activated.\n\n{{url}}\n\nIf the above URL does not work, try copying and pasting it into your browser.\nIf you continue to have problem, please feel free to contact us."
-    password_reset_instructions: "A request to reset your password has been made.\nIf you did not make this request, simply ignore this email.\nIf you did make this request, just click the link below:\n\n{{url}}\n\nIf the above URL does not work, try copying and pasting it into your browser.\nIf you continue to have problem please feel free to contact us."
   
   user_sessions:
     flashs:

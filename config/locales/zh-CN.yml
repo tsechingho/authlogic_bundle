@@ -217,6 +217,7 @@
       down: "往下"
     confirms:
       delete: "你确定吗？"
+    please_wait: "请稍后..."
     created_at: "建立时间"
     updated_at: "更新时间"
     previous_page: "&laquo; 前一页"
@@ -260,9 +261,6 @@
       activation_instructions: "帐号启动指引"
       activation_confirmation: "帐号启动完成"
       password_reset_instructions: "密码重设指引"
-    activation_instructions: "感谢你注册帐号！请点击下面的连结来启动你的帐号！\n\n{{url}}\n\n如果上面的连结无法点击，请试著将连结拷贝并贴上你的浏览器。\n如果你仍有问题，请直接与我们联络。"
-    activation_confirmation: "你的帐号已经被启动。\n\n{{url}}\n\n如果上面的连结无法点击，请试著将连结拷贝并贴上你的浏览器。\n如果你仍有问题，请直接与我们联络。"
-    password_reset_instructions: "重设密码的请求已被接受。\n如果你没有发出这个请求，请直接忽略这封邮件。\n如果你有发出这个请求，请点击下面的连结：\n\n{{url}}\n\n如果上面的连结无法点击，请试著将连结拷贝并贴上你的浏览器。\n如果你仍有问题，请直接与我们联络。"
   
   user_sessions:
     flashs:
