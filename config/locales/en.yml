@@ -75,6 +75,8 @@ en:
       next: "Next"
       up: "Up"
       down: "Down"
+      top: "Top"
+      bottom: "Bottom"
     confirms:
       delete: "Are you sure?"
     please_wait: "Please wait..."
