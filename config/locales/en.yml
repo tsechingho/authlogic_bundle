@@ -78,7 +78,7 @@ en:
       top: "Top"
       bottom: "Bottom"
     confirms:
-      delete: "Are you sure?"
+      destroy: "Are you sure?"
     please_wait: "Please wait..."
     created_at: "Created at"
     updated_at: "Updated at"
@@ -151,6 +151,7 @@ en:
         not_allowed: "Sorry, you are not allowed to view the requested page."
     titles:
       edit: "Editing user"
+      index: "Listing users"
       new: "Register Account"
       show: "User Account"
     actions:

@@ -230,7 +230,7 @@
       top: "置頂"
       bottom: "置底"
     confirms:
-      delete: "你確定嗎？"
+      destroy: "你確定嗎？"
     please_wait: "請稍後..."
     created_at: "建立時間"
     updated_at: "更新時間"
@@ -303,6 +303,7 @@
         not_allowed: "抱歉！你不被允許瀏覽此頁面。"
     titles:
       edit: "編輯使用者"
+      index: "使用者列表"
       new: "註冊帳號"
       show: "使用者帳號"
     actions:

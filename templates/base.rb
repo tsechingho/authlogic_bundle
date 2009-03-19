@@ -96,10 +96,17 @@ file_inject 'app/helpers/application_helper.rb', 'module ApplicationHelper', <<-
   def secure_mail_to(email)
     mail_to email, nil, :encode => 'javascript'
   end
+
+  def at(klass, attribute, options = {})
+    klass.human_attribute_name(attribute.to_s, options = {})
+  end
+
+  def openid_link
+    link_to at(User, :openid_identifier), "http://openid.net/"
+  end
 CODE
 
 file_append 'app/helpers/layout_helper.rb', open("#{SOURCE}/app/helpers/layout_helper.rb").read
-file_append 'app/helpers/users_helper.rb', open("#{SOURCE}/app/helpers/users_helper.rb").read
 
 if git?
   git :rm => "public/index.html"

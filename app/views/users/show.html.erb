@@ -1,11 +1,11 @@
 <% title t('users.titles.show') %>
 
 <p>
-  <b><%= t('activerecord.attributes.user.login') %>:</b>
+  <b><%= at(User, :login) %>:</b>
   <%=h @user.login %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.email') %>:</b>
+  <b><%= at(User, :email) %>:</b>
   <%=h @user.email %>
 </p>
 <p>
@@ -13,31 +13,31 @@
   <%=h @user.openid_identifier %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.login_count') %>:</b>
+  <b><%= at(User, :login_count) %>:</b>
   <%=h @user.login_count %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.failed_login_count') %>:</b>
+  <b><%= at(User, :failed_login_count) %>:</b>
   <%=h @user.failed_login_count %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.last_request_at') %>:</b>
+  <b><%= at(User, :last_request_at) %>:</b>
   <%=h @user.last_request_at %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.last_login_at') %>:</b>
+  <b><%= at(User, :last_login_at) %>:</b>
   <%=h @user.last_login_at %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.current_login_at') %>:</b>
+  <b><%= at(User, :current_login_at) %>:</b>
   <%=h @user.current_login_at %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.last_login_ip') %>:</b>
+  <b><%= at(User, :last_login_ip) %>:</b>
   <%=h @user.last_login_ip %>
 </p>
 <p>
-  <b><%= t('activerecord.attributes.user.current_login_ip') %>:</b>
+  <b><%= at(User, :current_login_ip) %>:</b>
   <%=h @user.current_login_ip %>
 </p>
 

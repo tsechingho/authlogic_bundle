@@ -4,7 +4,7 @@
 
 <% form_tag password_resets_path do %>
   <p>
-    <%= label_tag :email, t('activerecord.attributes.user.email') %><br />
+    <%= label_tag :email, at(User, :email) %><br />
     <%= text_field_tag :email %>
   </p>
   <p>

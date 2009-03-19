@@ -8,11 +8,11 @@
 <% form_for @user_session, :url => user_session_path do |f| %>
 <div id="password_box"<% unless @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
   <p>
-    <%= f.label :login, t('activerecord.attributes.user.login') %><br />
+    <%= f.label :login, at(User, :login) %><br />
     <%= f.text_field :login %>
   </p>
   <p>
-    <%= f.label :password, t('activerecord.attributes.user.password') %><br />
+    <%= f.label :password, at(User, :password) %><br />
     <%= f.password_field :password %>
   </p>
   <p>

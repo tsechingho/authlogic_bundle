@@ -25,7 +25,7 @@ The Role-Based Access Control (RBAC) is introdued, and you can design the author
 2. The logged-in user (customer role) can show and update his/her account.
 3. A special user "admin" (admin role) can manage all users.
 
-The internationalization of interface and messages are built-in with english and chinese(zh-TW/zh-CN).
+The internationalization of interface and messages are built-in with english and chinese (zh-TW/zh-CN).
 
 == Requirements
 
@@ -48,7 +48,9 @@ If you have an existed rails application, you can
   $ git submodule add git://github.com/tsechingho/authlogic_bundle.git vendor/plugins/authlogic_bundle
   $ rake rails:template LOCATION=vendor/plugins/authlogic_bundle/templates/base.rb SCM=git
 
-== Upgrade
+== Upgradation
+
+It's supposed you should change your existed codes by yourself with newer version of authlogic_bundle or accessory plugins if this step is needed.
 
 If you want to update the authlogic_bundle, you can
 

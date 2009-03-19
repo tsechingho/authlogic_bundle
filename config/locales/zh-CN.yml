@@ -230,7 +230,7 @@
       top: "置顶"
       bottom: "置底"
     confirms:
-      delete: "你确定吗？"
+      destroy: "你确定吗？"
     please_wait: "请稍后..."
     created_at: "建立时间"
     updated_at: "更新时间"
@@ -303,6 +303,7 @@
         not_allowed: "抱歉！你不被允许浏览此页面。"
     titles:
       edit: "编辑用户"
+      index: "用户清单"
       new: "注册帐号"
       show: "用户帐号"
     actions:
