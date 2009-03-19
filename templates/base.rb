@@ -32,6 +32,9 @@ generate :migration, 'create_roles'
 file Dir.glob('db/migrate/*_create_roles.rb').first,
   open("#{SOURCE}/db/migrate/create_roles.rb").read
 
+plugin 'i18n_label', :submodule => git?, 
+  :git => 'git://github.com/iain/i18n_label.git'
+
 rake 'gems:install', :sudo => true
 rake 'db:migrate'#, :env => 'development'
 

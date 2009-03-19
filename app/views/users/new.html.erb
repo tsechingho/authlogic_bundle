@@ -3,11 +3,11 @@
 <% form_for @user, :url => account_path do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :login, t('activerecord.attributes.user.login') %><br />
+    <%= f.label :login %><br />
     <%= f.text_field :login %>
   </p>
   <p>
-    <%= f.label :email, t('activerecord.attributes.user.email') %><br />
+    <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
   <p>
