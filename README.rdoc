@@ -50,14 +50,15 @@ If you have an existed rails application, you can
 
 == Upgradation
 
-It's supposed you should change your existed codes by yourself with newer version of authlogic_bundle or accessory plugins if this step is needed.
+It's supposed you should modify your existed codes by yourself with newer version of authlogic_bundle or accessory plugins if this step is needed.
 
 If you want to update the authlogic_bundle, you can
 
   $ cd <your-app>/vendor/plugins/authlogic_bundle
   $ git pull origin master
   $ cd ../../..
-  $ git commit -a -m 'update authlogic_bundle submodule'
+  $ git add vendor/plugins/authlogic_bundle
+  $ git commit -m 'update authlogic_bundle submodule'
 
 If you want to update all plugins into edge, you can
 

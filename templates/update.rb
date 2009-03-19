@@ -2,12 +2,13 @@ submodules = []
 
 plugins = Dir.glob('vendor/plugins/*')
 for plugin in plugins
-  inside(plugin) do
-    if File.exist? ".git/config"
+  if File.exist? ".git/config"
+    inside(plugin) do
       run "git pull origin master"
       submodules << File.basename(plugin)
     end
+    git :add => plugin
   end
 end
 
-run "git commit -a -m 'update submodules : #{submodules.join(', ')}'"
+git :commit => "-m 'update submodules : #{submodules.join(', ')}'"
