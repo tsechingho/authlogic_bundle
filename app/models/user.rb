@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-  acts_as_authentic :crypto_provider => Authlogic::CryptoProviders::BCrypt,
-    :login_field_validation_options => { :if => :openid_identifier_blank? },
-    :password_field_validation_options => { :if => :openid_identifier_blank? },
-    :password_field_validates_length_of_options => { :on => :update, :if => :has_no_credentials? }
+  acts_as_authentic do |c|
+    c.crypto_provider = Authlogic::CryptoProviders::BCrypt
+  end
 
   using_access_control
 
@@ -22,14 +21,10 @@ class User < ActiveRecord::Base
   # reset_perishable_token! will call save_without_session_maintenance too.
   before_save :set_current_user_for_model_security
 
-  def openid_identifier_blank?
-    openid_identifier.blank?
-  end
-
   # we need to make sure that either a password or openid gets set
   # when the user activates his account
   def has_no_credentials?
-    self.crypted_password.blank? && self.openid_identifier.blank?
+    require_password? && self.openid_identifier.blank?
   end
 
   def active?
