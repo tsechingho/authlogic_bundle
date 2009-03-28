@@ -3,20 +3,20 @@
 <fieldset>
   <legend><%= t('user_sessions.login_toggle', :token => login_toggle) %></legend>
 
-<%= error_messages_for :user_session %>
+<%= error_messages_for :user_session, :object_name => UserSession.human_name %>
 
 <% form_for @user_session, :url => user_session_path do |f| %>
 <div id="password_box"<% unless @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>
   <p>
-    <%= f.label :login, at(User, :login) %><br />
+    <%= f.label :login %><br />
     <%= f.text_field :login %>
   </p>
   <p>
-    <%= f.label :password, at(User, :password) %><br />
+    <%= f.label :password %><br />
     <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.label :remember_me, t('user_sessions.remember_me') %>
+    <%= f.label :remember_me %>
     <%= f.check_box :remember_me %>
   </p>
   <p>
@@ -33,7 +33,7 @@
     <%= f.text_field :openid_identifier %>
   </p>
   <p>
-    <%= f.label :remember_me, t('user_sessions.remember_me') %>
+    <%= f.label :remember_me %>
     <%= f.check_box :remember_me %>
   </p>
   <p>

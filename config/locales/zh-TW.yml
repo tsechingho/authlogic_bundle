@@ -188,14 +188,22 @@
       login_blank: "不能留空"
       login_not_found: "不存在"
       login_invalid: "請使用英文字母、阿拉伯數字、空白字元和 .-_@ 等特殊符號"
-      consecutive_failed_logins_limit_exceeded: "超過連續登入失敗的次數限制"
+      consecutive_failed_logins_limit_exceeded: "超過連續登入失敗的次數限制，帳號被停用"
       email_invalid: "不像是標準的電子郵件格式"
       password_blank: "不能留空"
       password_invalid: "不正確"
       not_active: "你的帳號尚未激活"
       not_confirmed: "你的帳號尚未得到確認"
       not_approved: "你的帳號並未得到核准"
-      blank_record: "你沒有使用任何帳號進行登入"
+      no_authentication_details: "你沒有提供任何認證資料"
+    models:
+      user_session: "使用者認證"
+    attributes:
+      user_session:
+        login: "登入帳號"
+        email: "電子郵件"
+        password: "密碼"
+        remember_me: "記住我"
   
   common:
     flashs:
@@ -288,7 +296,6 @@
     login_toggle: "使用 {{token}} 登入"
     login_token: "密碼 / OpenID"
     openid_identifier: "Open ID"
-    remember_me: "記住我"
     forget_password: "忘記密碼"
   
   users:
