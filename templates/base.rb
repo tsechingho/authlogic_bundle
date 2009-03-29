@@ -11,7 +11,7 @@ ActionController::Base.session_store = :active_record_store
 CODE
 
 gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.5'
-gem 'authlogic', :version => '>=2.0.3'
+gem 'authlogic', :version => '>=2.0.4'
 # plugin 'authlogic', :submodule => git?, 
 #   :git => 'git://github.com/binarylogic/authlogic.git'
 generate :migration, 'create_users'

@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::BCrypt
+    c.validates_length_of_password_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
+    c.validates_confirmation_of_password_field_options = {:minimum => 4, :on => :update, :if => (password_salt_field ? "#{password_salt_field}_changed?".to_sym : nil)}
+    c.validates_length_of_password_confirmation_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
   end
 
   using_access_control
