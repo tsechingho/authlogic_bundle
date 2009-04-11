@@ -1,11 +1,11 @@
-= AuthlogicBundle
+= Authlogic Bundle
 
 This plugin will help you build up an authentication/authorization system easily. You can also customize it by rails built-in engines' way.
 
 This plugin uses work flow of registration as:
 
 1. The new user registers his/her login and email
-2. System sends activation instruction mail to the user
+2. System sends activation instructions mail to the user
 3. The user follows up activation url in mail
 4. The user chooses authentication type (password / Open ID)
 5. System sends registration completion mail to the user
@@ -14,12 +14,12 @@ This plugin uses work flow of registration as:
 The user using password authentication can also reset his/her password.
 
 1. The user fills in his/her email in forgot password page
-2. System sends password reset insrtuction mail to the user
+2. System sends password reset instruction mail to the user
 3. The user follows up password reset url in mail
 4. The user chooses new password
 5. The user can log in with new password
 
-The Role-Based Access Control (RBAC) is introdued, and you can design the authorization rules (DSL) in first place. Here gives sample rules.
+The Role-Based Access Control (RBAC) is introduced, and you can design the authorization rules (DSL) in first place. Here gives sample rules.
 
 1. The anonymous (guest role) can create a new user (customer role).
 2. The logged-in user (customer role) can show and update his/her account.
@@ -35,6 +35,7 @@ The internationalization of interface and messages are built-in with english and
 4. ruby-openid gem
 5. open_id_authentication plugin
 6. declarative_authorization plugin
+7. ssl_requirement plugin
 
 == Installation
 
@@ -42,15 +43,21 @@ If you start up a new rails application, you can
 
   $ rails <your-app> -m http://github.com/tsechingho/authlogic_bundle/raw/master/templates/remote.rb
 
-If you have an existed rails application, you can
+If you have an existing rails application, you can
 
   $ cd <your-app>
   $ git submodule add git://github.com/tsechingho/authlogic_bundle.git vendor/plugins/authlogic_bundle
   $ rake rails:template LOCATION=vendor/plugins/authlogic_bundle/templates/base.rb SCM=git
 
-== Upgradation
+== Configuration
 
-It's supposed you should modify your existed codes by yourself with newer version of authlogic_bundle or accessory plugins if this step is needed.
+SSL will turn on in production mode and turn off in developemnt/test mode automatically. If you want to switch manually, please set ENV['SSL'] = 'on' in environment.rb or start server with SSL variable like
+
+  $ SSL=on script/server
+
+== Upgrades
+
+It's supposed you should modify your existing codes by yourself with newer version of authlogic_bundle or accessory plugins if this step is needed.
 
 If you want to update the authlogic_bundle, you can
 

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  ssl_required :show, :new, :edit, :create, :update
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
   filter_access_to :all
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   # POST /account
   def create
     @user = User.new
-    
+
     if @user.signup!(params[:user])
       @user.deliver_activation_instructions!
       flash[:success] = t('users.flashs.success.create')
@@ -40,6 +41,7 @@ class UsersController < ApplicationController
   # PUT /account
   def update
     @user = @current_user
+
     if @user.update_attributes(params[:user])
       flash[:success] = t('users.flashs.success.update')
       redirect_to account_url

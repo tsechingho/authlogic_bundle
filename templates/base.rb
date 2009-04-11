@@ -26,14 +26,17 @@ file Dir.glob('db/migrate/*_add_open_id_to_users.rb').first,
   open("#{SOURCE}/db/migrate/add_open_id_to_users.rb").read
 rake 'open_id_authentication:db:create'
 
-plugin 'declarative_authorization', :submodule => git?, 
+plugin 'declarative_authorization', :submodule => git?,
   :git => 'git://github.com/stffn/declarative_authorization.git'
 generate :migration, 'create_roles'
 file Dir.glob('db/migrate/*_create_roles.rb').first,
   open("#{SOURCE}/db/migrate/create_roles.rb").read
 
-plugin 'i18n_label', :submodule => git?, 
+plugin 'i18n_label', :submodule => git?,
   :git => 'git://github.com/iain/i18n_label.git'
+
+plugin 'ssl_requirement', :submodule => git?,
+  :git => 'git://github.com/rails/ssl_requirement.git'
 
 rake 'gems:install', :sudo => true
 rake 'db:migrate'#, :env => 'development'
@@ -88,6 +91,14 @@ file_inject 'app/controllers/application_controller.rb',
   include AuthenticatedSystem
   include AuthorizedSystem
   include LocalizedSystem
+  include SslRequirement
+
+  def ssl_required?
+    return ENV['SSL'] == 'on' ? true : false if defined? ENV['SSL']
+    return false if local_request? 
+    return false if RAILS_ENV == 'test'
+    super
+  end
 CODE
 
 # Helpers
