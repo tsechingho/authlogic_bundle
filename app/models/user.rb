@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   private
 
   def normalize_openid_identifier
-    self.openid_identifier = OpenIdAuthentication.normalize_url(openid_identifier) if !openid_identifier.blank?
+    self.openid_identifier = OpenIdAuthentication.normalize_identifier(openid_identifier) if !openid_identifier.blank?
   rescue OpenIdAuthentication::InvalidOpenId => e
     errors.add(:openid_identifier, e.message)
   end
