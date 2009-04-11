@@ -165,7 +165,7 @@ en:
       signup: "Register"
       login: "Log In"
       logout: "Logout"
-    basic_infomation: "Basic Information"
+    basic_information: "Basic Information"
     authentication_toggle: "Authenticated by {{token}}"
     authentication_token: "Password / OpenID"
     account: "My Account"

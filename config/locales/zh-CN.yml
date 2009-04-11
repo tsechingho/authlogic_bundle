@@ -317,7 +317,7 @@
       signup: "注册"
       login: "登入"
       logout: "登出"
-    basic_infomation: "基本资讯"
+    basic_information: "基本资讯"
     authentication_toggle: "使用 {{token}} 认证"
     authentication_token: "密码 / OpenID"
     account: "我的帐号"
