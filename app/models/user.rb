@@ -10,9 +10,6 @@ class User < ActiveRecord::Base
 
   has_many :roles
 
-  validate :normalize_openid_identifier
-  validates_uniqueness_of :openid_identifier, :allow_blank => true
-
   attr_accessible :login, :email, :password, :password_confirmation, :openid_identifier
 
   # Since UserSession.find and UserSession.save will trigger 
@@ -24,12 +21,6 @@ class User < ActiveRecord::Base
   # reset_perishable_token! will call save_without_session_maintenance too.
   before_save :set_current_user_for_model_security
 
-  # we need to make sure that either a password or openid gets set
-  # when the user activates his account
-  def has_no_credentials?
-    require_password? && self.openid_identifier.blank?
-  end
-
   def active?
     self.state == 'active'
   end
@@ -40,13 +31,17 @@ class User < ActiveRecord::Base
     save_without_session_maintenance
   end
 
-  def activate!(user)
+  # Since openid_identifier= will trigger openid authentication,
+  # We need save with &block to prevent double render/redirect error.
+  def activate!(user, &block)
+    unless user.blank?
+      self.password = user[:password]
+      self.password_confirmation = user[:password_confirmation]
+      self.openid_identifier = user[:openid_identifier]
+    end
     self.state = 'active'
-    self.password = user[:password]
-    self.password_confirmation = user[:password_confirmation]
-    self.openid_identifier = user[:openid_identifier]
-    self.roles.build(:name => 'customer')
-    save
+    roles.build(:name => 'customer') if roles.empty?
+    save(true, &block)
   end
 
   def deliver_activation_instructions!
@@ -81,9 +76,11 @@ class User < ActiveRecord::Base
 
   private
 
-  def normalize_openid_identifier
-    self.openid_identifier = OpenIdAuthentication.normalize_identifier(openid_identifier) if !openid_identifier.blank?
-  rescue OpenIdAuthentication::InvalidOpenId => e
-    errors.add(:openid_identifier, e.message)
+  # Since we use attr_accessible or attr_protected,
+  # we should overwrite this method defined in authlogic_openid.
+  def map_saved_attributes(attrs)
+    attrs.each do |key, value|
+      send("#{key}=", value)
+    end
   end
 end

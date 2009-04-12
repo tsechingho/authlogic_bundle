@@ -15,12 +15,14 @@ class ActivationsController < ApplicationController
     @user = User.find_by_login(params[:id])
     raise Exception if @user.active?
 
-    if @user.activate!(params[:user])
-      @user.deliver_activation_confirmation!
-      flash[:success] = t('activations.flashs.success.create')
-      redirect_to account_url
-    else
-      render :action => :new
+    @user.activate!(params[:user]) do |result|
+      if result
+        @user.deliver_activation_confirmation!
+        flash[:success] = t('activations.flashs.success.create')
+        redirect_to account_url
+      else
+        render :action => :new
+      end
     end
   rescue Exception => e
     redirect_to root_url

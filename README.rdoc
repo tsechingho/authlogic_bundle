@@ -34,8 +34,9 @@ The internationalization of interface and messages are built-in with english and
 3. authlogic gem/plugin
 4. ruby-openid gem
 5. open_id_authentication plugin
-6. declarative_authorization plugin
-7. ssl_requirement plugin
+6. authlogic_oid gem
+7. declarative_authorization plugin
+8. ssl_requirement plugin
 
 == Installation
 
@@ -51,7 +52,7 @@ If you have an existing rails application, you can
 
 == Configuration
 
-SSL will turn on in production mode and turn off in developemnt/test mode automatically. If you want to switch manually, please set ENV['SSL'] = 'on' in environment.rb or start server with SSL variable like
+SSL will turn on in production mode and turn off in development/test mode automatically. If you want to switch manually, please set ENV['SSL'] = 'on' in environment.rb or start server with SSL variable like
 
   $ SSL=on script/server
 

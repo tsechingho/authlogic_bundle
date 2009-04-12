@@ -41,12 +41,15 @@ class UsersController < ApplicationController
   # PUT /account
   def update
     @user = @current_user
+    @user.attributes = params[:user]
 
-    if @user.update_attributes(params[:user])
-      flash[:success] = t('users.flashs.success.update')
-      redirect_to account_url
-    else
-      render :action => :edit
+    @user.save do |result|
+      if result
+        flash[:success] = t('users.flashs.success.update')
+        redirect_to account_url
+      else
+        render :action => :edit
+      end
     end
   end
 end
