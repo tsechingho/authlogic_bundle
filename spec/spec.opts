@@ -1,0 +1,5 @@
+--colour
+--format progress
+--format html:coverage/spec.html
+--loadby mtime
+--reverse

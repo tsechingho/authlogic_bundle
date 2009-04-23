@@ -8,6 +8,7 @@ file '.gitignore', <<-CODE
 ._*
 Icon?
 config/database.yml
+coverage.data
 coverage/*
 db/*.sqlite3
 db/schema.rb
