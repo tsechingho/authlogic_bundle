@@ -10,8 +10,9 @@ module LocalizedSystem
       session[:locale] = params[:locale] if params[:locale]
       if http_lang = request.env["HTTP_ACCEPT_LANGUAGE"] and ! http_lang.blank?
         browser_locale = http_lang[/^[a-z]{2}/i].downcase + '-' + http_lang[3,2].upcase
+        browser_locale.sub!(/-US/, '')
       end
-      I18n.locale = session[:locale] || cookies[:locale] || browser_locale || I18n.default_locale
+      I18n.locale = session[:locale] || cookies[:locale] || browser_locale || I18n.default_locale || 'en'
 
       set_will_paginate_string if defined? WillPaginate
 
