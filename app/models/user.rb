@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   # Since openid_identifier= will trigger openid authentication,
-  # We need save with &block to prevent double render/redirect error.
+  # we need to save with block to prevent double render/redirect error.
   def activate!(user, &block)
     unless user.blank?
       self.password = user[:password]
@@ -42,6 +42,14 @@ class User < ActiveRecord::Base
     self.state = 'active'
     roles.build(:name => 'customer') if roles.empty?
     save(true, &block)
+  end
+
+  # Since password reset doesn't need to change openid_identifier,
+  # we save without block as usual.
+  def reset_password!(user)
+    self.password = user[:password]
+    self.password_confirmation = user[:password_confirmation]
+    save
   end
 
   def deliver_activation_instructions!

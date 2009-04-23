@@ -28,7 +28,7 @@ class PasswordResetsController < ApplicationController
 
   # PUT /password_resets/1
   def update
-    if @user.activate!(params[:user])
+    if @user.reset_password!(params[:user])
       flash[:success] = t('password_resets.flashs.success.update')
       redirect_to account_url
     else
