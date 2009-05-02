@@ -26,6 +26,7 @@ class UserSessionsController < ApplicationController
   def destroy
     current_user_session.destroy
     flash[:success] = t('user_sessions.flashs.success.destroy')
+    session[:return_to] = nil
     redirect_back_or_default login_url
   end
 end

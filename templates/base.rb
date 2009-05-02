@@ -12,36 +12,41 @@ CODE
 
 # please note the order of config.gem and databse migration
 
-gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.5'
-gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.4'
+gem 'stffn-declarative_authorization', :lib => 'declarative_authorization',
+  :version => '>=0.3.0', :source => 'http://gems.github.com'
+gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.6'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.3'
-gem 'authlogic', :version => '>=2.0.9'
+gem 'authlogic', :version => '>=2.0.11'
+gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.5'
+
+rake 'gems:install', :sudo => true
+
 # plugin 'authlogic', :submodule => git?, 
 #   :git => 'git://github.com/binarylogic/authlogic.git'
+
+# plugin 'declarative_authorization', :submodule => git?,
+#   :git => 'git://github.com/stffn/declarative_authorization.git'
+
+plugin 'open_id_authentication', :submodule => git?, 
+  :git => 'git://github.com/rails/open_id_authentication.git'
+plugin 'ssl_requirement', :submodule => git?,
+  :git => 'git://github.com/rails/ssl_requirement.git'
+plugin 'i18n_label', :submodule => git?,
+  :git => 'git://github.com/iain/i18n_label.git'
+
 generate :migration, 'create_users'
 file Dir.glob('db/migrate/*_create_users.rb').first,
   open("#{SOURCE}/db/migrate/create_users.rb").read
 
-plugin 'open_id_authentication', :submodule => git?, 
-  :git => 'git://github.com/rails/open_id_authentication.git'
 generate :migration, 'add_open_id_to_users'
 file Dir.glob('db/migrate/*_add_open_id_to_users.rb').first,
   open("#{SOURCE}/db/migrate/add_open_id_to_users.rb").read
 rake 'open_id_authentication:db:create'
 
-plugin 'declarative_authorization', :submodule => git?,
-  :git => 'git://github.com/stffn/declarative_authorization.git'
 generate :migration, 'create_roles'
 file Dir.glob('db/migrate/*_create_roles.rb').first,
   open("#{SOURCE}/db/migrate/create_roles.rb").read
 
-plugin 'ssl_requirement', :submodule => git?,
-  :git => 'git://github.com/rails/ssl_requirement.git'
-
-plugin 'i18n_label', :submodule => git?,
-  :git => 'git://github.com/iain/i18n_label.git'
-
-rake 'gems:install', :sudo => true
 rake 'db:migrate'#, :env => 'development'
 
 #########################

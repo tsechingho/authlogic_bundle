@@ -38,6 +38,13 @@ The internationalization of interface and messages are built-in with english and
 7. declarative_authorization plugin
 8. ssl_requirement plugin
 
+for testing:
+1. rspec
+2. rspec-rails
+3. cucumber
+4. webrat
+5. bmabey-email_spec
+
 == Installation
 
 If you start up a new rails application, you can
@@ -55,6 +62,12 @@ If you have an existing rails application, you can
 SSL will turn on in production mode and turn off in development/test mode automatically. If you want to switch manually, please set ENV['SSL'] = 'on' in environment.rb or start server with SSL variable like
 
   $ SSL=on script/server
+
+== Testing
+
+If you want to run the cucumber features, you can
+
+  $ rake features:authlogic_bundle
 
 == Upgrades
 

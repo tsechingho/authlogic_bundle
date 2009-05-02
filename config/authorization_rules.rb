@@ -3,15 +3,31 @@ authorization do
     # Don't remove this or you can't signup
     has_permission_on :users, :to => :create
   end
-  
+
   role :customer do
     has_permission_on :users, :to => [:show, :update]
   end
-  
+
   role :agent do
     has_permission_on :users, :to => [:show, :update]
   end
-  
+
+  role :supplier do
+    has_permission_on :users, :to => [:show, :update]
+  end
+
+  role :employee do
+    has_permission_on :users, :to => [:show, :update]
+  end
+
+  role :shareholder do
+    has_permission_on :users, :to => [:show, :update]
+  end
+
+  role :manager do
+    has_permission_on :users, :to => [:show, :update]
+  end
+
   role :admin do
     has_permission_on :users, :to => :manage
     has_permission_on :roles, :to => :manage

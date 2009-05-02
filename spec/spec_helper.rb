@@ -4,8 +4,14 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
 require 'spec/autorun'
 require 'spec/rails'
+require "email_spec/helpers"
+require "email_spec/matchers"
+require 'remarkable_rails'
 
 Spec::Runner.configure do |config|
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
+
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb
