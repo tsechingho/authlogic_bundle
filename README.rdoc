@@ -63,11 +63,22 @@ SSL will turn on in production mode and turn off in development/test mode automa
 
   $ SSL=on script/server
 
+== Customization
+
+If you prepare to customize your own User model, please start by
+
+  $ cp vendor/plugins/authlogic_bundle/app/models/user.rb app/models
+  $ cp vendor/plugins/authlogic_bundle/app/models/user_session.rb app/models
+
+Otherwise you will encounter "TypeError (can't dup NilClass)" and "ApplicationHelper" error messages.
+
+For complicated needs, please fork and modify the whole plugin.
+
 == Testing
 
 If you want to run the cucumber features, you can
 
-  $ rake features:authlogic_bundle
+  $ rake authlogic_bundle:features
 
 == Upgrades
 
