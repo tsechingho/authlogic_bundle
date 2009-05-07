@@ -15,3 +15,5 @@ plugin 'authlogic_bundle', :submodule => git?,
 load_template("vendor/plugins/authlogic_bundle/templates/base.rb")
 
 load_template("vendor/plugins/authlogic_bundle/templates/testing.rb")
+
+load_template("vendor/plugins/authlogic_bundle/templates/monitor.rb")
