@@ -1,3 +1,6 @@
+SOURCE = "vendor/plugins/authlogic_bundle" unless defined? SOURCE
+load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inject
+
 ##############################
 # Monitor
 ##############################
