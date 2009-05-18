@@ -112,8 +112,9 @@ CODE
 # Helpers
 # NOTE: Only controller's helper in engines will be loaded.
 file_inject 'app/helpers/application_helper.rb', 'module ApplicationHelper', <<-CODE
-  def secure_mail_to(email)
-    mail_to email, nil, :encode => 'javascript'
+  def secure_mail_to(email, name = nil)
+    return name if email.blank?
+    mail_to email, name, :encode => 'javascript'
   end
 
   def at(klass, attribute, options = {})

@@ -15,6 +15,7 @@ class UserSessionsController < ApplicationController
     @user_session.save do |result|
       if result
         flash[:success] = t('user_sessions.flashs.success.create')
+        session[:return_to] = nil if session[:return_to] == "/logout"
         redirect_back_or_default account_url
       else
         render :action => :new
