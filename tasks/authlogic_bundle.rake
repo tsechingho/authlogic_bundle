@@ -20,7 +20,7 @@ namespace :authlogic_bundle do
 
     Cucumber::Rake::Task.new(:features, "Run Features of authlogic_bundle with Cucumber") do |t|
       t.fork = true
-      t.cucumber_opts = %w{--format pretty}
+      t.cucumber_opts = ['--format', (ENV['CUCUMBER_FORMAT'] || 'pretty')]
       t.feature_pattern = "#{plugin_path}/features/**/*.feature"
       t.step_pattern = "#{plugin_path}/features/**/*.rb"
     end

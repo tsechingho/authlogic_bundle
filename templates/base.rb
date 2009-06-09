@@ -15,7 +15,7 @@ CODE
 gem 'stffn-declarative_authorization', :lib => 'declarative_authorization',
   :version => '>=0.3.0', :source => 'http://gems.github.com'
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.6'
-gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.3'
+gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
 gem 'authlogic', :version => '>=2.0.13'
 gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.5'
 

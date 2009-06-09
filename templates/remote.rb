@@ -14,6 +14,6 @@ plugin 'authlogic_bundle', :submodule => git?,
 
 load_template("vendor/plugins/authlogic_bundle/templates/base.rb")
 
-load_template("vendor/plugins/authlogic_bundle/templates/testing.rb")
+load_template("vendor/plugins/authlogic_bundle/templates/testing.rb") if yes?("Do you want to include bundled testing suit? (y/n)")
 
-load_template("vendor/plugins/authlogic_bundle/templates/monitor.rb")
+load_template("vendor/plugins/authlogic_bundle/templates/monitor.rb") if yes?("Do you want to include bundled monitor suit? (y/n)")

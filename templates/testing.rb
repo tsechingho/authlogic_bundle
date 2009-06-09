@@ -6,9 +6,9 @@ load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inj
 ##############################
 gem 'rspec', :lib => false, :version => '>= 1.2.6', :env => 'test'
 gem 'rspec-rails', :lib => false, :version => '>= 1.2.6', :env => 'test'
-gem 'remarkable', :lib => false, :version => '>=3.1.2', :env => 'test'
-gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.2', :env => 'test'
-gem 'remarkable_rails', :lib => false, :version => '>=3.1.2', :env => 'test'
+gem 'remarkable', :lib => false, :version => '>=3.1.6', :env => 'test'
+gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.6', :env => 'test'
+gem 'remarkable_rails', :lib => false, :version => '>=3.1.6', :env => 'test'
 gem 'thoughtbot-shoulda', :lib => false, :version => '>=2.10.1',
   :source => 'http://gems.github.com', :env => 'test'
 gem 'thoughtbot-factory_girl', :lib => false, :version => '>=1.2.1',
@@ -47,18 +47,23 @@ CODE
 gem 'term-ansicolor', :lib => false, :version => '>=1.0.3', :env => 'test'
 gem 'treetop', :lib => false, :version => '>=1.2.5', :env => 'test'
 gem 'diff-lcs', :lib => false, :version => '>=1.1.2', :env => 'test'
-gem 'nokogiri', :lib => false, :version => '>=1.2.3', :env => 'test'
+gem 'nokogiri', :lib => false, :version => '>=1.3.1', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
-gem 'cucumber', :lib => false, :version => '>=0.3.5', :env => 'test'
-gem 'webrat', :lib => 'webrat', :version => '>=0.4.4', :env => 'test'
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.1.3',
+gem 'cucumber', :lib => false, :version => '>=0.3.11', :env => 'test'
+gem 'webrat', :lib => false, :version => '>=0.4.4', :env => 'test'
+gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.2.0',
   :source => 'http://gems.github.com', :env => 'test'
 gem 'ruby-debug-base', :lib => false, :version => '>=0.10.3', :env => 'test'
 gem 'ruby-debug', :lib => false, :version => '>=0.10.3', :env => 'test'
 
+# we still need 'test' environment to install cucumber related gems
 rake 'gems:install', :sudo => true, :env => 'test'
 
 generate :cucumber
+
+# Write gem config to 'cucumber' environment for cucumber >=0.3.8
+gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.2.0',
+  :source => 'http://gems.github.com', :env => 'cucumber'
 
 file 'cucumber.yml', <<-CODE
 default: -r features features
@@ -90,7 +95,7 @@ CODE
 ##############################
 gem 'spicycode-rcov', :lib => 'rcov', :version => '>=0.8.2.1',
   :source => 'http://gems.github.com', :env => 'test'
-gem 'ZenTest', :lib => 'autotest', :version => '>=4.0.0', :env => 'test'
+gem 'ZenTest', :lib => 'autotest', :version => '>=4.1.1', :env => 'test'
 gem 'carlosbrando-autotest-notification', :lib => 'autotest_notification', :version => '>=1.9.1',
   :source => 'http://gems.github.com', :env => 'test'
 
