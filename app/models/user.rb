@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
   # Since password reset doesn't need to change openid_identifier,
   # we save without block as usual.
-  def reset_password!(user)
+  def reset_password_with_params!(user)
     self.class.ignore_blank_passwords = false
     self.password = user[:password]
     self.password_confirmation = user[:password_confirmation]
