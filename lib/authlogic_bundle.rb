@@ -1,1 +1,1 @@
-require File.dirname(__FILE__) + "/authlogic_bundle/i18n"
+require File.dirname(__FILE__) + "/authlogic_bundle/user"
