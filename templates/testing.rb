@@ -116,6 +116,22 @@ ENV['AUTOFEATURE'] = "true"
 ENV['RSPEC'] = "true"
 CODE
 
+##############################
+# Misc
+##############################
+file_append 'features/support/env.rb', <<-CODE
+
+# http://authlogic.rubyforge.org/classes/Authlogic/TestCase.html
+require 'authlogic/test_case'
+include Authlogic::TestCase
+#setup :activate_authlogic
+
+# http://www.tzi.org/~sbartsch/declarative_authorization/master/classes/Authorization/Maintenance.html
+require 'declarative_authorization/maintenance'
+include Authorization::Maintenance
+
+CODE
+
 
 if git?
   git :submodule => "init"

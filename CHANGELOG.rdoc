@@ -1,0 +1,20 @@
+== 0.4.0
+
+* modulize User model
+
+== 0.3.0 released 2009-5-18
+
+* Add rails-footnotes support
+* Add basic cucumber features
+* Add basic rspec + cucumber support
+
+== 0.2.0 released 2009-4-22
+
+* Change openid support to authlogic_oid
+* Add ssl_requirement support
+* Add rails-i18n & i18n_lable support
+* Add declarative_authorization support
+
+== 0.1.0 released 2009-2-19
+
+* Initial release.

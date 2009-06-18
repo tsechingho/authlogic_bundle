@@ -23,3 +23,12 @@ end
 require 'cucumber/rails/rspec'
 require 'webrat/core/matchers'
 require 'email_spec/cucumber'
+
+# http://authlogic.rubyforge.org/classes/Authlogic/TestCase.html
+require 'authlogic/test_case'
+include Authlogic::TestCase
+#setup :activate_authlogic
+
+# http://www.tzi.org/~sbartsch/declarative_authorization/master/classes/Authorization/Maintenance.html
+require 'declarative_authorization/maintenance'
+include Authorization::Maintenance

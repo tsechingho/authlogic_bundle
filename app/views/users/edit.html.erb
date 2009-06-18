@@ -15,7 +15,7 @@
   </fieldset>
   <fieldset>
     <legend><%= t('users.authentication_toggle', :token => authentication_toggle) %></legend>
-    <div id="password_box"<% unless @user.openid_identifier.blank? %> style="display: none;"<% end %>
+    <div id="password_box"<% unless @user.openid_identifier.blank? %> style="display: none;"<% end %>>
       <p>
         <%= f.label :password, t('users.password') %><br />
         <%= f.password_field :password %>
