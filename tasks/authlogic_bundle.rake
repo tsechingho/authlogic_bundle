@@ -1,4 +1,6 @@
-$LOAD_PATH.unshift(RAILS_ROOT + '/vendor/plugins/cucumber/lib') if File.directory?(RAILS_ROOT + '/vendor/plugins/cucumber/lib')
+['/vendor/plugins/cucumber/lib'].each do |lib_path|
+  $LOAD_PATH.unshift(RAILS_ROOT + lib_path) if File.directory?(RAILS_ROOT + lib_path)
+end
 
 namespace :authlogic_bundle do
   plugin_path = "vendor/plugins/authlogic_bundle"
