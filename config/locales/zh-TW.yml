@@ -27,16 +27,16 @@
     distance_in_words:
       half_a_minute: "半分鐘"
       less_than_x_seconds:
-        one: "一秒内"
-        other: "少於 {{count}} 秒"
+        one: "不到一秒"
+        other: "不到 {{count}} 秒"
       
       x_seconds:
         one: "一秒"
         other: "{{count}} 秒"
       
       less_than_x_minutes:
-        one: "一分鐘内"
-        other: "少於 {{count}} 分鐘"
+        one: "不到一分鐘"
+        other: "不到 {{count}} 分鐘"
       
       x_minutes:
         one: "一分鐘"
@@ -63,8 +63,8 @@
         other: "大約 {{count}} 年"
       
       over_x_years:
-        one: "一年以上"
-        other: "{{count}} 年以上"
+        one: "一年多"
+        other: "{{count}} 年多"
       
     
     prompts:
@@ -141,7 +141,7 @@
         exclusion: "是被保留的"
         invalid: "是無效的"
         confirmation: "不符合確認值"
-        accepted: "必须是可被接受的"
+        accepted: "必須是可被接受的"
         empty: "不能留空"
         blank: "不能是空白字元"
         too_long: "過長（最長是 {{count}} 個字）"
@@ -186,7 +186,7 @@
   authlogic:
     error_messages:
       login_blank: "不能留空"
-      login_not_found: "不存在"
+      login_not_found: "不正確"
       login_invalid: "請使用英文字母、阿拉伯數字、空白字元和 .-_@ 等特殊符號"
       consecutive_failed_logins_limit_exceeded: "超過連續登入失敗的次數限制，帳號被停用"
       email_invalid: "不像是標準的電子郵件格式"

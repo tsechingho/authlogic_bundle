@@ -27,16 +27,16 @@
     distance_in_words:
       half_a_minute: "半分钟"
       less_than_x_seconds:
-        one: "一秒内"
-        other: "少于 {{count}} 秒"
+        one: "不到一秒"
+        other: "不到 {{count}} 秒"
       
       x_seconds:
         one: "一秒"
         other: "{{count}} 秒"
       
       less_than_x_minutes:
-        one: "一分钟内"
-        other: "少于 {{count}} 分钟"
+        one: "不到一分钟"
+        other: "不到 {{count}} 分钟"
       
       x_minutes:
         one: "一分钟"
@@ -63,8 +63,8 @@
         other: "大约 {{count}} 年"
       
       over_x_years:
-        one: "一年以上"
-        other: "{{count}} 年以上"
+        one: "一年多"
+        other: "{{count}} 年多"
       
     
     prompts:
@@ -145,7 +145,7 @@
         empty: "不能留空"
         blank: "不能为空字符"
         too_long: "过长（最长为 {{count}} 个字符）"
-        too_short: "過短（最短为 {{count}} 个字符）"
+        too_short: "过短（最短为 {{count}} 个字符）"
         wrong_length: "长度非法（必须为 {{count}} 个字符）"
         taken: "已经被使用"
         not_a_number: "不是数字"
@@ -186,7 +186,7 @@
   authlogic:
     error_messages:
       login_blank: "不能留空"
-      login_not_found: "不存在"
+      login_not_found: "不正确"
       login_invalid: "请使用英文字母、阿拉伯数字、空白字元和 .-_@ 等特殊符号"
       consecutive_failed_logins_limit_exceeded: "超过连续登入失败的次数限制，帐号被停用"
       email_invalid: "不像是标准的电子邮件格式"
