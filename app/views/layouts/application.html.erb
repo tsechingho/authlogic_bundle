@@ -5,21 +5,23 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%=h yield(:title) || t('common.titles.untitled') %></title>
-  <%= stylesheet_link_tag :all, :recursive => true %>
+  <%# stylesheet_link_tag :all, :recursive => true, :cache => true %>
+  <%= stylesheet_link_tag 'reset', 'application', :cache => true %>
   <style type="text/css">
     #user_pannel, #locale_pannel, #locale_pannel form {display: inline}
   </style>
-  <%= javascript_include_tag :defaults %>
-  <%= yield(:head) %>
+  <%= yield :head %>
 </head>
-<body>
+<!--[if lt IE 7]><body class="ie6"><![endif]-->
+<!--[if gte IE 7]><body class="ie"><![endif]-->
+<!--[if !IE]>--><body><!--<![endif]-->
   <div id="container">
     <%= render :partial => 'users/pannel' %>
     
     <hr class="clear" />
     
     <%- flash.each do |name, msg| -%>
-      <%= content_tag :p, msg, :id => "flash_#{name}", :class => "notice" %>
+      <%= content_tag :p, msg, :id => "flash_#{name}", :class => name %>
     <%- end -%>
     
     <%- if show_title? -%>
@@ -28,5 +30,7 @@
     
     <%= yield %>
   </div>
+<%= javascript_include_tag :defaults, :cache => true %>
+<%= yield :foot %>
 </body>
 </html>
