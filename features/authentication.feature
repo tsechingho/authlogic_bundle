@@ -49,8 +49,8 @@ Feature: Authentication
       |         |  secret    | Login can not be blank                             |
       |         | bad secret | Login can not be blank                             |
       | unknown |            | Password can not be blank                          |
-      | unknown |  secret    | Login does not exist                               |
-      | unknown | bad secret | Login does not exist                               |
+      | unknown |  secret    | Login is not valid                                 |
+      | unknown | bad secret | Login is not valid                                 |
       | sharon  |            | Password can not be blank                          |
       | sharon  | bad secret | Password is not valid                              |
 
