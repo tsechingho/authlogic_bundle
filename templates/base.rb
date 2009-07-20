@@ -89,6 +89,11 @@ config = File.read(Rails.root.join('config', 'notifier.yml'))
 NOTIFIER = YAML.load(config)[RAILS_ENV]['notifier'].symbolize_keys
 CODE
 
+# initializer 'locales.rb'
+file_append 'config/initializers/locales.rb', <<-CODE
+I18n.load_path += Dir[File.join(File.dirname(__FILE__), '..', 'locales', '**', '*.{rb,yml}')]
+CODE
+
 #########################
 #  MVC
 #########################

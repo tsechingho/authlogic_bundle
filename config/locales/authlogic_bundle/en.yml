@@ -1,0 +1,144 @@
+en:
+  activerecord:
+    models:
+      role: "Role"
+      user: "User"
+    attributes:
+      role:
+        name: "Name"
+      user:
+        login: "Login"
+        email: "Email"
+        state: "State"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        openid_identifier: "Open ID"
+        login_count: "Login count"
+        failed_login_count: "Failed login count"
+        last_request_at: "Last request at"
+        last_login_at: "Last login at"
+        current_login_at: "Current login at"
+        last_login_ip: "Last login IP"
+        current_login_ip: "Current login IP"
+  
+  common:
+    flashs:
+      success:
+        create: "{{model}} was successfully created."
+        update: "{{model}} was successfully updated."
+      notices:
+        
+      errors:
+        destroy: "{{model}} can not be destroyed."
+    titles:
+      untitled: "Untitled"
+    actions:
+      index: "Index"
+      show: "Show"
+      new: "New"
+      edit: "Edit"
+      create: "Create"
+      update: "Update"
+      destroy: "Destroy"
+      delete: "Delete"
+      remove: "Remove"
+      search: "Search"
+      submit: "Submit"
+      cancel: "Cancel"
+      confirm: "Confirm"
+      back: "Back"
+      previous: "Previous"
+      next: "Next"
+      up: "Up"
+      down: "Down"
+      top: "Top"
+      bottom: "Bottom"
+    confirms:
+      destroy: "Are you sure?"
+    please_wait: "Please wait..."
+    created_at: "Created at"
+    updated_at: "Updated at"
+    previous_page: "&laquo; Previous page"
+    next_page: "Next page &raquo;"
+    from: "From"
+    to: "To"
+  
+  activations:
+    flashs:
+      success:
+        create: "Your account has been activated."
+    titles:
+      new: "Activate your account"
+    actions:
+      activate: "Activate"
+    password: "Set your password"
+    openid_identifier: "Or use OpenID instead of your login / password"
+  
+  home:
+    titles:
+      index: "Home"
+  
+  password_resets:
+    flashs:
+      success:
+        create: "Instructions to reset your password have been emailed to you. Please check your email."
+        update: "Password successfully updated"
+      errors:
+        create: "No user was found with that email address"
+        update: "We're sorry, but we could not locate your account. If you are having issues, try copying and pasting the URL from your email into your browser or restarting the reset password process."
+    titles:
+      edit: "Change My Password"
+      new: "Forgot Password"
+    actions:
+      reset: "Reset my password"
+      update: "Update my password and log me in"
+    reset_note: "Fill out the form below and instructions to reset your password will be emailed to you:"
+  
+  user_mailer:
+    titles:
+      activation_instructions: "Activation Instructions"
+      activation_confirmation: "Activation Complete"
+      password_reset_instructions: "Password Reset Instructions"
+  
+  user_sessions:
+    flashs:
+      success:
+        create: "Login successful!"
+        destroy: "Logout successful!"
+    titles:
+      new: "Login"
+    actions:
+      login: "Login"
+    login_toggle: "Login using {{token}}"
+    login_token: "Password / OpenID"
+    openid_identifier: "Open ID"
+    forget_password: "Forgot password"
+  
+  users:
+    flashs:
+      success:
+        create: "Your account has been created. Please check your e-mail for your account activation instructions!"
+        update: "Account updated!"
+      notices:
+        login_required: "You must be logged in to access this page"
+        logout_required: "You must be logged out to access this page"
+      errors:
+        not_allowed: "Sorry, you are not allowed to view the requested page."
+    titles:
+      edit: "Editing user"
+      index: "Listing users"
+      new: "Register Account"
+      show: "User Account"
+    actions:
+      signup: "Register"
+      login: "Log In"
+      logout: "Logout"
+    basic_information: "Basic Information"
+    authentication_toggle: "Authenticated by {{token}}"
+    authentication_token: "Password / OpenID"
+    account: "My Account"
+    password: "Change password"
+    online:
+      one: "{{count}} user currently logged in"
+      other: "{{count}} users currently logged in"
+  

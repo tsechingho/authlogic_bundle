@@ -1,0 +1,23 @@
+"zh-CN":
+  authlogic:
+    error_messages:
+      login_blank: "不能留空"
+      login_not_found: "不正确"
+      login_invalid: "请使用英文字母、阿拉伯数字、空白字元和 .-_@ 等特殊符号"
+      consecutive_failed_logins_limit_exceeded: "超过连续登入失败的次数限制，帐号被停用"
+      email_invalid: "不像是标准的电子邮件格式"
+      password_blank: "不能留空"
+      password_invalid: "不正确"
+      not_active: "你的帐号尚未激活"
+      not_confirmed: "你的帐号尚未得到确认"
+      not_approved: "你的帐号并未得到核准"
+      no_authentication_details: "你没有提供任何认证资料"
+    models:
+      user_session: "用户认证"
+    attributes:
+      user_session:
+        login: "用户名"
+        email: "电邮"
+        password: "密码"
+        remember_me: "记住我"
+  
