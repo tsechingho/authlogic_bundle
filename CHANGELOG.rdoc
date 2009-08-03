@@ -1,6 +1,7 @@
 == 0.4.0
 
-* modulize User model
+* split locale files into separate folder and add to I18n.load_path
+* collect methods of User model into AuthlogicBundle::User module
 
 == 0.3.0 released 2009-5-18
 

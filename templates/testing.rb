@@ -4,11 +4,11 @@ load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inj
 ##############################
 # RSpec
 ##############################
-gem 'rspec', :lib => false, :version => '>= 1.2.7', :env => 'test'
+gem 'rspec', :lib => false, :version => '>= 1.2.8', :env => 'test'
 gem 'rspec-rails', :lib => false, :version => '>= 1.2.7', :env => 'test'
-gem 'remarkable', :lib => false, :version => '>=3.1.7', :env => 'test'
-gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.7', :env => 'test'
-gem 'remarkable_rails', :lib => false, :version => '>=3.1.7', :env => 'test'
+gem 'remarkable', :lib => false, :version => '>=3.1.8', :env => 'test'
+gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.8', :env => 'test'
+gem 'remarkable_rails', :lib => false, :version => '>=3.1.8', :env => 'test'
 gem 'thoughtbot-shoulda', :lib => false, :version => '>=2.10.1',
   :source => 'http://gems.github.com', :env => 'test'
 gem 'thoughtbot-factory_girl', :lib => false, :version => '>=1.2.1',
@@ -44,12 +44,12 @@ CODE
 ##############################
 # Cucumber
 ##############################
-gem 'term-ansicolor', :lib => false, :version => '>=1.0.3', :env => 'test'
-gem 'treetop', :lib => false, :version => '>=1.2.5', :env => 'test'
+gem 'term-ansicolor', :lib => false, :version => '>=1.0.4', :env => 'test'
+gem 'treetop', :lib => false, :version => '>=1.3.0', :env => 'test'
 gem 'diff-lcs', :lib => false, :version => '>=1.1.2', :env => 'test'
-gem 'nokogiri', :lib => false, :version => '>=1.3.1', :env => 'test'
+gem 'nokogiri', :lib => false, :version => '>=1.3.3', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
-gem 'cucumber', :lib => false, :version => '>=0.3.11', :env => 'test'
+gem 'cucumber', :lib => false, :version => '>=0.3.92', :env => 'test'
 gem 'webrat', :lib => false, :version => '>=0.4.4', :env => 'test'
 gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.2.0',
   :source => 'http://gems.github.com', :env => 'test'
@@ -62,7 +62,7 @@ rake 'gems:install', :sudo => true, :env => 'test'
 generate :cucumber
 
 # Write gem config to 'cucumber' environment for cucumber >=0.3.8
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.2.0',
+gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.2.1',
   :source => 'http://gems.github.com', :env => 'cucumber'
 
 file 'cucumber.yml', <<-CODE
