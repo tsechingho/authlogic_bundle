@@ -10,7 +10,7 @@ gem 'josevalim-rails-footnotes', :lib => 'rails-footnotes', :version => '>=3.6.2
 rake 'gems:install', :sudo => true, :env => 'development'
 
 initializer 'footnotes.rb', <<-CODE
-if ENV['RAILS_ENV'] == 'development'
+if ENV['RAILS_ENV'] == 'development' && defined?(Footnotes)
   # NOT Textmate editor:
   # if defined?(Footnotes)
   #  Footnotes::Filter.prefix = 'txmt://open?url=file://%s&line=%d&column=%d'

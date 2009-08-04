@@ -59,6 +59,15 @@ route "map.resources :roles"
 file_append 'config/locales/en.yml', open("#{SOURCE}/config/locales/en.yml").read
 file_append 'config/locales/zh-CN.yml', open("#{SOURCE}/config/locales/zh-CN.yml").read
 file_append 'config/locales/zh-TW.yml', open("#{SOURCE}/config/locales/zh-TW.yml").read
+file_append 'config/locales/rails/zh-CN.yml', open("#{SOURCE}/config/locales/rails/zh-CN.yml").read
+file_append 'config/locales/rails/zh-TW.yml', open("#{SOURCE}/config/locales/rails/zh-TW.yml").read
+
+file_append 'config/locales/authlogic/en.yml', open("#{SOURCE}/config/locales/authlogic/en.yml").read
+file_append 'config/locales/authlogic/zh-CN.yml', open("#{SOURCE}/config/locales/authlogic/zh-CN.yml").read
+file_append 'config/locales/authlogic/zh-TW.yml', open("#{SOURCE}/config/locales/authlogic/zh-TW.yml").read
+file_append 'config/locales/authlogic_bundle/en.yml', open("#{SOURCE}/config/locales/authlogic_bundle/en.yml").read
+file_append 'config/locales/authlogic_bundle/zh-CN.yml', open("#{SOURCE}/config/locales/authlogic_bundle/zh-CN.yml").read
+file_append 'config/locales/authlogic_bundle/zh-TW.yml', open("#{SOURCE}/config/locales/authlogic_bundle/zh-TW.yml").read
 
 file_append 'config/authorization_rules.rb', open("#{SOURCE}/config/authorization_rules.rb").read
 
