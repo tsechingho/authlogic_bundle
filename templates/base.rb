@@ -59,9 +59,12 @@ route "map.resources :roles"
 file_append 'config/locales/en.yml', open("#{SOURCE}/config/locales/en.yml").read
 file_append 'config/locales/zh-CN.yml', open("#{SOURCE}/config/locales/zh-CN.yml").read
 file_append 'config/locales/zh-TW.yml', open("#{SOURCE}/config/locales/zh-TW.yml").read
+
+run 'mkdir config/locales/rails'
 file_append 'config/locales/rails/zh-CN.yml', open("#{SOURCE}/config/locales/rails/zh-CN.yml").read
 file_append 'config/locales/rails/zh-TW.yml', open("#{SOURCE}/config/locales/rails/zh-TW.yml").read
 
+run 'mkdir config/locales/authlogic'
 file_append 'config/locales/authlogic/en.yml', open("#{SOURCE}/config/locales/authlogic/en.yml").read
 file_append 'config/locales/authlogic/zh-CN.yml', open("#{SOURCE}/config/locales/authlogic/zh-CN.yml").read
 file_append 'config/locales/authlogic/zh-TW.yml', open("#{SOURCE}/config/locales/authlogic/zh-TW.yml").read
