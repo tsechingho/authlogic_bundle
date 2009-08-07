@@ -13,3 +13,7 @@ else
 end
 
 require "authlogic_bundle"
+
+config.to_prepare do
+  ApplicationController.helper LayoutHelper
+end
