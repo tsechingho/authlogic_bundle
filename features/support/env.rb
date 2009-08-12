@@ -33,3 +33,38 @@ include Authlogic::TestCase
 # http://www.tzi.org/~sbartsch/declarative_authorization/master/classes/Authorization/Maintenance.html
 require 'declarative_authorization/maintenance'
 include Authorization::Maintenance
+
+# It is recommended that you should only mock and stub things 
+# like Time and external services like OpenID etc.
+
+# Comment out the following lines if you want to use RSpec mock.
+# require "spec/mocks"
+#
+# Before do
+#   $rspec_mocks ||= Spec::Mocks::Space.new
+# end
+#
+# After do
+#   begin
+#     $rspec_mocks.verify_all
+#   ensure
+#     $rspec_mocks.reset_all
+#   end
+# end
+
+# Comment out the following lines if you want to use Mocha.
+# require "mocha"
+#
+# World(Mocha::Standalone)
+#
+# Before do
+#   mocha_setup
+# end
+#
+# After do
+#   begin
+#     mocha_verify
+#   ensure
+#     mocha_teardown
+#   end
+# end

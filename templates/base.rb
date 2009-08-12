@@ -68,6 +68,8 @@ run 'mkdir config/locales/authlogic'
 file_append 'config/locales/authlogic/en.yml', open("#{SOURCE}/config/locales/authlogic/en.yml").read
 file_append 'config/locales/authlogic/zh-CN.yml', open("#{SOURCE}/config/locales/authlogic/zh-CN.yml").read
 file_append 'config/locales/authlogic/zh-TW.yml', open("#{SOURCE}/config/locales/authlogic/zh-TW.yml").read
+
+run 'mkdir config/locales/authlogic_bundle'
 file_append 'config/locales/authlogic_bundle/en.yml', open("#{SOURCE}/config/locales/authlogic_bundle/en.yml").read
 file_append 'config/locales/authlogic_bundle/zh-CN.yml', open("#{SOURCE}/config/locales/authlogic_bundle/zh-CN.yml").read
 file_append 'config/locales/authlogic_bundle/zh-TW.yml', open("#{SOURCE}/config/locales/authlogic_bundle/zh-TW.yml").read

@@ -1,9 +1,11 @@
 module AuthlogicBundle
   module User
     module ClassMethods
-      
+      def password_salt_is_changed?
+        password_salt_field ? "#{password_salt_field}_changed?".to_sym : nil
+      end
     end
-    
+
     module InstanceMethods
       def active?
         self.state == 'active'
@@ -53,18 +55,8 @@ module AuthlogicBundle
         UserMailer.deliver_password_reset_instructions(self)
       end
 
-      def role_symbols
-        (roles || []).map { |r| r.name.to_sym }
-      end
-
       def to_param
         login.parameterize
-      end
-
-      protected
-
-      def set_current_user_for_model_security
-        Authorization.current_user = self
       end
 
       private
@@ -78,33 +70,59 @@ module AuthlogicBundle
       end
       
     end
-    
+
+    module AuthorizationMethods
+      def self.included(receiver)
+        receiver.class_eval do
+          has_many :roles
+          #has_and_belongs_to_many :roles, :join_table => "user_roles"
+
+          using_access_control
+
+          # Since UserSession.find and UserSession.save will trigger 
+          # record.save_without_session_maintenance(false) and the 'updated_at', 'last_request_at' 
+          # fields of user model will be updated every time by authlogic if record (user) found.
+          # We need to reset Authorization.current_user instead of giving the update privilege 
+          # of user model to guest role, and use before_save filter in user model instead of 
+          # after_find and before_save filters in UserSession model in case of other methods like 
+          # reset_perishable_token! will call save_without_session_maintenance too.
+          before_save :set_current_user_for_model_security
+          # use after_save to create default role
+          # every singed up user will have one role at least
+          #after_save :create_default_role
+        end
+      end
+
+      def role_symbols
+        (roles || []).map { |r| r.name.to_sym }
+      end
+
+      protected
+
+      def set_current_user_for_model_security
+        ::Authorization.current_user = self
+      end
+
+      def create_default_role
+        return unless roles.empty?
+        roles << ::Role.find_or_create_by_name(:name => 'customer', :title => 'Customer')
+      end
+    end
+
     def self.included(receiver)
       receiver.extend ClassMethods
+      receiver.send :include, InstanceMethods
+      receiver.send :include, AuthorizationMethods
       receiver.class_eval do
-        include InstanceMethods
 
         acts_as_authentic do |c|
           c.crypto_provider = Authlogic::CryptoProviders::BCrypt
           c.validates_length_of_password_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
-          c.validates_confirmation_of_password_field_options = {:minimum => 4, :on => :update, :if => (password_salt_field ? "#{password_salt_field}_changed?".to_sym : nil)}
+          c.validates_confirmation_of_password_field_options = {:minimum => 4, :on => :update, :if => :password_salt_is_changed?}
           c.validates_length_of_password_confirmation_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
         end
 
-        using_access_control
-
-        has_many :roles
-
         attr_accessible :login, :email, :password, :password_confirmation, :openid_identifier
-
-        # Since UserSession.find and UserSession.save will trigger 
-        # record.save_without_session_maintenance(false) and the 'updated_at', 'last_request_at' 
-        # fields of user model will be updated every time by authlogic if record (user) found.
-        # We need to reset Authorization.current_user instead of giving the update privilege 
-        # of user model to guest role, and use before_save filter in user model instead of 
-        # after_find and before_save filters in UserSession model in case of other methods like 
-        # reset_perishable_token! will call save_without_session_maintenance too.
-        before_save :set_current_user_for_model_security
       end
     end
   end
