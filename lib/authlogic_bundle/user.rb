@@ -11,64 +11,25 @@ module AuthlogicBundle
         self.state == 'active'
       end
 
-      def signup!(user)
-        self.login = user[:login]
-        self.email = user[:email]
-        self.save_without_session_maintenance
+      def signup!(user, &block)
+        return save(true, &block) if session_class.activated? && openid_complete?
+        return signup_by_openid!(user, &block) if respond_to?(:signup_by_openid!) && user && !user[:openid_identifier].blank?
+        signup_without_credentials!(user, &block)
       end
 
-      # Since openid_identifier= will trigger openid authentication,
-      # we need to save with block to prevent double render/redirect error.
-      def activate!(user, &block)
+      def signup_without_credentials!(user, &block)
         unless user.blank?
-          self.password = user[:password]
-          self.password_confirmation = user[:password_confirmation]
-          self.openid_identifier = user[:openid_identifier]
+          self.login = user[:login] unless user[:login].blank?
+          self.email = user[:email] unless user[:email].blank?
         end
-        self.state = 'active'
-        roles.build(:name => 'customer') if roles.empty?
-        save(true, &block)
-      end
-
-      # Since password reset doesn't need to change openid_identifier,
-      # we save without block as usual.
-      def reset_password_with_params!(user)
-        self.class.ignore_blank_passwords = false
-        self.password = user[:password]
-        self.password_confirmation = user[:password_confirmation]
-        self.save
-      end
-
-      def deliver_activation_instructions!
-        # skip reset perishable token since we don't set roles in signup!
-        reset_perishable_token! unless roles.blank?
-        UserMailer.deliver_activation_instructions(self)
-      end
-
-      def deliver_activation_confirmation!
-        reset_perishable_token!
-        UserMailer.deliver_activation_confirmation(self)
-      end
-
-      def deliver_password_reset_instructions!
-        reset_perishable_token!
-        UserMailer.deliver_password_reset_instructions(self)
+        result = save_without_session_maintenance
+        yield(result) if block_given?
+        result
       end
 
       def to_param
         login.parameterize
       end
-
-      private
-
-      # Since we use attr_accessible or attr_protected,
-      # we should overwrite this method defined in authlogic_openid.
-      def map_saved_attributes(attrs)
-        attrs.each do |key, value|
-          send("#{key}=", value)
-        end
-      end
-      
     end
 
     module AuthorizationMethods
@@ -109,20 +70,116 @@ module AuthlogicBundle
       end
     end
 
+    module AuthlogicOpenIdMethods
+      def self.included(receiver)
+        receiver.class_eval do
+          # extend/include methods of authlogic-oid in case of no methods found
+          extend AuthlogicOpenid::ActsAsAuthentic::Config
+          include AuthlogicOpenid::ActsAsAuthentic::Methods
+
+          attr_accessible :openid_identifier
+
+          openid_required_fields [:nickname, :email]
+          openid_optional_fields [:fullname, :dob, :gender, :postcode, :country, :language, :timezone]
+
+          # hack by alias_method_chain for authlogic-oid
+          alias_method_chain :map_openid_registration, :persona_fields
+        end
+      end
+
+      def signup_by_openid!(user, &block)
+        unless user.blank?
+          self.login = user[:login] unless user[:login].blank?
+          self.email = user[:email] unless user[:email].blank?
+          self.openid_identifier = user[:openid_identifier]
+        end
+        save(true, &block)
+      end
+
+      private
+
+      # fetch persona from openid.sreg parameters returned by openid server if supported
+      # http://openid.net/specs/openid-simple-registration-extension-1_0.html
+      def map_openid_registration_with_persona_fields(registration)
+        self.nickname ||= registration["nickname"] if respond_to?(:nickname) && !registration["nickname"].blank?
+        self.login ||= registration["nickname"] if respond_to?(:login) && !registration["nickname"].blank?
+        self.email ||= registration["email"] if respond_to?(:email) && !registration["email"].blank?
+        self.name ||= registration["fullname"] if respond_to?(:name) && !registration["fullname"].blank?
+        self.first_name ||= registration["fullname"].split(" ").first if respond_to?(:first_name) && !registration["fullname"].blank?
+        self.last_name ||= registration["fullname"].split(" ").last if respond_to?(:last_name) && !registration["fullname"].blank?
+        self.birthday ||= registration["dob"] if respond_to?(:birthday) && !registration["dob"].blank?
+        self.gender ||= registration["gender"] if respond_to?(:gender) && !registration["gender"].blank?
+        self.postcode ||= registration["postcode"] if respond_to?(:postcode) && !registration["postcode"].blank?
+        self.country ||= registration["country"] if respond_to?(:country) && !registration["country"].blank?
+        self.language ||= registration["language"] if respond_to?(:language) && !registration["language"].blank?
+        self.timezone ||= registration["timezone"] if respond_to?(:timezone) && !registration["timezone"].blank?
+      end
+
+      # Since we use attr_accessible or attr_protected,
+      # we should overwrite this method defined in authlogic_openid.
+      def map_saved_attributes(attrs)
+        attrs.each do |key, value|
+          send("#{key}=", value)
+        end
+      end
+    end
+
+    module ActivationMethods
+      # Since openid_identifier= will trigger openid authentication,
+      # we need to save with block to prevent double render/redirect error.
+      def activate!(user, &block)
+        unless user.blank?
+          self.password = user[:password]
+          self.password_confirmation = user[:password_confirmation]
+          self.openid_identifier = user[:openid_identifier]
+        end
+        self.state = 'active'
+        roles.build(:name => 'customer') if roles.empty?
+        save(true, &block)
+      end
+
+      def deliver_activation_instructions!
+        # skip reset perishable token since we don't set roles in signup!
+        reset_perishable_token! unless roles.blank?
+        UserMailer.deliver_activation_instructions(self)
+      end
+
+      def deliver_activation_confirmation!
+        reset_perishable_token!
+        UserMailer.deliver_activation_confirmation(self)
+      end
+    end
+
+    module PasswordResetMethods
+      # Since password reset doesn't need to change openid_identifier,
+      # we save without block as usual.
+      def reset_password_with_params!(user)
+        self.class.ignore_blank_passwords = false
+        self.password = user[:password]
+        self.password_confirmation = user[:password_confirmation]
+        save
+      end
+
+      def deliver_password_reset_instructions!
+        reset_perishable_token!
+        UserMailer.deliver_password_reset_instructions(self)
+      end
+    end
+
     def self.included(receiver)
       receiver.extend ClassMethods
       receiver.send :include, InstanceMethods
+      receiver.send :include, AuthlogicOpenIdMethods
       receiver.send :include, AuthorizationMethods
+      receiver.send :include, ActivationMethods
+      receiver.send :include, PasswordResetMethods
       receiver.class_eval do
+        attr_accessible :login, :email, :password, :password_confirmation
 
-        acts_as_authentic do |c|
-          c.crypto_provider = Authlogic::CryptoProviders::BCrypt
-          c.validates_length_of_password_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
-          c.validates_confirmation_of_password_field_options = {:minimum => 4, :on => :update, :if => :password_salt_is_changed?}
-          c.validates_length_of_password_confirmation_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
-        end
-
-        attr_accessible :login, :email, :password, :password_confirmation, :openid_identifier
+        crypto_provider Authlogic::CryptoProviders::BCrypt
+        merge_validates_length_of_password_field_options :on => :update
+        merge_validates_confirmation_of_password_field_options :on => :update, :if => :password_salt_is_changed?
+        merge_validates_length_of_password_confirmation_field_options :on => :update
       end
     end
   end

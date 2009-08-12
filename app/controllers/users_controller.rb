@@ -26,13 +26,17 @@ class UsersController < ApplicationController
   # POST /users
   # POST /account
   def create
-    if @user.signup!(params[:user])
-      @user.deliver_activation_instructions!
-      flash[:success] = t('users.flashs.success.create')
-      redirect_to root_url
-    else
-      render :action => :new
+    @user.signup!(params[:user]) do |result|
+      if result
+        @user.deliver_activation_instructions!
+        flash[:success] = t('users.flashs.success.create')
+        redirect_to root_url
+      else
+        render :action => :new
+      end
     end
+  rescue Exception => e
+    redirect_to root_url
   end
 
   # PUT /users/1

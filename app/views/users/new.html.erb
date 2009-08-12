@@ -11,6 +11,10 @@
     <%= f.text_field :email %>
   </p>
   <p>
+    <%= f.label :openid_identifier, openid_link %><br />
+    <%= f.text_field :openid_identifier %>
+  </p>
+  <p>
     <%= f.submit t('users.actions.signup') %>
   </p>
 <% end %>
