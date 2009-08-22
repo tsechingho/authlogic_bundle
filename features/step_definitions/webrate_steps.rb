@@ -19,8 +19,29 @@ When /^I follow "([^\"]*)"$/ do |link|
   click_link(link)
 end
 
+When /^I follow "([^\"]*)" within "([^\"]*)"$/ do |link, parent|
+  click_link_within(parent, link)
+end
+
 When /^I fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
   fill_in(field, :with => value)
+end
+
+# Use this to fill in an entire form with data from a table. Example:
+#
+#   When I fill in the following:
+#     | Account Number | 5002       |
+#     | Expiry date    | 2009-11-01 |
+#     | Note           | Nice guy   |
+#     | Wants Email?   |            |
+#
+# TODO: Add support for checkbox, select og option
+# based on naming conventions.
+#
+When /^I fill in the following:$/ do |fields|
+  fields.rows_hash.each do |name, value|
+    When %{I fill in "#{name}" with "#{value}"}
+  end
 end
 
 When /^I select "([^\"]*)" from "([^\"]*)"$/ do |value, field|
@@ -126,4 +147,8 @@ end
 
 Then /^I should be on (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
+end
+
+Then /^show me the page$/ do
+  save_and_open_page
 end

@@ -13,11 +13,11 @@ CODE
 # please note the order of config.gem and databse migration
 
 gem 'stffn-declarative_authorization', :lib => 'declarative_authorization',
-  :version => '>=0.3.0', :source => 'http://gems.github.com'
+  :version => '>=0.3.2.1', :source => 'http://gems.github.com'
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
 gem 'authlogic', :version => '>=2.1.1'
-gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.0.5'
+gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.1'
 
 rake 'gems:install', :sudo => true
 

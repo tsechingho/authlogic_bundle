@@ -49,9 +49,9 @@ gem 'treetop', :lib => false, :version => '>=1.3.0', :env => 'test'
 gem 'diff-lcs', :lib => false, :version => '>=1.1.2', :env => 'test'
 gem 'nokogiri', :lib => false, :version => '>=1.3.3', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
-gem 'cucumber', :lib => false, :version => '>=0.3.92', :env => 'test'
-gem 'webrat', :lib => false, :version => '>=0.4.4', :env => 'test'
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.2.0',
+gem 'cucumber', :lib => false, :version => '>=0.3.96', :env => 'test'
+gem 'webrat', :lib => false, :version => '>=0.5.1', :env => 'test'
+gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.1',
   :source => 'http://gems.github.com', :env => 'test'
 gem 'ruby-debug-base', :lib => false, :version => '>=0.10.3', :env => 'test'
 gem 'ruby-debug', :lib => false, :version => '>=0.10.3', :env => 'test'
@@ -62,7 +62,7 @@ rake 'gems:install', :sudo => true, :env => 'test'
 generate :cucumber
 
 # Write gem config to 'cucumber' environment for cucumber >=0.3.8
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.2.1',
+gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.1',
   :source => 'http://gems.github.com', :env => 'cucumber'
 
 file 'cucumber.yml', <<-CODE
@@ -95,7 +95,7 @@ CODE
 ##############################
 gem 'spicycode-rcov', :lib => 'rcov', :version => '>=0.8.2.1',
   :source => 'http://gems.github.com', :env => 'test'
-gem 'ZenTest', :lib => 'autotest', :version => '>=4.1.1', :env => 'test'
+gem 'ZenTest', :lib => 'autotest', :version => '>=4.1.4', :env => 'test'
 gem 'carlosbrando-autotest-notification', :lib => 'autotest_notification', :version => '>=1.9.1',
   :source => 'http://gems.github.com', :env => 'test'
 

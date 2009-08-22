@@ -62,7 +62,7 @@ Feature: Authentication
     And I check "Remember me"
     And I press "Login"
     Then I should be logged in
-    When I open the homepage in a new window
+    When I open the homepage in a new window with cookies
     Then I should be logged in
     When I follow "Logout"
     Then I should be logged out

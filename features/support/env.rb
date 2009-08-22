@@ -15,7 +15,7 @@ Cucumber::Rails.use_transactional_fixtures
 Cucumber::Rails.bypass_rescue
 
 require 'webrat'
-require 'cucumber/webrat/table_locator' # Lets you do table.diff!(table_at('#my_table').to_a)
+require 'cucumber/webrat/element_locator' # Lets you do table.diff!(element_at('#my_table_or_dl_or_ul_or_ol').to_table)
 
 Webrat.configure do |config|
   config.mode = :rails
@@ -33,6 +33,11 @@ include Authlogic::TestCase
 # http://www.tzi.org/~sbartsch/declarative_authorization/master/classes/Authorization/Maintenance.html
 require 'declarative_authorization/maintenance'
 include Authorization::Maintenance
+
+# mock the response of open id server
+require 'authlogic_bundle/test_case/open_id_authentication_helper'
+# add session helper
+require 'authlogic_bundle/test_case/session_helper'
 
 # It is recommended that you should only mock and stub things 
 # like Time and external services like OpenID etc.
