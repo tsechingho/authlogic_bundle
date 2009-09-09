@@ -50,8 +50,7 @@ module AuthlogicBundle
     module AuthorizationMethods
       def self.included(receiver)
         receiver.class_eval do
-          has_many :roles
-          #has_and_belongs_to_many :roles, :join_table => "user_roles"
+          has_and_belongs_to_many :roles, :join_table => "user_roles"
 
           using_access_control
 
@@ -65,12 +64,17 @@ module AuthlogicBundle
           before_save :set_current_user_for_model_security
           # use after_save to create default role
           # every singed up user will have one role at least
-          #after_save :create_default_role
+          after_save :create_default_role
         end
       end
 
       def role_symbols
         (roles || []).map { |r| r.name.to_sym }
+      end
+
+      def assign_role(role)
+        role_found = role.is_a?(::Role) ? role : ::Role.find_by_name(role.to_s)
+        roles << role_found if role_found
       end
 
       protected
@@ -81,7 +85,8 @@ module AuthlogicBundle
 
       def create_default_role
         return unless roles.empty?
-        roles << ::Role.find_or_create_by_name(:name => 'customer', :title => 'Customer')
+        ::Role.first ? ::Role.first : ::Role.find_or_create_by_name(:name => 'customer', :title => 'Customer')
+        assign_role(::Role.first)
       end
     end
 
@@ -149,7 +154,6 @@ module AuthlogicBundle
           self.openid_identifier = user[:openid_identifier]
         end
         self.state = 'active'
-        roles.build(:name => 'customer') if roles.empty?
         save(true, &block)
       end
 

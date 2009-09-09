@@ -58,6 +58,12 @@ If you have an existing rails application, you can
   $ git submodule add git://github.com/tsechingho/authlogic_bundle.git vendor/plugins/authlogic_bundle
   $ rake rails:template LOCATION=vendor/plugins/authlogic_bundle/templates/base.rb SCM=git
 
+If rails version >= 2.3.4, there are default data sets imported by
+
+  $ rake db:seed
+
+And you can login with root/root (login/password).
+
 == Configuration
 
 SSL will turn on in production mode and turn off in development/test mode automatically. If you want to switch manually, please set ENV['SSL'] = 'on' in environment.rb or start server with SSL variable like

@@ -6,12 +6,12 @@ load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inj
 ##############################
 gem 'rspec', :lib => false, :version => '>= 1.2.8', :env => 'test'
 gem 'rspec-rails', :lib => false, :version => '>= 1.2.7', :env => 'test'
-gem 'remarkable', :lib => false, :version => '>=3.1.8', :env => 'test'
-gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.8', :env => 'test'
-gem 'remarkable_rails', :lib => false, :version => '>=3.1.8', :env => 'test'
-gem 'thoughtbot-shoulda', :lib => false, :version => '>=2.10.1',
+gem 'remarkable', :lib => false, :version => '>=3.1.10', :env => 'test'
+gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.10', :env => 'test'
+gem 'remarkable_rails', :lib => false, :version => '>=3.1.10', :env => 'test'
+gem 'thoughtbot-shoulda', :lib => false, :version => '>=2.10.2',
   :source => 'http://gems.github.com', :env => 'test'
-gem 'thoughtbot-factory_girl', :lib => false, :version => '>=1.2.1',
+gem 'thoughtbot-factory_girl', :lib => false, :version => '>=1.2.2',
   :source => 'http://gems.github.com', :env => 'test'
 
 rake 'gems:install', :sudo => true, :env => 'test'
@@ -45,12 +45,12 @@ CODE
 # Cucumber
 ##############################
 gem 'term-ansicolor', :lib => false, :version => '>=1.0.4', :env => 'test'
-gem 'treetop', :lib => false, :version => '>=1.3.0', :env => 'test'
+gem 'treetop', :lib => false, :version => '>=1.4.1', :env => 'test'
 gem 'diff-lcs', :lib => false, :version => '>=1.1.2', :env => 'test'
 gem 'nokogiri', :lib => false, :version => '>=1.3.3', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
-gem 'cucumber', :lib => false, :version => '>=0.3.96', :env => 'test'
-gem 'webrat', :lib => false, :version => '>=0.5.1', :env => 'test'
+gem 'cucumber', :lib => false, :version => '>=0.3.99', :env => 'test'
+gem 'webrat', :lib => false, :version => '>=0.5.3', :env => 'test'
 gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.1',
   :source => 'http://gems.github.com', :env => 'test'
 gem 'ruby-debug-base', :lib => false, :version => '>=0.10.3', :env => 'test'
@@ -66,9 +66,10 @@ gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.1',
   :source => 'http://gems.github.com', :env => 'cucumber'
 
 file 'cucumber.yml', <<-CODE
-default: -r features features
-autotest: -r features --format pretty
-autotest-all: -r features --format progress
+default: --format pretty --tags ~@proposed,~@wip --strict features
+wip: --tags @wip --wip features
+autotest: --require features --format pretty
+autotest-all: --require features --format progress
 CODE
 
 file_append 'features/support/env.rb', <<-CODE
@@ -96,7 +97,7 @@ CODE
 gem 'spicycode-rcov', :lib => 'rcov', :version => '>=0.8.2.1',
   :source => 'http://gems.github.com', :env => 'test'
 gem 'ZenTest', :lib => 'autotest', :version => '>=4.1.4', :env => 'test'
-gem 'carlosbrando-autotest-notification', :lib => 'autotest_notification', :version => '>=1.9.1',
+gem 'carlosbrando-autotest-notification', :lib => 'autotest_notification', :version => '>=2.0.0',
   :source => 'http://gems.github.com', :env => 'test'
 
 rake 'gems:install', :sudo => true, :env => 'test'

@@ -16,6 +16,8 @@ module NavigationHelpers
       logout_path
     when /the account page/
       account_path
+    when /the account editing page/
+      edit_account_path
 
     when /the singup page/
       signup_path

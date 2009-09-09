@@ -1,5 +1,16 @@
-== 0.4.0
+== master
 
+
+== 0.5.0 released 2009-9-9
+
+* add support for multi-authorization files and roles retrieving from authorization files
+* update localization, authentication and authorization modules
+* add Preference model and associated supports
+* update config_loader.rb to support smtp mailer setting
+
+== 0.4.0 released 2009-8-22
+
+* add openid registration support
 * split User methods to several modules
 * split locale files into separate folder and add to I18n.load_path
 * collect methods of User model into AuthlogicBundle::User module

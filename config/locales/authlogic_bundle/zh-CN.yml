@@ -145,4 +145,5 @@
     online:
       one: "目前有 {{count}} 位用户登入"
       other: "目前有 {{count}} 位用户登入"
+    preference: "偏好设定"
   

@@ -13,7 +13,7 @@ CODE
 # please note the order of config.gem and databse migration
 
 gem 'stffn-declarative_authorization', :lib => 'declarative_authorization',
-  :version => '>=0.3.2.1', :source => 'http://gems.github.com'
+  :version => '>=0.3.2.2', :source => 'http://gems.github.com'
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
 gem 'authlogic', :version => '>=2.1.1'
@@ -79,6 +79,8 @@ file_append 'config/locales/authlogic_bundle/zh-CN.yml', open("#{SOURCE}/config/
 file_append 'config/locales/authlogic_bundle/zh-TW.yml', open("#{SOURCE}/config/locales/authlogic_bundle/zh-TW.yml").read
 
 file_append 'config/authorization_rules.rb', open("#{SOURCE}/config/authorization_rules.rb").read
+file_append 'db/seeds.rb', open("#{SOURCE}/db/seeds.rb").read
+rake 'db:seed' if Rails::VERSION::STRING >= "2.3.4"
 
 file_append 'config/notifier.yml', open("#{SOURCE}/config/notifier.yml").read
 
@@ -95,8 +97,8 @@ file_append 'config/initializers/locales.rb', open("#{SOURCE}/config/initializer
 # Controllers
 file_inject 'app/controllers/application_controller.rb',
   'class ApplicationController < ActionController::Base', <<-CODE
-  include AuthenticatedSystem
-  include AuthorizedSystem
+  include AuthlogicBundle::Authentication
+  include AuthlogicBundle::Authorization
   include AuthlogicBundle::Localization
   include SslRequirement
 
