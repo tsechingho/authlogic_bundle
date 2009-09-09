@@ -43,9 +43,11 @@ class UsersController < ApplicationController
   # PUT /account
   def update
     @user.attributes = params[:user]
+    language_changed = @user.preference.language_changed?
 
     @user.save do |result|
       if result
+        set_language(@user.preference.language) if language_changed
         flash[:success] = t('users.flashs.success.update')
         redirect_to account_url
       else

@@ -3,6 +3,7 @@ en:
     models:
       role: "Role"
       user: "User"
+      preference: "Preference"
     attributes:
       role:
         name: "Name"
@@ -20,6 +21,9 @@ en:
         current_login_at: "Current login at"
         last_login_ip: "Last login IP"
         current_login_ip: "Current login IP"
+      preference:
+        language: "Language"
+        time_zone: "Time zone"
   
   common:
     flashs:

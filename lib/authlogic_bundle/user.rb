@@ -32,6 +32,21 @@ module AuthlogicBundle
       end
     end
 
+    module PreferenceMethods
+      def self.included(receiver)
+        receiver.class_eval do
+          has_one :preference, :class_name => "Preference", :foreign_key => "user_id"
+          accepts_nested_attributes_for :preference, :allow_destroy => true
+          attr_accessible :preference_attributes
+          after_create :create_default_preference
+        end
+      end
+
+      def create_default_preference
+        create_preference if Preference.table_exists? && preference.nil?
+      end
+    end
+
     module AuthorizationMethods
       def self.included(receiver)
         receiver.class_eval do
@@ -169,6 +184,7 @@ module AuthlogicBundle
     def self.included(receiver)
       receiver.extend ClassMethods
       receiver.send :include, InstanceMethods
+      receiver.send :include, PreferenceMethods
       receiver.send :include, AuthlogicOpenIdMethods
       receiver.send :include, AuthorizationMethods
       receiver.send :include, ActivationMethods

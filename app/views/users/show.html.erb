@@ -40,5 +40,13 @@
   <b><%= at(User, :current_login_ip) %>:</b>
   <%=h @user.current_login_ip %>
 </p>
+<p>
+  <b><%= at(Preference, :language) %>:</b>
+  <%=h @user.preference.language %>
+</p>
+<p>
+  <b><%= at(Preference, :time_zone) %>:</b>
+  <%=h @user.preference.time_zone %>
+</p>
 
 <%= link_to t('common.actions.edit'), edit_account_path %>

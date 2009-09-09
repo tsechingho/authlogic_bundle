@@ -3,6 +3,7 @@
     models:
       role: "角色"
       user: "使用者"
+      preference: "偏好設定"
     attributes:
       role:
         name: "名稱"
@@ -20,6 +21,9 @@
         current_login_at: "目前登入時間"
         last_login_ip: "上次登入位址"
         current_login_ip: "目前登入位址"
+      preference:
+        language: "語言"
+        time_zone: "時區"
   
   common:
     flashs:

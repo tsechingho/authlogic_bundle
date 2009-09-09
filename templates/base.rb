@@ -47,6 +47,10 @@ generate :migration, 'create_roles'
 file Dir.glob('db/migrate/*_create_roles.rb').first,
   open("#{SOURCE}/db/migrate/create_roles.rb").read
 
+generate :migration, 'create_preferences'
+file Dir.glob('db/migrate/*_create_preferences.rb').first,
+  open("#{SOURCE}/db/migrate/create_preferences.rb").read
+
 rake 'db:migrate'#, :env => 'development'
 
 #########################
@@ -76,37 +80,13 @@ file_append 'config/locales/authlogic_bundle/zh-TW.yml', open("#{SOURCE}/config/
 
 file_append 'config/authorization_rules.rb', open("#{SOURCE}/config/authorization_rules.rb").read
 
-file_append 'config/notifier.yml', <<-CODE
-development:
-  notifier:
-    host: localhost:3000
-    name: User Notifier
-    email: noreply@example.com
-
-test:
-  notifier:
-    host: www.example.com
-    name: User Notifier
-    email: noreply@example.com
-
-production:
-  notifier:
-    host: www.example.com
-    name: User Notifier
-    email: noreply@example.com
-
-CODE
+file_append 'config/notifier.yml', open("#{SOURCE}/config/notifier.yml").read
 
 # initializer 'config_loader.rb'
-file_append 'config/initializers/config_loader.rb', <<-CODE
-config = File.read(Rails.root.join('config', 'notifier.yml'))
-NOTIFIER = YAML.load(config)[RAILS_ENV]['notifier'].symbolize_keys
-CODE
+file_append 'config/initializers/config_loader.rb', open("#{SOURCE}/config/initializers/config_loader.rb").read
 
 # initializer 'locales.rb'
-file_append 'config/initializers/locales.rb', <<-CODE
-I18n.load_path += Dir[File.join(File.dirname(__FILE__), '..', 'locales', '**', '*.{rb,yml}')]
-CODE
+file_append 'config/initializers/locales.rb', open("#{SOURCE}/config/initializers/locales.rb").read
 
 #########################
 #  MVC
@@ -117,7 +97,7 @@ file_inject 'app/controllers/application_controller.rb',
   'class ApplicationController < ActionController::Base', <<-CODE
   include AuthenticatedSystem
   include AuthorizedSystem
-  include LocalizedSystem
+  include AuthlogicBundle::Localization
   include SslRequirement
 
   def ssl_required?
