@@ -3,15 +3,36 @@ development:
     host: localhost:3000
     name: User Notifier
     email: noreply@example.com
+  default_content_type: text/html # "text/plain" "text/html" "text/enriched"
+  delivery_method: :smtp # :sendmail :stmp
+  smtp_settings:
+    address: localhost
+    port: 25
+    domain: example.com
+    authentication: :login
+    user_name: noreply@example.com
+    password: noreply
+    enable_starttls_auto: true
 
 test:
   notifier:
     host: www.example.com
     name: User Notifier
     email: noreply@example.com
+  default_content_type: text/html
 
 production:
   notifier:
     host: www.example.com
     name: User Notifier
     email: noreply@example.com
+  default_content_type: text/html
+  delivery_method: :smtp # :sendmail
+  smtp_settings:
+    address: smtp.example.com
+    port: 25
+    domain: example.com
+    authentication: :login
+    user_name: noreply@example.com
+    password: noreply
+    enable_starttls_auto: true
