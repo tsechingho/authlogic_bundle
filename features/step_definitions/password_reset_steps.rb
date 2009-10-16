@@ -5,7 +5,7 @@ Given /^"([^\"]*)" a user who opened (?:his|her) reset password email$/ do |name
   And "I press \"Reset my password\""
   Then "I should receive an email"
   When "I open the email"
-  Then "I should see \"reset your password\" in the email"
+  Then "I should see \"reset your password\" in the email body"
 end
 
 Then /^I (?:should )?see a reset password form$/ do

@@ -15,15 +15,15 @@ Feature: Password Reset
     And I press "Reset my password"
     Then I should receive an email
     When I open the email
-    And I should see "reset your password" in the email
+    And I should see "reset your password" in the email body
 
   Scenario: Do not send a reset instructions email if given an invalid email
     Given "sharon" a confirmed user with email "sharon@example.com"
     When I go to the reset password page
     And I fill in "email" with "unknown@example.com"
     And I press "Reset my password"
-    Then "sharon@example.com" should not receive an email
-    And "unknown@example.com" should not receive an email
+    Then "sharon@example.com" should receive no emails
+    And "unknown@example.com" should receive no emails
     And I should see "No user was found with that email address"
 
   Scenario: Display change password form with valid token

@@ -16,7 +16,7 @@ Given /^"([^\"]*)" a notified but unconfirmed user$/ do |name|
   Given "\"#{name}\" an unconfirmed user"
   And "I should receive an email"
   When "I open the email"
-  Then "I should see \"activate your account\" in the email"
+  Then "I should see \"activate your account\" in the email body"
 end
 
 Given /^"([^\"]*)" a confirmed user with password "([^\"]*)"$/ do |name, password|

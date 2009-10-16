@@ -4,8 +4,8 @@ load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inj
 ##############################
 # RSpec
 ##############################
-gem 'rspec', :lib => false, :version => '>= 1.2.8', :env => 'test'
-gem 'rspec-rails', :lib => false, :version => '>= 1.2.7', :env => 'test'
+gem 'rspec', :lib => false, :version => '>= 1.2.9', :env => 'test'
+gem 'rspec-rails', :lib => false, :version => '>= 1.2.9', :env => 'test'
 gem 'remarkable', :lib => false, :version => '>=3.1.10', :env => 'test'
 gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.10', :env => 'test'
 gem 'remarkable_rails', :lib => false, :version => '>=3.1.10', :env => 'test'
@@ -15,15 +15,6 @@ gem 'thoughtbot-factory_girl', :lib => false, :version => '>=1.2.2',
   :source => 'http://gems.github.com', :env => 'test'
 
 rake 'gems:install', :sudo => true, :env => 'test'
-
-# plugin 'rspec-rails', :submodule => git?,
-#   :git => 'git://github.com/dchelimsky/rspec-rails.git'
-# plugin 'rspec', :submodule => git?,
-#   :git => 'git://github.com/dchelimsky/rspec.git'
-# plugin 'factory_girl', :submodule => git?,
-#   :git => 'git://github.com/thoughtbot/factory_girl.git'
-# plugin 'shoulda', :submodule => git?,
-#   :git => 'git://github.com/thoughtbot/shoulda.git'
 
 generate :rspec
 
@@ -44,25 +35,24 @@ CODE
 ##############################
 # Cucumber
 ##############################
+gem 'ruby-debug-base', :lib => false, :version => '>=0.10.3', :env => 'test'
+gem 'ruby-debug', :lib => false, :version => '>=0.10.3', :env => 'test'
 gem 'term-ansicolor', :lib => false, :version => '>=1.0.4', :env => 'test'
-gem 'treetop', :lib => false, :version => '>=1.4.1', :env => 'test'
+gem 'treetop', :lib => false, :version => '>=1.4.2', :env => 'test'
 gem 'diff-lcs', :lib => false, :version => '>=1.1.2', :env => 'test'
 gem 'nokogiri', :lib => false, :version => '>=1.3.3', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
-gem 'cucumber', :lib => false, :version => '>=0.3.99', :env => 'test'
+gem 'cucumber', :lib => false, :version => '>=0.4.2', :env => 'test'
 gem 'webrat', :lib => false, :version => '>=0.5.3', :env => 'test'
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.1',
+gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.4',
   :source => 'http://gems.github.com', :env => 'test'
-gem 'ruby-debug-base', :lib => false, :version => '>=0.10.3', :env => 'test'
-gem 'ruby-debug', :lib => false, :version => '>=0.10.3', :env => 'test'
 
 # we still need 'test' environment to install cucumber related gems
 rake 'gems:install', :sudo => true, :env => 'test'
 
 generate :cucumber
 
-# Write gem config to 'cucumber' environment for cucumber >=0.3.8
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.1',
+gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.4',
   :source => 'http://gems.github.com', :env => 'cucumber'
 
 file 'cucumber.yml', <<-CODE
@@ -70,6 +60,7 @@ default: --format pretty --tags ~@proposed,~@wip --strict features
 wip: --tags @wip --wip features
 autotest: --require features --format pretty
 autotest-all: --require features --format progress
+authlogic_bundle: --color --tags ~@wip --strict --format pretty vendor/plugins/authlogic_bundle/features
 CODE
 
 file_append 'features/support/env.rb', <<-CODE

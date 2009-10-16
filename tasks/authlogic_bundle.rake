@@ -20,13 +20,16 @@ namespace :authlogic_bundle do
   begin
     require 'cucumber/rake/task'
 
-    Cucumber::Rake::Task.new(:features, "Run Features of authlogic_bundle with Cucumber") do |t|
-      t.fork = true
-      t.cucumber_opts = ['--format', (ENV['CUCUMBER_FORMAT'] || 'pretty')]
-      t.feature_pattern = "#{plugin_path}/features/**/*.feature"
-      t.step_pattern = "#{plugin_path}/features/**/*.rb"
+    # Use vendored cucumber binary if possible. If it's not vendored,
+    # Cucumber::Rake::Task will automatically use installed gem's cucumber binary
+    vendored_cucumber_binary = Dir["#{RAILS_ROOT}/vendor/{gems,plugins}/cucumber*/bin/cucumber"].first
+
+    Cucumber::Rake::Task.new({:features => 'db:test:prepare'}, "Run Features of authlogic_bundle with Cucumber") do |t|
+      t.binary = vendored_cucumber_binary
+      t.fork = true # You may get faster startup if you set this to false
+      t.cucumber_opts = "--color --tags ~@wip --strict --format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} #{plugin_path}/features"
+      # t.profile = "authlogic_bundle"
     end
-    task :features => 'db:test:prepare'
   rescue LoadError
     desc 'Cucumber rake task not available'
     task :features do

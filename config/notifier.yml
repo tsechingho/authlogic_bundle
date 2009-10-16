@@ -14,12 +14,15 @@ development:
     password: noreply
     enable_starttls_auto: true
 
-test:
+test: &TEST
   notifier:
     host: www.example.com
     name: User Notifier
     email: noreply@example.com
   default_content_type: text/html
+
+cucumber:
+  <<: *TEST
 
 production:
   notifier:
@@ -27,7 +30,7 @@ production:
     name: User Notifier
     email: noreply@example.com
   default_content_type: text/html
-  delivery_method: :smtp # :sendmail
+  delivery_method: :sendmail # :smtp
   smtp_settings:
     address: smtp.example.com
     port: 25

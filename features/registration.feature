@@ -38,7 +38,7 @@ Feature: Registration
     Given "sharon" an unconfirmed user
     And I should receive an email
     When I open the email
-    Then I should see "activate your account" in the email
+    Then I should see "activate your account" in the email body
 
   Scenario: Want to confirm account using mail activation token
     Given "sharon" a notified but unconfirmed user
@@ -86,7 +86,7 @@ Feature: Registration
     Then I should be logged in
     And I should have 2 emails at all
     When I open the most recent email
-    Then I should see "Activation Complete" in the subject
+    Then I should see "Activation Complete" in the email subject
     When I follow "Logout"
     Then I should be logged out
 
