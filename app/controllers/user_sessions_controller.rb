@@ -15,6 +15,7 @@ class UserSessionsController < ApplicationController
     @user_session.save do |result|
       if result
         flash[:success] = t('user_sessions.flashs.success.create')
+        session[:language] = nil
         session[:return_to] = nil if session[:return_to] == "/logout"
         redirect_back_or_default account_url
       else
@@ -27,6 +28,7 @@ class UserSessionsController < ApplicationController
   def destroy
     current_user_session.destroy
     flash[:success] = t('user_sessions.flashs.success.destroy')
+    session[:language] = nil
     session[:return_to] = nil
     redirect_back_or_default login_url
   end

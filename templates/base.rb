@@ -16,8 +16,8 @@ gem 'stffn-declarative_authorization', :lib => 'declarative_authorization',
   :version => '>=0.3.2.2', :source => 'http://gems.github.com'
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
-gem 'authlogic', :version => '>=2.1.1'
-gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.1'
+gem 'authlogic', :version => '>=2.1.2'
+gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
 
 rake 'gems:install', :sudo => true
 

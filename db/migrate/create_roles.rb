@@ -13,7 +13,7 @@ class CreateRoles < ActiveRecord::Migration
       t.references :role, :null => false
     end
   end
-  
+
   def self.down
     drop_table :roles_users
     drop_table :roles
