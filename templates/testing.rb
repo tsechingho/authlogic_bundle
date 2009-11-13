@@ -45,7 +45,7 @@ gem 'treetop', :lib => false, :version => '>=1.4.2', :env => 'test'
 gem 'diff-lcs', :lib => false, :version => '>=1.1.2', :env => 'test'
 gem 'nokogiri', :lib => false, :version => '>=1.4.0', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
-gem 'cucumber', :lib => false, :version => '>=0.4.3', :env => 'test'
+gem 'cucumber', :lib => false, :version => '>=0.4.4', :env => 'test'
 gem 'webrat', :lib => false, :version => '>=0.5.3', :env => 'test'
 gem 'email_spec', :lib => 'email_spec', :version => '>=0.3.5',
   :source => 'http://gemcutter.org', :env => 'test' # bmabey

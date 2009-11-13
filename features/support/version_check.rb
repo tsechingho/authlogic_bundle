@@ -1,10 +1,10 @@
-if Cucumber::VERSION != '0.4.2'
+if Cucumber::VERSION != '0.4.4'
 warning = <<-WARNING
 (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) 
 
          (::)   R O T T E N   C U C U M B E R   A L E R T    (::)
 
-Your #{__FILE__.gsub(/version_check.rb$/, 'env.rb')} file was generated with Cucumber 0.4.2,
+Your #{__FILE__.gsub(/version_check.rb$/, 'env.rb')} file was generated with Cucumber 0.4.4,
 but you seem to be running Cucumber #{Cucumber::VERSION}. If you're running an older 
 version than #{Cucumber::VERSION}, just upgrade your gem. If you're running a newer 
 version than #{Cucumber::VERSION} you should:

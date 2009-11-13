@@ -1,6 +1,5 @@
-['/vendor/plugins/cucumber/lib'].each do |lib_path|
-  $LOAD_PATH.unshift(RAILS_ROOT + lib_path) if File.directory?(RAILS_ROOT + lib_path)
-end
+vendored_cucumber_dir = Dir["#{RAILS_ROOT}/vendor/{gems,plugins}/cucumber*"].first
+$LOAD_PATH.unshift("#{vendored_cucumber_dir}/lib") unless vendored_cucumber_dir.nil?
 
 namespace :authlogic_bundle do
   plugin_path = "vendor/plugins/authlogic_bundle"
@@ -22,7 +21,7 @@ namespace :authlogic_bundle do
 
     # Use vendored cucumber binary if possible. If it's not vendored,
     # Cucumber::Rake::Task will automatically use installed gem's cucumber binary
-    vendored_cucumber_binary = Dir["#{RAILS_ROOT}/vendor/{gems,plugins}/cucumber*/bin/cucumber"].first
+    vendored_cucumber_binary = "#{vendored_cucumber_dir}/bin/cucumber" unless vendored_cucumber_dir.nil?
 
     Cucumber::Rake::Task.new({:features => 'db:test:prepare'}, "Run Features of authlogic_bundle with Cucumber") do |t|
       t.binary = vendored_cucumber_binary
