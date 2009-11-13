@@ -6,13 +6,16 @@ load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inj
 ##############################
 gem 'rspec', :lib => false, :version => '>= 1.2.9', :env => 'test'
 gem 'rspec-rails', :lib => false, :version => '>= 1.2.9', :env => 'test'
-gem 'remarkable', :lib => false, :version => '>=3.1.10', :env => 'test'
-gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.10', :env => 'test'
-gem 'remarkable_rails', :lib => false, :version => '>=3.1.10', :env => 'test'
-gem 'thoughtbot-shoulda', :lib => false, :version => '>=2.10.2',
-  :source => 'http://gems.github.com', :env => 'test'
-gem 'thoughtbot-factory_girl', :lib => false, :version => '>=1.2.2',
-  :source => 'http://gems.github.com', :env => 'test'
+gem 'remarkable', :lib => false, :version => '>=3.1.11',
+  :source => 'http://gemcutter.org', :env => 'test'
+gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.11',
+  :source => 'http://gemcutter.org', :env => 'test'
+gem 'remarkable_rails', :lib => false, :version => '>=3.1.11',
+  :source => 'http://gemcutter.org', :env => 'test'
+gem 'shoulda', :lib => false, :version => '>=2.10.2',
+  :source => 'http://gemcutter.org', :env => 'test' # thoughtbot
+gem 'factory_girl', :lib => false, :version => '>=1.2.3',
+  :source => 'http://gemcutter.org', :env => 'test' # thoughtbot
 
 rake 'gems:install', :sudo => true, :env => 'test'
 
@@ -44,16 +47,16 @@ gem 'nokogiri', :lib => false, :version => '>=1.4.0', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
 gem 'cucumber', :lib => false, :version => '>=0.4.3', :env => 'test'
 gem 'webrat', :lib => false, :version => '>=0.5.3', :env => 'test'
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.4',
-  :source => 'http://gems.github.com', :env => 'test'
+gem 'email_spec', :lib => 'email_spec', :version => '>=0.3.5',
+  :source => 'http://gemcutter.org', :env => 'test' # bmabey
 
 # we still need 'test' environment to install cucumber related gems
 rake 'gems:install', :sudo => true, :env => 'test'
 
 generate :cucumber
 
-gem 'bmabey-email_spec', :lib => 'email_spec', :version => '>=0.3.4',
-  :source => 'http://gems.github.com', :env => 'cucumber'
+gem 'email_spec', :lib => 'email_spec', :version => '>=0.3.5',
+  :source => 'http://gemcutter.org', :env => 'cucumber' # bmabey
 
 file 'cucumber.yml', <<-CODE
 default: --format pretty --tags ~@proposed,~@wip --strict features
@@ -85,11 +88,11 @@ CODE
 ##############################
 # RCov & Autotest
 ##############################
-gem 'spicycode-rcov', :lib => 'rcov', :version => '>=0.8.2.1',
-  :source => 'http://gems.github.com', :env => 'test'
+gem 'rcov', :lib => 'rcov', :version => '>=0.9.6',
+  :source => 'http://gemcutter.org', :env => 'test' # relevance
 gem 'ZenTest', :lib => 'autotest', :version => '>=4.1.4', :env => 'test'
-gem 'carlosbrando-autotest-notification', :lib => 'autotest_notification', :version => '>=2.0.0',
-  :source => 'http://gems.github.com', :env => 'test'
+gem 'autotest-notification', :lib => 'autotest_notification', :version => '>=2.1.0',
+  :source => 'http://gemcutter.org', :env => 'test' # carlosbrando
 
 rake 'gems:install', :sudo => true, :env => 'test'
 

@@ -10,13 +10,17 @@ file_append 'config/initializers/session_store.rb', <<-CODE
 ActionController::Base.session_store = :active_record_store
 CODE
 
-# please note the order of config.gem and databse migration
+# add gemcutter.org as gems source
+# run 'gem install gemcutter', :sudo => true
+# run 'gem tumble', :sudo => true
+# run 'gem sources --add http://gemcutter.org', :sudo => true
 
-gem 'stffn-declarative_authorization', :lib => 'declarative_authorization',
-  :version => '>=0.3.2.2', :source => 'http://gems.github.com'
+# please note the order of config.gem and databse migration
+gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.3.2.3',
+  :source => 'http://gemcutter.org' # stffn
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
-gem 'authlogic', :version => '>=2.1.2'
+gem 'authlogic', :version => '>=2.1.3'
 gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
 
 rake 'gems:install', :sudo => true
