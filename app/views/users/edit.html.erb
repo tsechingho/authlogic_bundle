@@ -33,18 +33,16 @@
     </div>
   </fieldset>
   <fieldset>
-    <legend><%= t('users.preference') %></legend>
-    <% f.fields_for :preference, (@user.preference || @user.build_preference) do |p| %>
+    <legend><%= t('users.preferences') %></legend>
     <p>
-      <%= p.label :language %><br />
-      <%= p.select :language, @languages_available, :include_blank => true %>
+      <%= f.label :preferred_language %><br />
+      <%= f.select :preferred_language, @languages_available, :include_blank => true %>
     </p>
     <p>
-      <%= p.label :time_zone %><br />
-      <%# f.select :time_zone, ActiveSupport::TimeZone.all.map {|tz| [tz.to_s, tz.tzinfo.name] }, :include_blank => true %>
-      <%= p.time_zone_select :time_zone, nil, :include_blank => true %>
+      <%= f.label :preferred_time_zone %><br />
+      <%# f.select :preferred_time_zone, ActiveSupport::TimeZone.all.map {|tz| [tz.to_s, tz.tzinfo.name] }, :include_blank => true %>
+      <%= f.time_zone_select :preferred_time_zone, nil, :include_blank => true %>
     </p>
-    <% end %>
   </fieldset>
   <p>
     <%= f.submit t('common.actions.update') %>

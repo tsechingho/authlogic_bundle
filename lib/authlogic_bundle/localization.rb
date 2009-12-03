@@ -39,8 +39,8 @@ module AuthlogicBundle
       end
 
       def user_language
-        return unless current_user && current_user.preference && !current_user.preference.language.blank?
-        current_user.preference.language
+        return unless current_user && !current_user.preferred_language.blank?
+        current_user.preferred_language
       end
 
       def browser_language
@@ -51,8 +51,8 @@ module AuthlogicBundle
       end
 
       def set_time_zone
-        return unless current_user && current_user.preference && !current_user.preference.time_zone.blank?
-        Time.zone = current_user.preference.time_zone
+        return unless current_user && !current_user.preferred_time_zone.blank?
+        Time.zone = current_user.preferred_time_zone
       end
 
       # Because I18n.locale are dynamically determined in ApplicationController,

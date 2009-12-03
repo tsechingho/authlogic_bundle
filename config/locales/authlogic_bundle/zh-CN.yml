@@ -21,9 +21,11 @@
         current_login_at: "目前登入时间"
         last_login_ip: "上次登入位址"
         current_login_ip: "目前登入位址"
+        preferred_language: "语言"
+        preferred_time_zone: "时区"
       preference:
-        language: "语言"
-        time_zone: "时区"
+        name: "名称"
+        value: "设定值"
   
   common:
     flashs:
@@ -145,5 +147,5 @@
     online:
       one: "目前有 {{count}} 位用户登入"
       other: "目前有 {{count}} 位用户登入"
-    preference: "偏好设定"
+    preferences: "偏好设定"
   

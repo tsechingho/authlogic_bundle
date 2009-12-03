@@ -21,9 +21,11 @@ en:
         current_login_at: "Current login at"
         last_login_ip: "Last login IP"
         current_login_ip: "Current login IP"
+        preferred_language: "Language"
+        preferred_time_zone: "Time zone"
       preference:
-        language: "Language"
-        time_zone: "Time zone"
+        name: "Name"
+        value: "Value"
   
   common:
     flashs:
@@ -145,5 +147,5 @@ en:
     online:
       one: "{{count}} user currently logged in"
       other: "{{count}} users currently logged in"
-    preference: "Preference"
+    preferences: "Preferences"
   

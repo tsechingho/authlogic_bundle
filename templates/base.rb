@@ -16,6 +16,8 @@ CODE
 # run 'gem sources --add http://gemcutter.org', :sudo => true
 
 # please note the order of config.gem and databse migration
+gem 'preferences', :lib => 'preferences', :version => '>= 0.3.1',
+  :source => 'http://gemcutter.org' # pluginaweek
 gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.3.2.3',
   :source => 'http://gemcutter.org' # stffn
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
