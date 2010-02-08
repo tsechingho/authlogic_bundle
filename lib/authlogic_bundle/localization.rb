@@ -12,6 +12,10 @@ module AuthlogicBundle
         @languages_available ||= [["English", "en"], ["繁體中文", "zh-TW"], ["简体中文", "zh-CN"]]
       end
 
+      def language_verified?(language)
+        languages_available.any? { |array| array.last == language }
+      end
+
       def set_language(prefered = nil)
         session[:language] = prefered unless prefered.blank?
         ::I18n.locale = session[:language] || cookies[:language] || browser_language || ::I18n.default_locale || 'en'
@@ -29,7 +33,7 @@ module AuthlogicBundle
 
       # browser must accept cookies
       def persist_language
-        if !params[:language].blank?
+        if !params[:language].blank? && language_verified?(params[:language])
           session[:language] = cookies[:language] = params[:language]
         elsif (session[:language].blank? or cookies[:language].blank?) && !user_language.blank?
           session[:language] = cookies[:language] = user_language
@@ -40,6 +44,7 @@ module AuthlogicBundle
 
       def user_language
         return unless current_user && !current_user.preferred_language.blank?
+        return unless language_verified?(current_user.preferred_language)
         current_user.preferred_language
       end
 
@@ -47,7 +52,7 @@ module AuthlogicBundle
         return unless http_lang = request.env["HTTP_ACCEPT_LANGUAGE"] and !http_lang.blank?
         browser_locale = http_lang[/^[a-z]{2}/i].downcase + '-' + http_lang[3,2].upcase
         browser_locale.sub!(/-US/, '')
-        languages_available.flatten.include?(browser_locale) ? browser_locale : nil
+        language_verified?(browser_locale) ? browser_locale : nil
       end
 
       def set_time_zone

@@ -13,6 +13,6 @@
 </div>
 <div id="locale_pannel">
   <% form_tag request.path, :method => :get do %>
-    <%= select_tag :language, options_for_select(@languages_available, I18n.locale), { :index => nil, :onchange => 'this.form.submit()' } %>
+    <%= select_tag :language, options_for_select(@languages_available, I18n.locale.to_s), { :index => nil, :onchange => 'this.form.submit()' } %>
   <% end %>
 </div>

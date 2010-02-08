@@ -33,7 +33,13 @@ module AuthlogicBundle
         end
       end
 
+      def disallowed_urls
+        @disallowed_urls ||= [signup_url, login_url, logout_url]
+      end
+
       def store_location
+        disallowed_urls.map! { |url| url[/\/\w+$/] }
+        return if disallowed_urls.include?(request.request_uri)
         session[:return_to] = request.request_uri
       end
 
