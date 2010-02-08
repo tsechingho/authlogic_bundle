@@ -1,4 +1,0 @@
-default: --format pretty --tags ~@proposed,~@wip --strict features
-wip: --tags @wip --wip features
-autotest: --require features --format pretty
-autotest-all: --require features --format progress

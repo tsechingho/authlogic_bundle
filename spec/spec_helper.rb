@@ -8,6 +8,8 @@ require 'spec/rails'
 require 'email_spec/helpers'
 require 'email_spec/matchers'
 require 'remarkable_rails'
+require 'shoulda'
+require 'factory_girl'
 
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
@@ -48,7 +50,7 @@ Spec::Runner.configure do |config|
   #
   # == Mock Framework
   #
-  # RSpec uses it's own mocking framework by default. If you prefer to
+  # RSpec uses its own mocking framework by default. If you prefer to
   # use mocha, flexmock or RR, uncomment the appropriate line:
   #
   # config.mock_with :mocha

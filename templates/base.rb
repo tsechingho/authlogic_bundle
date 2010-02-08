@@ -18,20 +18,14 @@ CODE
 # please note the order of config.gem and databse migration
 gem 'preferences', :lib => 'preferences', :version => '>= 0.3.1',
   :source => 'http://gemcutter.org' # pluginaweek
-gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.3.2.3',
+gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.4',
   :source => 'http://gemcutter.org' # stffn
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
-gem 'authlogic', :version => '>=2.1.3'
+gem 'authlogic', :version => '>=2.1.3' # binarylogic
 gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
 
 rake 'gems:install', :sudo => true
-
-# plugin 'authlogic', :submodule => git?, 
-#   :git => 'git://github.com/binarylogic/authlogic.git'
-
-# plugin 'declarative_authorization', :submodule => git?,
-#   :git => 'git://github.com/stffn/declarative_authorization.git'
 
 plugin 'open_id_authentication', :submodule => git?, 
   :git => 'git://github.com/rails/open_id_authentication.git'

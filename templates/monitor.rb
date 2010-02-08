@@ -4,7 +4,7 @@ load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inj
 ##############################
 # Monitor
 ##############################
-gem 'rails-footnotes', :lib => 'rails-footnotes', :version => '>=3.6.3',
+gem 'rails-footnotes', :lib => 'rails-footnotes', :version => '>=3.6.6',
   :source => 'http://gemcutter.org', :env => 'development' # josevalim
 
 rake 'gems:install', :sudo => true, :env => 'development'

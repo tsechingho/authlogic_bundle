@@ -4,15 +4,15 @@ load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inj
 ##############################
 # RSpec
 ##############################
-gem 'rspec', :lib => false, :version => '>= 1.2.9', :env => 'test'
-gem 'rspec-rails', :lib => false, :version => '>= 1.2.9', :env => 'test'
-gem 'remarkable', :lib => false, :version => '>=3.1.11',
+gem 'rspec', :lib => false, :version => '>= 1.3.0', :env => 'test'
+gem 'rspec-rails', :lib => false, :version => '>= 1.3.2', :env => 'test'
+gem 'remarkable', :lib => false, :version => '>=3.1.12',
   :source => 'http://gemcutter.org', :env => 'test'
-gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.11',
+gem 'remarkable_activerecord', :lib => false, :version => '>=3.1.12',
   :source => 'http://gemcutter.org', :env => 'test'
-gem 'remarkable_rails', :lib => false, :version => '>=3.1.11',
+gem 'remarkable_rails', :lib => false, :version => '>=3.1.12',
   :source => 'http://gemcutter.org', :env => 'test'
-gem 'shoulda', :lib => false, :version => '>=2.10.2',
+gem 'shoulda', :lib => false, :version => '>=2.10.3',
   :source => 'http://gemcutter.org', :env => 'test' # thoughtbot
 gem 'factory_girl', :lib => false, :version => '>=1.2.3',
   :source => 'http://gemcutter.org', :env => 'test' # thoughtbot
@@ -21,13 +21,7 @@ rake 'gems:install', :sudo => true, :env => 'test'
 
 generate :rspec
 
-file 'spec/spec.opts', <<-CODE
---colour
---format progress
---format html:coverage/spec.html
---loadby mtime
---reverse
-CODE
+file 'spec/spec.opts', open("#{SOURCE}/spec/spec.opts").read
 
 file_inject 'spec/spec_helper.rb', "require 'spec/rails'", <<-CODE
 require 'remarkable_rails'
@@ -41,13 +35,15 @@ CODE
 gem 'ruby-debug-base', :lib => false, :version => '>=0.10.3', :env => 'test'
 gem 'ruby-debug', :lib => false, :version => '>=0.10.3', :env => 'test'
 gem 'term-ansicolor', :lib => false, :version => '>=1.0.4', :env => 'test'
-gem 'treetop', :lib => false, :version => '>=1.4.2', :env => 'test'
+gem 'treetop', :lib => false, :version => '>=1.4.3', :env => 'test'
 gem 'diff-lcs', :lib => false, :version => '>=1.1.2', :env => 'test'
-gem 'nokogiri', :lib => false, :version => '>=1.4.0', :env => 'test'
+gem 'nokogiri', :lib => false, :version => '>=1.4.1', :env => 'test'
 gem 'builder', :lib => false, :version => '>=2.1.2', :env => 'test'
-gem 'cucumber', :lib => false, :version => '>=0.4.4', :env => 'test'
-gem 'webrat', :lib => false, :version => '>=0.5.3', :env => 'test'
-gem 'email_spec', :lib => 'email_spec', :version => '>=0.3.5',
+gem 'cucumber', :lib => false, :version => '>=0.6.2', :env => 'test'
+gem 'cucumber-rails', :lib => false, :version => '>=0.2.4', :env => 'test'
+gem 'database_cleaner', :lib => false, :version => '>=0.4.3', :env => 'test'
+gem 'webrat', :lib => false, :version => '>=0.7.0', :env => 'test'
+gem 'email_spec', :lib => 'email_spec', :version => '>=0.4.0',
   :source => 'http://gemcutter.org', :env => 'test' # bmabey
 
 # we still need 'test' environment to install cucumber related gems
@@ -55,20 +51,12 @@ rake 'gems:install', :sudo => true, :env => 'test'
 
 generate :cucumber
 
-gem 'email_spec', :lib => 'email_spec', :version => '>=0.3.5',
+gem 'email_spec', :lib => 'email_spec', :version => '>=0.4.0',
   :source => 'http://gemcutter.org', :env => 'cucumber' # bmabey
 
-file 'cucumber.yml', <<-CODE
-default: --format pretty --tags ~@proposed,~@wip --strict features
-wip: --tags @wip --wip features
-autotest: --require features --format pretty
-autotest-all: --require features --format progress
-authlogic_bundle: --color --tags ~@wip --strict --format pretty vendor/plugins/authlogic_bundle/features
-CODE
+file 'config/cucumber.yml', open("#{SOURCE}/config/cucumber.yml").read
 
-file_append 'features/support/env.rb', <<-CODE
-require 'email_spec/cucumber'
-CODE
+file_append 'features/support/custom_env.rb', open("#{SOURCE}/features/support/custom_env.rb").read
 
 generate :email_spec
 
@@ -88,9 +76,9 @@ CODE
 ##############################
 # RCov & Autotest
 ##############################
-gem 'rcov', :lib => 'rcov', :version => '>=0.9.6',
+gem 'rcov', :lib => 'rcov', :version => '>=0.9.7.1',
   :source => 'http://gemcutter.org', :env => 'test' # relevance
-gem 'ZenTest', :lib => 'autotest', :version => '>=4.1.4', :env => 'test'
+gem 'ZenTest', :lib => 'autotest', :version => '>=4.2.1', :env => 'test'
 gem 'autotest-notification', :lib => 'autotest_notification', :version => '>=2.1.0',
   :source => 'http://gemcutter.org', :env => 'test' # carlosbrando
 
