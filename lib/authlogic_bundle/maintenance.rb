@@ -26,7 +26,7 @@ module AuthlogicBundle
     end
 
     def create_roles_from_rule_file(file=nil, skips=[:guest])
-      file ||= "#{RAILS_ROOT}/config/authorization_rules.rb"
+      file ||= "#{Rails.root}/config/authorization_rules.rb"
       puts "Reading #{file} ..." if speak
       reader = ::Authorization::Reader::DSLReader.load file
       reader.auth_rules_reader.roles.each do |role|

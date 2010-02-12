@@ -1,4 +1,4 @@
-if ENV['RAILS_ENV'] == 'development' && defined?(Footnotes)
+if Rails.env == 'development' && defined?(Footnotes)
   # NOT Textmate editor:
   # if defined?(Footnotes)
   #  Footnotes::Filter.prefix = 'txmt://open?url=file://%s&line=%d&column=%d'

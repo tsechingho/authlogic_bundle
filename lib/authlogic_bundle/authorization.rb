@@ -31,7 +31,7 @@ module AuthlogicBundle
     # all rules and privilleges of each auth_dsl_file will be considered
     # in controller, @authorization_engine will be used
     # in model, Authorization::Engine.instance will be used
-    # if RAILS_ENV is development, a new Authorization::Engine.instance
+    # if Rails.env is development, a new Authorization::Engine.instance
     # will always be created without hacking
     def merge_authorization_rules
       reader = ::Authorization::Reader::DSLReader.new

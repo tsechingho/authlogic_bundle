@@ -105,7 +105,7 @@ file_inject 'app/controllers/application_controller.rb',
   def ssl_required?
     return ENV['SSL'] == 'on' ? true : false if defined? ENV['SSL']
     return false if local_request?
-    return false if RAILS_ENV == 'test'
+    return false if Rails.env == 'test'
     super
   end
 CODE
