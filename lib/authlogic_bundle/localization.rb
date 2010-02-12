@@ -13,12 +13,26 @@ module AuthlogicBundle
       end
 
       def language_verified?(language)
-        languages_available.any? { |array| array.last == language }
+        !language.blank? && languages_available.any? { |array| array.last == language }
       end
 
+      # Rails.configuration.i18n.default_locale
+      # I18n.default_locale
       def set_language(prefered = nil)
-        session[:language] = prefered unless prefered.blank?
-        ::I18n.locale = session[:language] || cookies[:language] || browser_language || ::I18n.default_locale || 'en'
+        session[:language] = prefered if language_verified?(prefered)
+        ::I18n.locale = session[:language] || cookies[:language] || browser_language || ::Rails.configuration.i18n.default_locale || ::I18n.default_locale || 'en'
+      end
+
+      def time_zone_verified?(time_zone)
+        !time_zone.blank?
+      end
+
+      # Rails.configuratin.time_zone
+      # ActiveRecord::Base.default_timezone
+      # Time.zone_default
+      def set_time_zone(prefered = nil)
+        prefered = nil unless time_zone_verified?(prefered)
+        ::Time.zone = prefered || user_time_zone || ::Rails.configuration.time_zone || 'UTC'
       end
 
       private
@@ -33,19 +47,21 @@ module AuthlogicBundle
 
       # browser must accept cookies
       def persist_language
-        if !params[:language].blank? && language_verified?(params[:language])
+        if language_verified?(params[:language])
           session[:language] = cookies[:language] = params[:language]
-        elsif (session[:language].blank? or cookies[:language].blank?) && !user_language.blank?
+        elsif (session[:language].blank? or cookies[:language].blank?) && language_verified?(user_language)
           session[:language] = cookies[:language] = user_language
-        elsif !browser_language.blank?
+        elsif cookies[:language].blank? && language_verified?(browser_language)
           cookies[:language] = browser_language
         end
       end
 
       def user_language
-        return unless current_user && !current_user.preferred_language.blank?
-        return unless language_verified?(current_user.preferred_language)
-        current_user.preferred_language
+        return Rails.cache.read('user_prefered_language') unless current_user
+        Rails.cache.fetch('user_prefered_language') do
+          user_locale = current_user.preferred_language
+          language_verified?(user_locale) ? user_locale : nil
+        end
       end
 
       def browser_language
@@ -55,9 +71,12 @@ module AuthlogicBundle
         language_verified?(browser_locale) ? browser_locale : nil
       end
 
-      def set_time_zone
-        return unless current_user && !current_user.preferred_time_zone.blank?
-        Time.zone = current_user.preferred_time_zone
+      def user_time_zone
+        return Rails.cache.read('user_prefered_time_zone') unless current_user
+        Rails.cache.fetch('user_prefered_time_zone') do
+          time_zone = current_user.preferred_time_zone
+          time_zone_verified?(time_zone) ? time_zone : nil
+        end
       end
 
       # Because I18n.locale are dynamically determined in ApplicationController,

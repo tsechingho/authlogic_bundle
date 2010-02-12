@@ -42,12 +42,14 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /account
   def update
-    previous_language = @user.preferred_language
     @user.attributes = params[:user]
 
     @user.save do |result|
       if result
-        set_language(@user.preferred_language) if previous_language != @user.preferred_language
+        Rails.cache.delete('user_prefered_language')
+        set_language(@user.preferred_language)
+        Rails.cache.delete('user_prefered_time_zone')
+        set_time_zone(@user.preferred_time_zone)
         flash[:success] = t('users.flashs.success.update')
         redirect_to account_url
       else
