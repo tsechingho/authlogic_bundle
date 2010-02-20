@@ -21,6 +21,7 @@ gem 'preferences', :lib => 'preferences', :version => '>= 0.3.1',
 gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.4',
   :source => 'http://gemcutter.org' # stffn
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
+gem 'rack-openid', :lib => 'rack/openid', :version => '>=1.0.0'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
 gem 'authlogic', :version => '>=2.1.3' # binarylogic
 gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
@@ -37,6 +38,17 @@ plugin 'i18n_label', :submodule => git?,
 generate :migration, 'create_users'
 file Dir.glob('db/migrate/*_create_users.rb').first,
   open("#{SOURCE}/db/migrate/create_users.rb").read
+
+# since master branch of open_id_authentication use rack-openid and use memory store instead of db store,
+# authlogic-oid do not folloew up yet and will fail openid authentication.
+# Let's roll back to old commit to make things easier.
+# I'll check rack version of open_id_authentication later.
+if git?
+  inside('vendor/plugins/open_id_authentication') do
+    run "git reset --hard 079b91f70602814c98d4345e198f743bb56b76b5"
+  end
+  git :add => 'vendor/plugins/open_id_authentication'
+end
 
 generate :migration, 'add_open_id_to_users'
 file Dir.glob('db/migrate/*_add_open_id_to_users.rb').first,

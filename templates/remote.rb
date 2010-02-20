@@ -1,10 +1,11 @@
+REMOTE_SOURCE = "http://github.com/tsechingho/authlogic_bundle/raw/master"
 ENV['SCM'] = 'git' if yes?('Use git as scm? (y/n)')
 
 def git?
   ENV['SCM'] == 'git'
 end
 
-load_template("http://github.com/tsechingho/authlogic_bundle/raw/master/templates/git_init.rb") if git?
+load_template("#{REMOTE_SOURCE}/templates/git_init.rb") if git?
 
 rails_edge_path = ask("If you want to symbol link rails edge, please give absolute path or press enter to skip:")
 run "ln -s #{rails_edge_path} vendor/rails" unless rails_edge_path.blank?

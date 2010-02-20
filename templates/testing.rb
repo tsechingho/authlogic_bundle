@@ -119,6 +119,6 @@ CODE
 if git?
   git :submodule => "init"
   git :submodule => "update"
-  git :add => "config lib script spec features cucumber.yml"
+  git :add => "config lib script spec features"
   git :commit => "-m 'setup testing suite'"
 end
