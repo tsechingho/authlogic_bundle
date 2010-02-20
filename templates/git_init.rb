@@ -4,16 +4,38 @@
 git :init
 
 file '.gitignore', <<-CODE
+## MAC OS
 .DS_Store
 ._*
 Icon?
+
+## TEXTMATE
+*.tmproj
+tmtags
+
+## EMACS
+*~
+\#*
+.\#*
+
+## VIM
+*.swp
+
+## PROJECT::GENERAL
 config/database.yml
+coverage
 coverage.data
 coverage/*
 db/*.sqlite3
 db/schema.rb
 log/*.log
+pkg
+rdoc
+rerun.txt
 tmp/**/*
+
+## PROJECT::SPECIFIC
+
 CODE
 
 # tell git to hold empty directories
