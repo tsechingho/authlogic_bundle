@@ -29,22 +29,24 @@ The internationalization of interface and messages are built-in with english and
 
 == Requirements
 
-1. rails gem (2.3.4+)
-2. bcrypt-ruby gem
-3. authlogic gem
-4. ruby-openid gem
-5. open_id_authentication plugin
-6. authlogic_oid gem
-7. declarative_authorization gem
-8. ssl_requirement plugin
-9. i18n_label plugin
+* rails gem (2.3.4+)
+* bcrypt-ruby gem
+* authlogic gem
+* ruby-openid gem
+* rack-openid gem
+* open_id_authentication plugin
+* authlogic_oid gem
+* declarative_authorization gem
+* ssl_requirement plugin
+* formtastic gem
+* validation_reflection gem
 
 for testing:
-1. rspec gem
-2. rspec-rails gem
-3. cucumber gem
-4. webrat gem
-5. bmabey-email_spec gem
+* rspec gem
+* rspec-rails gem
+* cucumber gem
+* webrat gem
+* bmabey-email_spec gem
 
 == Installation
 

@@ -27,6 +27,38 @@ en:
         name: "Name"
         value: "Value"
   
+  formtastic:
+    titles:
+      user:
+        edit:
+          basic_information: "Basic Information"
+          authentication: "Authentication"
+          preferences: "Preferences"
+    
+    labels:
+      user:
+        edit:
+          password: "Change password"
+        new:
+          set_password: "Set your password"
+    
+    hints:
+      user:
+    
+    actions:
+      create: "Create {{model}}"
+      update: "Update {{model}}"
+      user_session:
+        new:
+          create: "Login"
+      user:
+        new:
+          create: "Register"
+          activate: "Activate"
+          reset_password: "Reset my password"
+          update_password: "Update my password and log me in"
+    
+  
   common:
     flashs:
       success:
@@ -75,9 +107,6 @@ en:
         create: "Your account has been activated."
     titles:
       new: "Activate your account"
-    actions:
-      activate: "Activate"
-    password: "Set your password"
     openid_identifier: "Or use OpenID instead of your login / password"
   
   home:
@@ -95,9 +124,6 @@ en:
     titles:
       edit: "Change My Password"
       new: "Forgot Password"
-    actions:
-      reset: "Reset my password"
-      update: "Update my password and log me in"
     reset_note: "Fill out the form below and instructions to reset your password will be emailed to you:"
   
   user_mailer:
@@ -113,8 +139,6 @@ en:
         destroy: "Logout successful!"
     titles:
       new: "Login"
-    actions:
-      login: "Login"
     login_toggle: "Login using {{token}}"
     login_token: "Password / OpenID"
     openid_identifier: "Open ID"
@@ -139,13 +163,10 @@ en:
       signup: "Register"
       login: "Log In"
       logout: "Logout"
-    basic_information: "Basic Information"
     authentication_toggle: "Authenticated by {{token}}"
     authentication_token: "Password / OpenID"
     account: "My Account"
-    password: "Change password"
     online:
       one: "{{count}} user currently logged in"
       other: "{{count}} users currently logged in"
-    preferences: "Preferences"
   

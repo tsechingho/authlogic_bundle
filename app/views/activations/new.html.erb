@@ -1,21 +1,10 @@
 <% title t('activations.titles.new') %>
 
-<% form_for @user, :url => activate_path(@user), :html => { :method => :post } do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :password, t('activations.password') %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <hr />
-  <p>
-    <%= f.label :openid_identifier, openid_link %><br />
-    <%= f.text_field :openid_identifier %><br />
-  </p>
-  <p>
-    <%= f.submit t('activations.actions.activate') %>
-  </p>
+<% semantic_form_for @user, :url => activate_path(@user), :html => {:method => :post, :id => nil} do |f| %>
+  <% f.inputs do %>
+    <%= f.input :password, :label => :set_password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :openid_identifier, :label => openid_link %>
+    <%= f.commit_button :activate, :name => nil %>
+  <% end %>
 <% end %>

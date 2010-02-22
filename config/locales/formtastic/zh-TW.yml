@@ -1,0 +1,10 @@
+"zh-TW":
+  formtastic:
+    :yes: '是'
+    :no: '否'
+    create: '建立'
+    save: '儲存'
+    submit: '送出'
+    required: '必須'
+    search: '搜尋'
+    reset: '重置'

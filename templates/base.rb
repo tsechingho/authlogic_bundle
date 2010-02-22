@@ -16,6 +16,8 @@ CODE
 # run 'gem sources --add http://gemcutter.org', :sudo => true
 
 # please note the order of config.gem and databse migration
+gem 'validation_reflection', :lib => 'validation_reflection', :version => '>= 0.3.5'
+gem 'formtastic', :lib => 'formtastic', :version => '>= 0.9.7' # justinfrench
 gem 'preferences', :lib => 'preferences', :version => '>= 0.3.1' # pluginaweek
 gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.4' # stffn
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
@@ -30,8 +32,18 @@ plugin 'open_id_authentication', :submodule => git?,
   :git => 'git://github.com/rails/open_id_authentication.git'
 plugin 'ssl_requirement', :submodule => git?,
   :git => 'git://github.com/rails/ssl_requirement.git'
-plugin 'i18n_label', :submodule => git?,
-  :git => 'git://github.com/iain/i18n_label.git'
+
+generate :formtastic
+
+file_inject 'config/initializers/formtastic.rb',
+  '# Formtastic::SemanticFormBuilder.all_fields_required_by_default = true', <<-CODE
+Formtastic::SemanticFormBuilder.all_fields_required_by_default = false
+CODE
+
+file_inject 'config/initializers/formtastic.rb',
+  '# Formtastic::SemanticFormBuilder.i18n_lookups_by_default = false', <<-CODE
+Formtastic::SemanticFormBuilder.i18n_lookups_by_default = true
+CODE
 
 generate :migration, 'create_users'
 file Dir.glob('db/migrate/*_create_users.rb').first,

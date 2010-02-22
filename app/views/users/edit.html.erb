@@ -1,50 +1,21 @@
 <% title t('users.titles.edit') %>
 
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
-  <fieldset>
-    <legend><%= t('users.basic_information') %></legend>
-    <p>
-      <%= f.label :login %><br />
-      <%= f.text_field :login %>
-    </p>
-    <p>
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
-    </p>
-  </fieldset>
-  <fieldset>
-    <legend><%= t('users.authentication_toggle', :token => authentication_toggle) %></legend>
-    <div id="password_box"<% unless @user.openid_identifier.blank? %> style="display: none;"<% end %>>
-      <p>
-        <%= f.label :password, t('users.password') %><br />
-        <%= f.password_field :password %>
-      </p>
-      <p>
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation %>
-      </p>
-    </div>
-    <div id="openid_box"<% if @user.openid_identifier.blank? %> style="display: none;"<% end %>>
-      <p>
-        <%= f.label :openid_identifier, openid_link %><br />
-        <%= f.text_field :openid_identifier %>
-      </p>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend><%= t('users.preferences') %></legend>
-    <p>
-      <%= f.label :preferred_language %><br />
-      <%= f.select :preferred_language, @languages_available, :include_blank => true %>
-    </p>
-    <p>
-      <%= f.label :preferred_time_zone %><br />
-      <%# f.select :preferred_time_zone, ActiveSupport::TimeZone.all.map {|tz| [tz.to_s, tz.tzinfo.name] }, :include_blank => true %>
-      <%= f.time_zone_select :preferred_time_zone, nil, :include_blank => true %>
-    </p>
-  </fieldset>
-  <p>
-    <%= f.submit t('common.actions.update'), :name => nil %>
-  </p>
+<% semantic_form_for @user, :url => account_path, :html => {:id => nil} do |f| %>
+  <% f.inputs :basic_information do %>
+    <%= f.input :login %>
+    <%= f.input :email %>
+  <% end %>
+  <% f.inputs :authentication do %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :openid_identifier, :label => openid_link %>
+  <% end %>
+  <% f.inputs :preferences do %>
+    <%= f.input :preferred_language, :as => :select, :collection => @languages_available, :include_blank => true %>
+    <%= f.input :preferred_time_zone, :as => :time_zone, :include_blank => true %>
+    <%# f.input :preferred_time_zone, :as => :select, :collection => ActiveSupport::TimeZone.all.map {|tz| [tz.to_s, tz.tzinfo.name] }, :include_blank => true %>
+  <% end %>
+  <% f.buttons do %>
+    <%= f.commit_button :name => nil %>
+  <% end %>
 <% end %>

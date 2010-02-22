@@ -1,16 +1,9 @@
 <% title t('password_resets.titles.edit') %>
 
-<% form_for @user, :url => password_reset_path, :method => :put do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-    <%= f.submit t('password_resets.actions.update') %>
-  </p>
+<% semantic_form_for @user, :url => password_reset_path, :html => {:method => :put, :id => nil} do |f| %>
+  <% f.inputs do %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.commit_button :update_password, :name => nil %>
+  <% end %>
 <% end %>

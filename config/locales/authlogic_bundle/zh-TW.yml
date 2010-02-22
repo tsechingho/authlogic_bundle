@@ -27,6 +27,38 @@
         name: "名稱"
         value: "設定值"
   
+  formtastic:
+    titles:
+      user:
+        edit:
+          basic_information: "基本資訊"
+          authentication: "Authentication"
+          preferences: "偏好設定"
+    
+    labels:
+      user:
+        edit:
+          password: "Change password"
+        new:
+          set_password: "設定你的密碼"
+    
+    hints:
+      user:
+    
+    actions:
+      create: "建立{{model}}"
+      update: "更新{{model}}"
+      user_session:
+        new:
+          create: "登入"
+      user:
+        new:
+          create: "註冊"
+          activate: "啟動"
+          reset_password: "重設我的密碼"
+          update_password: "更新我的密碼並登入"
+    
+  
   common:
     flashs:
       success:
@@ -75,9 +107,6 @@
         create: "你的帳號已經被啟動"
     titles:
       new: "啟用你的帳號"
-    actions:
-      activate: "啟動"
-    password: "設定你的密碼"
     openid_identifier: "或使用 OpenID 而不是使用帳號/密碼"
   
   home:
@@ -95,9 +124,6 @@
     titles:
       edit: "更改我的密碼"
       new: "忘記密碼"
-    actions:
-      reset: "重設我的密碼"
-      update: "更新我的密碼並登入"
     reset_note: "填入下面的表單，重設密碼的指引會電郵給你："
   
   user_mailer:
@@ -113,8 +139,6 @@
         destroy: "登出成功！"
     titles:
       new: "登入"
-    actions:
-      login: "登入"
     login_toggle: "使用 {{token}} 登入"
     login_token: "密碼 / OpenID"
     openid_identifier: "Open ID"
@@ -139,7 +163,6 @@
       signup: "註冊"
       login: "登入"
       logout: "登出"
-    basic_information: "基本資訊"
     authentication_toggle: "使用 {{token}} 認證"
     authentication_token: "密碼 / OpenID"
     account: "我的帳號"
@@ -147,5 +170,4 @@
     online:
       one: "目前有 {{count}} 位使用者登入"
       other: "目前有 {{count}} 位使用者登入"
-    preferences: "偏好設定"
   
