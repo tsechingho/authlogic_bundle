@@ -1,4 +1,4 @@
-<% title t('users.titles.edit') %>
+<%- title -%>
 
 <% semantic_form_for @user, :url => account_path, :html => {:id => nil} do |f| %>
   <% f.inputs :basic_information do %>

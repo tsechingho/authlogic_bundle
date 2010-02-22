@@ -86,6 +86,11 @@ module AuthlogicBundle
         WillPaginate::ViewHelpers.pagination_options[:previous_label] = t('common.previous_page')
         WillPaginate::ViewHelpers.pagination_options[:next_label] = t('common.next_page')
       end
+
+      def flash_translate(key, options = {})
+        I18n.t(key, {:scope => [controller_name, action_name, :flash]}.merge(options))
+      end
+      alias :ft :flash_translate
     end
 
     def self.included(receiver)

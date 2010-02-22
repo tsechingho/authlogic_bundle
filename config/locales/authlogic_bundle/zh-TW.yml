@@ -29,6 +29,11 @@
   
   formtastic:
     titles:
+      user_session:
+        new:
+          login_by_password: "使用密碼/OpenID登入"
+          login_by_openid: "使用密碼/OpenID登入"
+      
       user:
         edit:
           basic_information: "基本資訊"
@@ -102,29 +107,40 @@
     to: "到"
   
   activations:
-    flashs:
-      success:
-        create: "你的帳號已經被啟動"
-    titles:
-      new: "啟用你的帳號"
+    new:
+      title: "啟用你的帳號"
+    
+    create:
+      flash:
+        success: "你的帳號已經被啟動"
+    
     openid_identifier: "或使用 OpenID 而不是使用帳號/密碼"
   
   home:
-    titles:
-      index: "首頁"
+    index:
+      title: "首頁"
+    
   
   password_resets:
-    flashs:
-      success:
-        create: "重設密碼的指引已經電郵給你，請檢查你的電子郵件。"
-        update: "密碼更改成功"
-      errors:
-        create: "沒有使用這個電子郵件的使用者"
-        update: "很抱歉，我們無法找到你的帳號。如果你仍有問題，請試著從電子郵件將密碼重設連結拷貝及貼上你的瀏覽器，或重跑一次密碼重設流程。"
-    titles:
-      edit: "更改我的密碼"
-      new: "忘記密碼"
-    reset_note: "填入下面的表單，重設密碼的指引會電郵給你："
+    edit:
+      title: "更改我的密碼"
+      flash:
+        error: "很抱歉，我們無法找到你的帳號。如果你仍有問題，請試著從電子郵件將密碼重設連結拷貝及貼上你的瀏覽器，或重跑一次密碼重設流程。"
+    
+    new:
+      title: "忘記密碼"
+      reset_note: "填入下面的表單，重設密碼的指引會電郵給你："
+    
+    create:
+      flash:
+        success: "重設密碼的指引已經電郵給你，請檢查你的電子郵件。"
+        error: "沒有使用這個電子郵件的使用者"
+    
+    update:
+      flash:
+        success: "密碼更改成功"
+        error: "很抱歉，我們無法找到你的帳號。如果你仍有問題，請試著從電子郵件將密碼重設連結拷貝及貼上你的瀏覽器，或重跑一次密碼重設流程。"
+    
   
   user_mailer:
     titles:
@@ -133,36 +149,51 @@
       password_reset_instructions: "密碼重設指引"
   
   user_sessions:
-    flashs:
-      success:
-        create: "登入成功！"
-        destroy: "登出成功！"
-    titles:
-      new: "登入"
-    login_toggle: "使用 {{token}} 登入"
-    login_token: "密碼 / OpenID"
+    new:
+      title: "登入"
+      forget_password: "忘記密碼"
+    
+    create:
+      flash:
+        success: "登入成功！"
+    
+    destroy:
+      flash:
+        success: "登出成功！"
+    
     openid_identifier: "Open ID"
-    forget_password: "忘記密碼"
   
   users:
-    flashs:
-      success:
-        create: "你的帳號已經被啟動。帳號啟動指引已經寄出，請檢查你的電子郵件！"
-        update: "帳號更新！"
-      notices:
-        login_required: "你必須登入才能瀏覽此頁面。"
-        logout_required: "你必須登出才能瀏覽此頁面。"
-      errors:
-        not_allowed: "抱歉！你不被允許瀏覽此頁面。"
-    titles:
-      edit: "編輯使用者"
-      index: "使用者列表"
-      new: "註冊帳號"
-      show: "使用者帳號"
+    edit:
+      title: "編輯使用者"
+    
+    index:
+      title: "使用者列表"
+    
+    new:
+      title: "註冊帳號"
+    
+    show:
+      title: "使用者帳號"
+    
+    create:
+      flash:
+        success: "你的帳號已經被啟動。帳號啟動指引已經寄出，請檢查你的電子郵件！"
+    
+    update:
+      flash:
+        success: "帳號更新！"
+    
+    flash:
+      login_required: "你必須登入才能瀏覽此頁面。"
+      logout_required: "你必須登出才能瀏覽此頁面。"
+      not_allowed: "抱歉！你不被允許瀏覽此頁面。"
+    
     actions:
       signup: "註冊"
       login: "登入"
       logout: "登出"
+    
     authentication_toggle: "使用 {{token}} 認證"
     authentication_token: "密碼 / OpenID"
     account: "我的帳號"

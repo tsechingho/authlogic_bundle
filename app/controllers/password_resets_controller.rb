@@ -18,10 +18,10 @@ class PasswordResetsController < ApplicationController
 
     if @user
       @user.deliver_password_reset_instructions!
-      flash[:success] = t('password_resets.flashs.success.create')
+      flash[:success] = ft('success')
       redirect_to root_url
     else
-      flash[:error] = t('password_resets.flashs.errors.create')
+      flash[:error] = ft('error')
       render :action => :new
     end
   end
@@ -29,7 +29,7 @@ class PasswordResetsController < ApplicationController
   # PUT /password_resets/1
   def update
     if @user.reset_password_with_params!(params[:user])
-      flash[:success] = t('password_resets.flashs.success.update')
+      flash[:success] = ft('success')
       redirect_to account_url
     else
       render :action => :edit
@@ -42,7 +42,7 @@ class PasswordResetsController < ApplicationController
     @user = User.find_using_perishable_token(params[:id])
 
     unless @user
-      flash[:error] = t('password_resets.flashs.errors.update')
+      flash[:error] = ft('error')
       redirect_to root_url
     end
   end

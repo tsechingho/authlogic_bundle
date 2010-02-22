@@ -45,6 +45,10 @@ file_inject 'config/initializers/formtastic.rb',
 Formtastic::SemanticFormBuilder.i18n_lookups_by_default = true
 CODE
 
+file_append 'public/stylesheets/formtastic_changes.css', <<-CODE
+form.formtastic fieldset { border: 1px solid rgb(204, 204, 204); margin: 0 0 1.5em 0; padding: 1.4em; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px; }
+CODE
+
 generate :migration, 'create_users'
 file Dir.glob('db/migrate/*_create_users.rb').first,
   open("#{SOURCE}/db/migrate/create_users.rb").read

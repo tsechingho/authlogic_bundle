@@ -1,6 +1,6 @@
-<% title t('password_resets.titles.new') %>
+<%- title -%>
 
-<p><%= t('password_resets.reset_note') %></p>
+<p><%= t('.reset_note') %></p>
 
 <% semantic_form_for User.new, :url => password_resets_path, :html => {:id => nil} do |f| %>
   <% f.inputs do %>

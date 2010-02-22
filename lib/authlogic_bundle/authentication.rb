@@ -18,7 +18,7 @@ module AuthlogicBundle
       def require_user
         unless current_user
           store_location
-          flash[:notice] = t('users.flashs.notices.login_required')
+          flash[:notice] = t('users.flash.login_required')
           redirect_to login_url
           return false
         end
@@ -27,7 +27,7 @@ module AuthlogicBundle
       def require_no_user
         if current_user
           store_location
-          flash[:notice] = t('users.flashs.notices.logout_required')
+          flash[:notice] = t('users.flash.logout_required')
           redirect_to account_url
           return false
         end

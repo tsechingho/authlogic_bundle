@@ -1,4 +1,4 @@
-<% title t('password_resets.titles.edit') %>
+<%- title -%>
 
 <% semantic_form_for @user, :url => password_reset_path, :html => {:method => :put, :id => nil} do |f| %>
   <% f.inputs do %>

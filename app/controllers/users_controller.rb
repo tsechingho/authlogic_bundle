@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @user.signup!(params[:user]) do |result|
       if result
         @user.deliver_activation_instructions!
-        flash[:success] = t('users.flashs.success.create')
+        flash[:success] = ft('success')
         redirect_to root_url
       else
         render :action => :new
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
         set_language(@user.preferred_language)
         Rails.cache.delete('user_prefered_time_zone')
         set_time_zone(@user.preferred_time_zone)
-        flash[:success] = t('users.flashs.success.update')
+        flash[:success] = ft('success')
         redirect_to account_url
       else
         render :action => :edit

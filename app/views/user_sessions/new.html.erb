@@ -1,28 +1,43 @@
-<% title t('user_sessions.titles.new') %>
+<%- title t('user_sessions.new.title') -%>
 
-<fieldset>
-  <legend><%= t('user_sessions.login_toggle', :token => login_toggle) %></legend>
-
-<%= error_messages_for :user_session, :object_name => UserSession.human_name %>
+<%= error_messages_for :user_session, :object_name => UserSession.human_name if @user_session.errors[:login].empty? && @user_session.errors[:password].empty? %>
 
 <% semantic_form_for @user_session, :url => user_session_path do |f| %>
-  <% f.inputs :id => 'password_box', :style => (@user_session.openid_identifier.blank? ? nil : 'display: none;') do %>
+  <% f.inputs :login_by_password, :id => 'password_box', :class => 'toggle_box' do %>
     <%= f.input :login %>
     <%= f.input :password %>
     <%= f.input :remember_me, :as => :check_boxes, :collection => [[nil, true]] %>
     <%= f.commit_button :name => nil %>
     <li class="password_reset">
-      <%= link_to t('user_sessions.forget_password'), new_password_reset_path %>
+      <%= link_to t('.forget_password'), new_password_reset_path %>
     </li>
   <% end %>
 <% end %>
 
 <% semantic_form_for @user_session, :url => user_session_path do |f| %>
-  <% f.inputs :id => 'openid_box', :style => (@user_session.openid_identifier.blank? ? 'display: none;' : nil) do %>
+  <% f.inputs :login_by_openid, :id => 'openid_box', :class => 'toggle_box' do %>
     <%= f.input :openid_identifier, :label => openid_link %>
     <%= f.input :remember_me, :as => :check_boxes, :collection => [[nil, true]] %>
     <%= f.commit_button :name => nil %>
   <% end %>
 <% end %>
 
-</fieldset>
+<% javascript do %>
+document.observe("dom:loaded", function() {
+  var use_openid = <%= !@user_session.openid_identifier.blank? %>;
+  if (use_openid) {
+    $('password_box').hide();
+  } else {
+    $('openid_box').hide();
+  }
+  $(document.body).observe("click", function(event) {
+    if (event.findElement('fieldset.toggle_box legend')) {
+      if (err = $('errorExplanation')) {
+        err.toggle();
+      }
+      $('password_box').toggle();
+      $('openid_box').toggle();
+    }
+  });
+});
+<% end %>

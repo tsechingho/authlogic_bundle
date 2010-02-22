@@ -1,4 +1,4 @@
-<% title t('activations.titles.new') %>
+<%- title -%>
 
 <% semantic_form_for @user, :url => activate_path(@user), :html => {:method => :post, :id => nil} do |f| %>
   <% f.inputs do %>

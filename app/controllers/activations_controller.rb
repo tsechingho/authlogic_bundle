@@ -18,7 +18,7 @@ class ActivationsController < ApplicationController
     @user.activate!(params[:user]) do |result|
       if result
         @user.deliver_activation_confirmation!
-        flash[:success] = t('activations.flashs.success.create')
+        flash[:success] = ft('success')
         redirect_to edit_account_url
       else
         render :action => :new

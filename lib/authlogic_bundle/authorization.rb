@@ -20,7 +20,7 @@ module AuthlogicBundle
 
       def permission_denied
         respond_to do |format|
-          flash[:error] = t('users.flashs.errors.not_allowed')
+          flash[:error] = t('users.flash.not_allowed')
           format.html { redirect_to(:back) rescue redirect_to(root_path) }
           format.xml  { head :unauthorized }
           format.js   { head :unauthorized }

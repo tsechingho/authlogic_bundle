@@ -29,6 +29,11 @@
   
   formtastic:
     titles:
+      user_session:
+        new:
+          login_by_password: "使用密码/OpenID登入"
+          login_by_openid: "使用密码/OpenID登入"
+      
       user:
         edit:
           basic_information: "基本资讯"
@@ -102,29 +107,40 @@
     to: "到"
   
   activations:
-    flashs:
-      success:
-        create: "你的帐号已经被启动"
-    titles:
-      new: "启用你的帐号"
+    new:
+      title: "启用你的帐号"
+    
+    create:
+      flash:
+        success: "你的帐号已经被启动"
+    
     openid_identifier: "或使用 OpenID 而不是使用帐号/密码"
   
   home:
-    titles:
-      index: "首页"
+    index:
+      title: "首页"
+    
   
   password_resets:
-    flashs:
-      success:
-        create: "重设密码的指引已经电邮给你，请检查你的电子邮件。"
-        update: "密码更改成功"
-      errors:
-        create: "没有使用这个电子邮件的用户"
-        update: "很抱歉，我们无法找到你的帐号。如果你仍有问题，请试著从电子邮件将密码重设连结拷贝及贴上你的浏览器，或重跑一次密码重设流程。"
-    titles:
-      edit: "更改我的密码"
-      new: "忘记密码"
-    reset_note: "填入下面的表单，重设密码的指引会电邮给你："
+    edit:
+      title: "更改我的密码"
+      flash:
+        error: "很抱歉，我们无法找到你的帐号。如果你仍有问题，请试著从电子邮件将密码重设连结拷贝及贴上你的浏览器，或重跑一次密码重设流程。"
+    
+    new:
+      title: "忘记密码"
+      reset_note: "填入下面的表单，重设密码的指引会电邮给你："
+    
+    create:
+      flash:
+        success: "重设密码的指引已经电邮给你，请检查你的电子邮件。"
+        error: "没有使用这个电子邮件的用户"
+    
+    update:
+      flash:
+        success: "密码更改成功"
+        error: "很抱歉，我们无法找到你的帐号。如果你仍有问题，请试著从电子邮件将密码重设连结拷贝及贴上你的浏览器，或重跑一次密码重设流程。"
+    
   
   user_mailer:
     titles:
@@ -133,36 +149,51 @@
       password_reset_instructions: "密码重设指引"
   
   user_sessions:
-    flashs:
-      success:
-        create: "登入成功！"
-        destroy: "登出成功！"
-    titles:
-      new: "登入"
-    login_toggle: "使用 {{token}} 登入"
-    login_token: "密码 / OpenID"
+    new:
+      title: "登入"
+      forget_password: "忘记密码"
+    
+    create:
+      flash:
+        success: "登入成功！"
+    
+    destroy:
+      flash:
+        success: "登出成功！"
+    
     openid_identifier: "Open ID"
-    forget_password: "忘记密码"
   
   users:
-    flashs:
-      success:
-        create: "你的帐号已经被启动。帐号启动指引已经寄出，请检查你的电子邮件！"
-        update: "帐号更新！"
-      notices:
-        login_required: "你必须登入才能浏览此页面。"
-        logout_required: "你必须登出才能浏览此页面。"
-      errors:
-        not_allowed: "抱歉！你不被允许浏览此页面。"
-    titles:
-      edit: "编辑用户"
-      index: "用户清单"
-      new: "注册帐号"
-      show: "用户帐号"
+    edit:
+      title: "编辑用户"
+    
+    index:
+      title: "用户清单"
+    
+    new:
+      title: "注册帐号"
+    
+    show:
+      title: "用户帐号"
+    
+    create:
+      flash:
+        success: "你的帐号已经被启动。帐号启动指引已经寄出，请检查你的电子邮件！"
+    
+    update:
+      flash:
+        success: "帐号更新！"
+    
+    flash:
+      login_required: "你必须登入才能浏览此页面。"
+      logout_required: "你必须登出才能浏览此页面。"
+      not_allowed: "抱歉！你不被允许浏览此页面。"
+    
     actions:
       signup: "注册"
       login: "登入"
       logout: "登出"
+    
     authentication_toggle: "使用 {{token}} 认证"
     authentication_token: "密码 / OpenID"
     account: "我的帐号"
