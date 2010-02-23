@@ -43,7 +43,8 @@ en:
     labels:
       user:
         edit:
-          password: "Change password"
+          password: "Password"
+          change_password: "Change password"
         new:
           set_password: "Set your password"
     
@@ -61,6 +62,7 @@ en:
           create: "Register"
           activate: "Activate"
           reset_password: "Reset my password"
+        edit:
           update_password: "Update my password and log me in"
     
   

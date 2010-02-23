@@ -40,8 +40,8 @@ Feature: Password Reset
     Given "sharon" a user who opened her reset password email
     When I follow "reset your password" in the email
     Then I should see a password modification form
-    When I fill in "password" with "new secret"
-    And I fill in "Password confirmation" with "new secret"
+    When I fill in "change password" with "new secret"
+    And I fill in "password confirmation" with "new secret"
     And I press "Update my password and log me in"
     Then I should see my account page
     And I should see "Password successfully updated"
@@ -57,12 +57,12 @@ Feature: Password Reset
     And I press "Update my password and log me in"
     Then I should see a password modification form
     And I should not see my account page
-    And I should see "<error_message>"
+    And I should see "<error_message>" within "<selector>"
     And I should not see "Password successfully updated"
 
     Examples:
-      | password   | confirmation | error_message                       |
-      |            |              | Password is too short               |
-      |            | new secret   | Password is too short               |
-      | new secret |              | Password confirmation is too short  |
-      | new secret | secret       | Password doesn't match confirmation |
+      | password   | confirmation | error_message              | selector                          |
+      |            |              | is too short               | #user_password_input              |
+      |            | new secret   | is too short               | #user_password_input              |
+      | new secret |              | is too short               | #user_password_confirmation_input |
+      | new secret | secret       | doesn't match confirmation | #user_password_input              |

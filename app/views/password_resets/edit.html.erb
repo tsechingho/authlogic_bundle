@@ -2,7 +2,7 @@
 
 <% semantic_form_for @user, :url => password_reset_path, :html => {:method => :put, :id => nil} do |f| %>
   <% f.inputs do %>
-    <%= f.input :password %>
+    <%= f.input :password, :label => :change_password %>
     <%= f.input :password_confirmation %>
     <%= f.commit_button :update_password, :name => nil %>
   <% end %>

@@ -23,6 +23,7 @@ Feature: Authentication
     And I press "Login"
     Then I should not be logged in
     And I should see "Your account is not active"
+    And I should see "is not valid" within "#user_session_password_input"
 
   Scenario: Allow login of a user with valid credentials
     Given "sharon" a confirmed user with password "secret"
@@ -41,18 +42,18 @@ Feature: Authentication
     And I fill in "password" with "<password>"
     And I press "Login"
     Then I should not be logged in
-    And I should see "<error_message>"
+    And I should see "<error_message>" within "<selector>"
 
     Examples:
-      | login   | password   | error_message                                      |
-      |         |            | You did not provide any details for authentication |
-      |         |  secret    | Login can not be blank                             |
-      |         | bad secret | Login can not be blank                             |
-      | unknown |            | Password can not be blank                          |
-      | unknown |  secret    | Login is not valid                                 |
-      | unknown | bad secret | Login is not valid                                 |
-      | sharon  |            | Password can not be blank                          |
-      | sharon  | bad secret | Password is not valid                              |
+      | login   | password   | error_message                                      | selector                     |
+      |         |            | You did not provide any details for authentication | #errorExplanation            |
+      |         |  secret    | can not be blank                                   | #user_session_login_input    |
+      |         | bad secret | can not be blank                                   | #user_session_login_input    |
+      | unknown |            | can not be blank                                   | #user_session_password_input |
+      | unknown |  secret    | is not valid                                       | #user_session_login_input    |
+      | unknown | bad secret | is not valid                                       | #user_session_login_input    |
+      | sharon  |            | can not be blank                                   | #user_session_password_input |
+      | sharon  | bad secret | is not valid                                       | #user_session_password_input |
 
   Scenario: Allow a confirmed user to login and be remembered
     Given "sharon" a confirmed user with password "secret"

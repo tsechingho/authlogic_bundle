@@ -16,12 +16,12 @@ CODE
 # run 'gem sources --add http://gemcutter.org', :sudo => true
 
 # please note the order of config.gem and databse migration
-gem 'validation_reflection', :lib => 'validation_reflection', :version => '>= 0.3.5'
+gem 'validation_reflection', :lib => 'validation_reflection', :version => '>= 0.3.6'
 gem 'formtastic', :lib => 'formtastic', :version => '>= 0.9.7' # justinfrench
 gem 'preferences', :lib => 'preferences', :version => '>= 0.3.1' # pluginaweek
-gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.4' # stffn
+gem 'declarative_authorization', :lib => 'declarative_authorization', :version => '>=0.4.1' # stffn
 gem 'ruby-openid', :lib => 'openid', :version => '>=2.1.7'
-gem 'rack-openid', :lib => 'rack/openid', :version => '>=1.0.0'
+gem 'rack-openid', :lib => 'rack/openid', :version => '>=1.0.1'
 gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
 gem 'authlogic', :version => '>=2.1.3' # binarylogic
 gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'

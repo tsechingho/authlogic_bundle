@@ -26,13 +26,13 @@ Feature: Registration
     And I fill in "email" with "<email>"
     And I press "Register"
     Then I should have an unsuccessful registration
-    And I should see "<error_message>"
+    And I should see "<error_message>" within "<selector>"
 
     Examples: incomplete registration inputs
-      | login  | email              | error_message      |
-      |        |                    | Login is too short |
-      | sharon |                    | Email is too short |
-      |        | sharon@example.com | Login is too short |
+      | login  | email              | error_message | selector          |
+      |        |                    | is too short  | #user_login_input |
+      | sharon |                    | is too short  | #user_email_input |
+      |        | sharon@example.com | is too short  | #user_login_input |
 
   Scenario: Send an activation instruction mail at a successful account creation
     Given "sharon" an unconfirmed user
@@ -68,14 +68,14 @@ Feature: Registration
     And I fill in "password confirmation" with "<confirmation>"
     And I press "Activate"
     Then I should have an unsuccessful activation
-    And I should see "<error_message>"
+    And I should see "<error_message>" within "<selector>"
 
     Examples: Bad password and confirmation combinations
-      | password | confirmation | error_message                       |
-      |          |              | Password is too short               |
-      |  secret  |              | Password confirmation is too short  |
-      |          | secret       | Password is too short               |
-      |  secret  | not a secret | Password doesn't match confirmation |
+      | password | confirmation | error_message              | selector                          |
+      |          |              | is too short               | #user_password_input              |
+      | secret   |              | is too short               | #user_password_confirmation_input |
+      |          | secret       | is too short               | #user_password_input              |
+      | secret   | not a secret | doesn't match confirmation | #user_password_input              |
 
   Scenario: Send an activation confirmation mail when user confirms account
     Given "sharon" a notified but unconfirmed user

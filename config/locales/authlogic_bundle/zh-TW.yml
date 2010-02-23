@@ -43,7 +43,8 @@
     labels:
       user:
         edit:
-          password: "Change password"
+          password: "密碼"
+          change_password: "更改密碼"
         new:
           set_password: "設定你的密碼"
     
@@ -61,6 +62,7 @@
           create: "註冊"
           activate: "啟動"
           reset_password: "重設我的密碼"
+        edit:
           update_password: "更新我的密碼並登入"
     
   
@@ -197,7 +199,6 @@
     authentication_toggle: "使用 {{token}} 認證"
     authentication_token: "密碼 / OpenID"
     account: "我的帳號"
-    password: "更改密碼"
     online:
       one: "目前有 {{count}} 位使用者登入"
       other: "目前有 {{count}} 位使用者登入"

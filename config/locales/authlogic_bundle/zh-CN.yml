@@ -43,7 +43,8 @@
     labels:
       user:
         edit:
-          password: "更改密码"
+          password: "密码"
+          change_password: "更改密码"
         new:
           set_password: "设定你的密码"
     
@@ -61,6 +62,7 @@
           create: "注册"
           activate: "启动"
           reset_password: "重设我的密码"
+        edit:
           update_password: "更新我的密码并登入"
     
   

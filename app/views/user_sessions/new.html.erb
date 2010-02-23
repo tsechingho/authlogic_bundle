@@ -1,6 +1,6 @@
 <%- title t('user_sessions.new.title') -%>
 
-<%= error_messages_for :user_session, :object_name => UserSession.human_name if @user_session.errors[:login].empty? && @user_session.errors[:password].empty? %>
+<%= error_messages_for :user_session, :object_name => UserSession.human_name unless @user_session.errors[:base].empty? %>
 
 <% semantic_form_for @user_session, :url => user_session_path do |f| %>
   <% f.inputs :login_by_password, :id => 'password_box', :class => 'toggle_box' do %>
