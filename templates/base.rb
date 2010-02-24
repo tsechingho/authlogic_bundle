@@ -139,9 +139,17 @@ file_inject 'app/helpers/application_helper.rb', 'module ApplicationHelper', <<-
     mail_to email, name, :encode => 'javascript'
   end
 
-  def at(klass, attribute, options = {})
-    klass.human_attribute_name(attribute.to_s, options = {})
+  def attr_translate(klass, attribute = nil, options = {})
+    return klass.human_name(options) if attribute.blank?
+    klass.human_attribute_name(attribute.to_s, options)
   end
+  alias :at :attr_translate
+
+  def flash_translate(key, options = {})
+    I18n.t(key, :scope => [controller_name, action_name, :flash])
+    I18n.t(key, {:scope => [controller_name, action_name, :flash]}.merge(options))
+  end
+  alias :ft :flash_translate
 
   def openid_link
     link_to at(User, :openid_identifier), "http://openid.net/"
