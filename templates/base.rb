@@ -1,5 +1,5 @@
-SOURCE = "vendor/plugins/authlogic_bundle"
-load_template("#{SOURCE}/templates/helper.rb")
+SOURCE = "vendor/plugins/authlogic_bundle" unless defined? SOURCE
+load_template("#{SOURCE}/templates/helper.rb") unless self.respond_to? :file_inject
 
 #########################
 #  Gems & Plugins
@@ -9,11 +9,6 @@ rake 'db:sessions:create'
 file_append 'config/initializers/session_store.rb', <<-CODE
 ActionController::Base.session_store = :active_record_store
 CODE
-
-# add gemcutter.org as gems source
-# run 'gem install gemcutter', :sudo => true
-# run 'gem tumble', :sudo => true
-# run 'gem sources --add http://gemcutter.org', :sudo => true
 
 # please note the order of config.gem and databse migration
 gem 'validation_reflection', :lib => 'validation_reflection', :version => '>= 0.3.6'
@@ -26,7 +21,7 @@ gem 'authlogic-oid', :lib => 'authlogic_openid', :version => '>=1.0.4'
 gem 'authlogic', :version => '>=2.1.3' # binarylogic
 gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
 
-rake 'gems:install', :sudo => true
+rake 'gems:install', :sudo => sudo?
 
 plugin 'open_id_authentication', :submodule => git?, 
   :git => 'git://github.com/rails/open_id_authentication.git'
@@ -54,7 +49,7 @@ file Dir.glob('db/migrate/*_create_users.rb').first,
   open("#{SOURCE}/db/migrate/create_users.rb").read
 
 # since master branch of open_id_authentication use rack-openid and use memory store instead of db store,
-# authlogic-oid do not folloew up yet and will fail openid authentication.
+# authlogic-oid do not follow up yet and will fail openid authentication.
 # Let's roll back to old commit to make things easier.
 # I'll check rack version of open_id_authentication later.
 if git?

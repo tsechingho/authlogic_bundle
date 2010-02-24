@@ -12,7 +12,7 @@ gem 'remarkable_rails', :lib => false, :version => '>=3.1.13', :env => 'test'
 gem 'shoulda', :lib => false, :version => '>=2.10.3', :env => 'test' # thoughtbot
 gem 'factory_girl', :lib => false, :version => '>=1.2.3', :env => 'test' # thoughtbot
 
-rake 'gems:install', :sudo => true, :env => 'test'
+rake 'gems:install', :sudo => sudo?, :env => 'test'
 
 generate :rspec
 
@@ -41,7 +41,7 @@ gem 'webrat', :lib => false, :version => '>=0.7.0', :env => 'test'
 gem 'email_spec', :lib => 'email_spec', :version => '>=0.5.0', :env => 'test' # bmabey
 
 # we still need 'test' environment to install cucumber related gems
-rake 'gems:install', :sudo => true, :env => 'test'
+rake 'gems:install', :sudo => sudo?, :env => 'test'
 
 generate :cucumber
 
@@ -73,7 +73,7 @@ gem 'rcov', :lib => 'rcov', :version => '>=0.9.7.1', :env => 'test' # relevance
 gem 'ZenTest', :lib => 'autotest', :version => '>=4.2.1', :env => 'test'
 gem 'autotest-notification', :lib => 'autotest_notification', :version => '>=2.1.0', :env => 'test' # carlosbrando
 
-rake 'gems:install', :sudo => true, :env => 'test'
+rake 'gems:install', :sudo => sudo?, :env => 'test'
 
 file 'spec/rcov.opts', <<-CODE
 --exclude "spec/*,gems/*,features/*"

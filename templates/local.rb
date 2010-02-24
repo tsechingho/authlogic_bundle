@@ -1,14 +1,13 @@
-REPOSITORY = "git://github.com/tsechingho/authlogic_bundle.git"
-REMOTE_SOURCE = "http://github.com/tsechingho/authlogic_bundle/raw/master"
+LOCAL_SOURCE = template.sub('/templates/local.rb','')
 SOURCE = "vendor/plugins/authlogic_bundle"
 
-load_template("#{REMOTE_SOURCE}/templates/helper.rb")
+load_template("#{LOCAL_SOURCE}/templates/helper.rb")
 
-load_template("#{REMOTE_SOURCE}/templates/git_init.rb") if git?
+load_template("#{LOCAL_SOURCE}/templates/git_init.rb") if git?
 
 run "ln -s #{ENV['EDGE_RAILS']} vendor/rails" if edge_rails?
 
-plugin 'authlogic_bundle', :submodule => git?, :git => REPOSITORY
+run "ln -s #{LOCAL_SOURCE} #{SOURCE}"
 
 load_template("#{SOURCE}/templates/base.rb")
 

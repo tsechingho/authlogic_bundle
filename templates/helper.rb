@@ -1,5 +1,16 @@
 def git?
+  ENV['SCM'] ||= 'git' if ENV['SCM'].blank? && yes?('Use git as scm? (y/n)')
   ENV['SCM'] == 'git'
+end
+
+def sudo?
+  ENV['SUDO'] = yes?('Install gems as root? (y/n)') ? 'yes' : 'no' if ENV['SUDO'].blank?
+  ENV['SUDO'] == 'yes'
+end
+
+def edge_rails?
+  ENV['EDGE_RAILS'] ||= ask("Absolute path for edge rails symbol link [Press enter to skip]:")
+  !ENV['EDGE_RAILS'].blank?
 end
 
 def file_append(file, data)
